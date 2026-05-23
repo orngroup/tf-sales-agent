@@ -4,35 +4,34 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>TripFactory · Sales Agent Role Framework</title>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
-  --navy:       #1a2744;
-  --navy-mid:   #1e2f56;
-  --navy-light: #253660;
-  --blue:       #2196d3;
-  --blue-bg:    #e8f6fd;
-  --white:      #ffffff;
-  --surface:    #f6f8fc;
-  --border:     #e3eaf4;
-  --text:       #1a2744;
-  --text-mid:   #4a5a7a;
-  --text-muted: #8a9ab8;
-  --amber:      #d48a15; --amber-bg: #fff8ed; --amber-dk: #9a6010;
-  --teal:       #1a9e75; --teal-bg:  #eafaf4; --teal-dk:  #0f6e56;
-  --blue2:      #2196d3; --blue2-bg: #e8f6fd; --blue2-dk: #1260a0;
-  --purple:     #6b63cc; --purple-bg:#f0effe; --purple-dk:#4a44a0;
-  --coral:      #d95228; --coral-bg: #fdf0eb; --coral-dk: #a03818;
-  --green:      #3a9e22; --green-bg: #edf8e8; --green-dk: #27700a;
-  --indigo:     #3d5af1; --indigo-bg:#eef0ff; --indigo-dk:#2638c0;
+  --navy:      #111e38;
+  --navy-mid:  #192a4e;
+  --blue:      #1e8fc7;
+  --surface:   #f4f6fa;
+  --white:     #ffffff;
+  --border:    #dde4f0;
+  --text:      #111e38;
+  --text-mid:  #2e3d5a;
+  --text-soft: #5a6a88;
+  --amber:     #c97d10; --amber-bg: #fff7e6; --amber-dk: #7a4d08;
+  --teal:      #14896a; --teal-bg:  #e6f8f2; --teal-dk:  #0a5a46;
+  --blue2:     #1778b8; --blue2-bg: #e6f4fc; --blue2-dk: #0e4e7a;
+  --indigo:    #3d4fd8; --indigo-bg:#eef0ff; --indigo-dk:#1e2880;
+  --purple:    #5e52bc; --purple-bg:#f0effe; --purple-dk:#362e80;
+  --coral:     #c64120; --coral-bg: #fceee8; --coral-dk: #7a2610;
+  --green:     #2a8a18; --green-bg: #eaf6e6; --green-dk: #185a0a;
 }
 html { scroll-behavior: smooth; }
 body {
   font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
   background: var(--surface);
   color: var(--text);
-  line-height: 1.6;
+  line-height: 1.65;
+  font-size: 14px;
 }
 
 /* ── HERO ── */
@@ -40,53 +39,103 @@ body {
   background: var(--navy);
   border-bottom: 4px solid var(--blue);
   position: sticky; top: 0; z-index: 100;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.18);
 }
 .hero-inner {
-  max-width: 1440px; margin: 0 auto;
-  padding: 0 40px; height: 70px;
-  display: flex; align-items: center; justify-content: space-between; gap: 24px;
+  max-width: 1400px; margin: 0 auto;
+  padding: 0 32px; height: 68px;
+  display: flex; align-items: center; justify-content: space-between; gap: 20px;
 }
-.hero-left { display: flex; align-items: center; gap: 18px; }
+.hero-left { display: flex; align-items: center; gap: 16px; }
 .logo-wrap {
-  background: white; border-radius: 7px; padding: 5px 11px;
-  height: 46px; display: flex; align-items: center;
+  background: white; border-radius: 7px; padding: 5px 10px;
+  height: 44px; display: flex; align-items: center;
 }
-.logo-wrap img { height: 32px; width: auto; }
-.h-div { width: 1px; height: 30px; background: rgba(255,255,255,0.15); }
-.hero-title { font-size: 19px; font-weight: 800; color: white; letter-spacing: -0.3px; }
-.hero-sub { font-size: 10.5px; color: rgba(255,255,255,0.42); font-weight: 500; letter-spacing: 0.07em; text-transform: uppercase; margin-top: 1px; }
-.hero-pills { display: flex; gap: 7px; flex-wrap: wrap; justify-content: flex-end; }
+.logo-wrap img { height: 30px; width: auto; display: block; }
+.h-div { width: 1px; height: 28px; background: rgba(255,255,255,0.15); }
+.hero-title { font-size: 18px; font-weight: 800; color: white; letter-spacing: -0.3px; }
+.hero-sub { font-size: 10px; color: rgba(255,255,255,0.45); font-weight: 500; letter-spacing: 0.07em; text-transform: uppercase; }
+.hero-pills { display: flex; gap: 6px; flex-wrap: wrap; justify-content: flex-end; }
 .pill {
-  background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
-  color: rgba(255,255,255,0.72); font-size: 10.5px; font-weight: 600;
-  padding: 5px 13px; border-radius: 100px; white-space: nowrap;
+  background: rgba(255,255,255,0.09); border: 1px solid rgba(255,255,255,0.15);
+  color: rgba(255,255,255,0.78); font-size: 10.5px; font-weight: 600;
+  padding: 5px 12px; border-radius: 100px; white-space: nowrap;
 }
 
-/* ── LAYOUT ── */
-.wrap { max-width: 1440px; margin: 0 auto; padding: 36px 40px 64px; }
+/* ── FLOW ARROW BANNER ── */
+.flow-bar {
+  background: var(--navy);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.flow-inner {
+  max-width: 1400px; margin: 0 auto;
+  padding: 0 32px;
+  display: flex; align-items: stretch;
+  min-width: 600px;
+}
+.flow-step {
+  display: flex; align-items: center;
+  flex: 1; position: relative;
+}
+.flow-btn {
+  flex: 1;
+  display: flex; align-items: center; justify-content: center; gap: 7px;
+  padding: 11px 6px;
+  text-decoration: none;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.03em;
+  color: rgba(255,255,255,0.6);
+  transition: color 0.2s;
+  white-space: nowrap;
+}
+.flow-btn:hover { color: white; }
+.flow-btn .f-num {
+  width: 20px; height: 20px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 9px; font-weight: 800; flex-shrink: 0;
+}
+.flow-arrow {
+  color: rgba(255,255,255,0.18);
+  font-size: 16px; flex-shrink: 0;
+  padding: 0 2px;
+  display: flex; align-items: center;
+}
 
-/* ── INTRO STRIP ── */
+.f1 .f-num { background: var(--amber);   color: white; }
+.f2 .f-num { background: var(--teal);    color: white; }
+.f3 .f-num { background: var(--blue2);   color: white; }
+.f4 .f-num { background: var(--indigo);  color: white; }
+.f5 .f-num { background: var(--blue2);   color: white; }
+.f6 .f-num { background: var(--purple);  color: white; }
+.f7 .f-num { background: var(--coral);   color: white; }
+
+/* ── MAIN WRAP ── */
+.wrap { max-width: 1400px; margin: 0 auto; padding: 32px 32px 64px; }
+
+/* ── INTRO ── */
 .intro-strip {
   background: white; border: 1px solid var(--border);
-  border-left: 5px solid var(--blue); border-radius: 10px;
-  padding: 20px 28px; margin-bottom: 28px;
-  display: flex; align-items: flex-start; gap: 20px;
+  border-left: 5px solid var(--blue); border-radius: 12px;
+  padding: 22px 28px; margin-bottom: 28px;
+  display: flex; align-items: flex-start; gap: 18px;
 }
 .intro-icon {
-  width: 46px; height: 46px; background: var(--blue-bg); border-radius: 9px;
+  width: 48px; height: 48px; background: var(--blue2-bg); border-radius: 10px;
   display: flex; align-items: center; justify-content: center;
-  font-size: 20px; flex-shrink: 0; margin-top: 2px;
+  font-size: 22px; flex-shrink: 0;
 }
-.intro-strip h2 { font-size: 15px; font-weight: 700; color: var(--navy); margin-bottom: 5px; }
-.intro-strip p { font-size: 13px; color: var(--text-mid); line-height: 1.7; max-width: 820px; }
+.intro-strip h2 { font-size: 16px; font-weight: 800; color: var(--navy); margin-bottom: 6px; }
+.intro-strip p { font-size: 14px; color: var(--text-mid); line-height: 1.7; max-width: 800px; }
 
 /* ── TWO-COL ── */
-.two-col { display: grid; grid-template-columns: 1fr 380px; gap: 28px; align-items: start; }
+.two-col { display: grid; grid-template-columns: 1fr 400px; gap: 28px; align-items: start; }
 
-/* ── PHASES ── */
+/* ── PHASE CARDS ── */
 .phase {
   background: white; border: 1px solid var(--border);
   border-radius: 14px; margin-bottom: 20px; overflow: hidden;
+  box-shadow: 0 1px 4px rgba(17,30,56,0.06);
 }
 .phase-head {
   padding: 18px 24px 15px;
@@ -94,241 +143,284 @@ body {
   border-bottom: 1px solid var(--border);
 }
 .p-num {
-  width: 34px; height: 34px; border-radius: 50%;
+  width: 36px; height: 36px; border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
-  font-size: 13px; font-weight: 800; flex-shrink: 0;
+  font-size: 14px; font-weight: 800; flex-shrink: 0;
 }
 .p-badge {
-  font-size: 9.5px; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase;
+  font-size: 10px; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase;
   padding: 3px 10px; border-radius: 100px; flex-shrink: 0;
 }
-.p-title { font-size: 16px; font-weight: 700; color: var(--navy); }
-.p-note { margin-left: auto; font-size: 11.5px; color: var(--text-muted); font-style: italic; white-space: nowrap; }
+.p-title { font-size: 17px; font-weight: 800; color: var(--navy); }
+.p-note { margin-left: auto; font-size: 12px; color: var(--text-soft); font-style: italic; white-space: nowrap; }
 
-.p-grid { display: grid; gap: 0; }
-.p-grid.cols-4 { grid-template-columns: repeat(4,1fr); }
-.p-grid.cols-3 { grid-template-columns: repeat(3,1fr); }
-.p-grid.cols-2 { grid-template-columns: repeat(2,1fr); }
+/* Task grid */
+.p-grid { display: grid; }
+.cols-4 { grid-template-columns: repeat(4,1fr); }
+.cols-3 { grid-template-columns: repeat(3,1fr); }
+.cols-2 { grid-template-columns: repeat(2,1fr); }
 
 .tc {
-  padding: 16px 18px;
+  padding: 18px 20px;
   border-right: 1px solid var(--border);
+  position: relative;
 }
 .tc:last-child { border-right: none; }
 
+/* Arrow between task columns */
+.tc + .tc::before {
+  content: '→';
+  position: absolute;
+  left: -12px;
+  top: 22px;
+  width: 24px;
+  height: 24px;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  color: var(--text-soft);
+  z-index: 2;
+  line-height: 24px;
+  text-align: center;
+}
+
 .tc-label {
-  display: inline-flex; align-items: center; gap: 5px;
-  font-size: 9px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
-  padding: 2px 8px; border-radius: 100px; margin-bottom: 7px;
+  display: inline-block;
+  font-size: 9.5px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+  padding: 2px 9px; border-radius: 100px; margin-bottom: 8px;
 }
 .tc h4 {
-  font-size: 12.5px; font-weight: 700; color: var(--navy);
-  margin-bottom: 9px; padding-bottom: 8px; border-bottom: 1px solid var(--border);
+  font-size: 13.5px; font-weight: 800; color: var(--navy);
+  margin-bottom: 10px; padding-bottom: 9px; border-bottom: 1px solid var(--border);
 }
 .tc ul { list-style: none; }
 .tc li {
-  font-size: 12px; color: var(--text-mid); line-height: 1.62;
-  padding: 3px 0 3px 15px; position: relative;
+  font-size: 13px; color: var(--text-mid); font-weight: 500;
+  line-height: 1.65; padding: 4px 0 4px 16px; position: relative;
 }
 .tc li::before {
   content: '';
-  position: absolute; left: 0; top: 10px;
-  width: 5px; height: 5px; border-radius: 50%;
-  opacity: 0.4;
+  position: absolute; left: 0; top: 12px;
+  width: 6px; height: 6px; border-radius: 50%;
+  opacity: 0.5;
 }
 
-/* Responsibility notice boxes */
+/* Responsibility notice */
 .resp-notice {
-  display: flex; align-items: flex-start; gap: 10px;
-  margin: 0; padding: 11px 18px 11px 20px;
+  display: flex; align-items: flex-start; gap: 12px;
+  padding: 14px 20px;
   border-top: 1px solid var(--border);
-  background: var(--surface);
-  font-size: 11.5px; color: var(--text-mid); line-height: 1.55;
+  font-size: 13px; color: var(--text-mid); font-weight: 500; line-height: 1.6;
 }
-.resp-notice .rn-icon {
-  width: 22px; height: 22px; border-radius: 50%;
+.rn-icon {
+  width: 26px; height: 26px; border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
-  font-size: 11px; flex-shrink: 0; margin-top: 1px;
+  font-size: 13px; flex-shrink: 0; margin-top: 1px;
+  font-weight: 700;
 }
-.resp-notice strong { color: var(--navy); font-weight: 600; }
+.resp-notice strong { color: var(--navy); font-weight: 700; }
+.rn-blue { background: #f0f8ff; border-top-color: #b0d8f0; }
+.rn-blue .rn-icon { background: var(--blue2-bg); color: var(--blue2); }
+.rn-amber { background: #fffcf4; border-top-color: #f0d890; }
+.rn-amber .rn-icon { background: var(--amber-bg); color: var(--amber); }
 
 /* Financial milestone bar */
 .fin-bar {
   background: var(--navy); border-radius: 0 0 13px 13px;
-  padding: 14px 20px;
-  display: flex; gap: 0; overflow: hidden;
+  padding: 0; display: flex; overflow: hidden;
 }
-.fin-bar-item {
-  flex: 1; padding: 6px 14px; border-right: 1px solid rgba(255,255,255,0.1);
+.fbi {
+  flex: 1; padding: 14px 16px;
+  border-right: 1px solid rgba(255,255,255,0.08);
   display: flex; flex-direction: column; gap: 2px;
+  position: relative;
 }
-.fin-bar-item:last-child { border-right: none; }
-.fbi-label { font-size: 9px; font-weight: 600; letter-spacing: 0.07em; text-transform: uppercase; color: rgba(255,255,255,0.38); }
-.fbi-value { font-size: 12.5px; font-weight: 700; color: var(--blue); }
-.fbi-desc { font-size: 10.5px; color: rgba(255,255,255,0.5); }
+.fbi:last-child { border-right: none; }
+.fbi + .fbi::before {
+  content: '▶';
+  position: absolute; left: -8px; top: 50%; transform: translateY(-50%);
+  color: rgba(255,255,255,0.2); font-size: 12px;
+  z-index: 1;
+}
+.fbi-label { font-size: 9.5px; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; color: rgba(255,255,255,0.38); }
+.fbi-value { font-size: 13px; font-weight: 700; color: var(--blue); }
+.fbi-desc { font-size: 11px; color: rgba(255,255,255,0.48); font-weight: 500; }
 
-/* Phase colour classes */
-.c-amber .p-num { background:var(--amber-bg); color:var(--amber); }
-.c-amber .p-badge { background:var(--amber-bg); color:var(--amber-dk); }
+/* Phase colour theming */
+.c-amber .p-num    { background: var(--amber-bg); color: var(--amber); }
+.c-amber .p-badge  { background: var(--amber-bg); color: var(--amber-dk); }
 .c-amber .phase-head { border-top: 3px solid var(--amber); }
-.c-amber .tc li::before { background:var(--amber); }
-.c-amber .tc-label { background:var(--amber-bg); color:var(--amber-dk); }
+.c-amber .tc li::before { background: var(--amber); }
+.c-amber .tc-label { background: var(--amber-bg); color: var(--amber-dk); }
 
-.c-teal .p-num { background:var(--teal-bg); color:var(--teal); }
-.c-teal .p-badge { background:var(--teal-bg); color:var(--teal-dk); }
+.c-teal .p-num    { background: var(--teal-bg); color: var(--teal); }
+.c-teal .p-badge  { background: var(--teal-bg); color: var(--teal-dk); }
 .c-teal .phase-head { border-top: 3px solid var(--teal); }
-.c-teal .tc li::before { background:var(--teal); }
-.c-teal .tc-label { background:var(--teal-bg); color:var(--teal-dk); }
+.c-teal .tc li::before { background: var(--teal); }
+.c-teal .tc-label { background: var(--teal-bg); color: var(--teal-dk); }
 
-.c-blue2 .p-num { background:var(--blue2-bg); color:var(--blue2); }
-.c-blue2 .p-badge { background:var(--blue2-bg); color:var(--blue2-dk); }
+.c-blue2 .p-num    { background: var(--blue2-bg); color: var(--blue2); }
+.c-blue2 .p-badge  { background: var(--blue2-bg); color: var(--blue2-dk); }
 .c-blue2 .phase-head { border-top: 3px solid var(--blue2); }
-.c-blue2 .tc li::before { background:var(--blue2); }
-.c-blue2 .tc-label { background:var(--blue2-bg); color:var(--blue2-dk); }
+.c-blue2 .tc li::before { background: var(--blue2); }
+.c-blue2 .tc-label { background: var(--blue2-bg); color: var(--blue2-dk); }
 
-.c-purple .p-num { background:var(--purple-bg); color:var(--purple); }
-.c-purple .p-badge { background:var(--purple-bg); color:var(--purple-dk); }
-.c-purple .phase-head { border-top: 3px solid var(--purple); }
-.c-purple .tc li::before { background:var(--purple); }
-.c-purple .tc-label { background:var(--purple-bg); color:var(--purple-dk); }
-
-.c-coral .p-num { background:var(--coral-bg); color:var(--coral); }
-.c-coral .p-badge { background:var(--coral-bg); color:var(--coral-dk); }
-.c-coral .phase-head { border-top: 3px solid var(--coral); }
-.c-coral .tc li::before { background:var(--coral); }
-.c-coral .tc-label { background:var(--coral-bg); color:var(--coral-dk); }
-
-.c-green .p-num { background:var(--green-bg); color:var(--green); }
-.c-green .p-badge { background:var(--green-bg); color:var(--green-dk); }
-.c-green .phase-head { border-top: 3px solid var(--green); }
-.c-green .tc li::before { background:var(--green); }
-.c-green .tc-label { background:var(--green-bg); color:var(--green-dk); }
-
-.c-indigo .p-num { background:var(--indigo-bg); color:var(--indigo); }
-.c-indigo .p-badge { background:var(--indigo-bg); color:var(--indigo-dk); }
+.c-indigo .p-num    { background: var(--indigo-bg); color: var(--indigo); }
+.c-indigo .p-badge  { background: var(--indigo-bg); color: var(--indigo-dk); }
 .c-indigo .phase-head { border-top: 3px solid var(--indigo); }
-.c-indigo .tc li::before { background:var(--indigo); }
-.c-indigo .tc-label { background:var(--indigo-bg); color:var(--indigo-dk); }
+.c-indigo .tc li::before { background: var(--indigo); }
+.c-indigo .tc-label { background: var(--indigo-bg); color: var(--indigo-dk); }
 
-/* resp-notice colour variants */
-.rn-amber { background: #fffbf3; border-top-color: #f5d98e; }
-.rn-amber .rn-icon { background: var(--amber-bg); color: var(--amber); }
-.rn-blue { background: #f0f8ff; border-top-color: #b3d9f5; }
-.rn-blue .rn-icon { background: var(--blue2-bg); color: var(--blue2); }
+.c-purple .p-num    { background: var(--purple-bg); color: var(--purple); }
+.c-purple .p-badge  { background: var(--purple-bg); color: var(--purple-dk); }
+.c-purple .phase-head { border-top: 3px solid var(--purple); }
+.c-purple .tc li::before { background: var(--purple); }
+.c-purple .tc-label { background: var(--purple-bg); color: var(--purple-dk); }
+
+.c-coral .p-num    { background: var(--coral-bg); color: var(--coral); }
+.c-coral .p-badge  { background: var(--coral-bg); color: var(--coral-dk); }
+.c-coral .phase-head { border-top: 3px solid var(--coral); }
+.c-coral .tc li::before { background: var(--coral); }
+.c-coral .tc-label { background: var(--coral-bg); color: var(--coral-dk); }
 
 /* Competencies */
 .comp-card {
-  background: white; border: 1px solid var(--border); border-radius: 14px; padding: 24px;
+  background: white; border: 1px solid var(--border); border-radius: 14px; padding: 26px;
+  box-shadow: 0 1px 4px rgba(17,30,56,0.06);
 }
 .comp-card h3 {
-  font-size: 11px; font-weight: 700; color: var(--text-muted);
-  text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px;
+  font-size: 11px; font-weight: 800; color: var(--text-soft);
+  text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 18px;
 }
-.comp-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; }
+.comp-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; }
 .comp-item {
-  background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 14px 16px;
+  background: var(--surface); border: 1px solid var(--border); border-radius: 9px; padding: 16px 18px;
 }
-.comp-item strong { display:block; font-size:13px; font-weight:700; color:var(--navy); margin-bottom:3px; }
-.comp-item span { font-size:12px; color:var(--text-muted); line-height:1.5; }
+.comp-item strong { display: block; font-size: 14px; font-weight: 800; color: var(--navy); margin-bottom: 4px; }
+.comp-item span { font-size: 13px; color: var(--text-mid); font-weight: 500; line-height: 1.55; }
 
 /* ── RIGHT COL ── */
-.right-col { position: sticky; top: 90px; }
-
+.right-col { position: sticky; top: 112px; }
 .case-card {
   background: white; border: 1px solid var(--border); border-radius: 14px; overflow: hidden;
+  box-shadow: 0 1px 4px rgba(17,30,56,0.06);
 }
-.case-head {
-  background: var(--navy); padding: 24px 24px 20px;
-}
+.case-head { background: var(--navy); padding: 24px 24px 20px; }
 .case-eyebrow {
-  font-size: 9.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+  font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
   color: var(--blue); margin-bottom: 7px;
 }
 .case-head h2 { font-size: 17px; font-weight: 800; color: white; line-height: 1.3; margin-bottom: 5px; }
-.case-head p { font-size: 12px; color: rgba(255,255,255,0.42); }
+.case-head p { font-size: 12.5px; color: rgba(255,255,255,0.44); }
 
 .case-facts {
   background: var(--navy-mid); padding: 16px 22px;
   display: grid; grid-template-columns: 1fr 1fr; gap: 10px 0;
 }
-.fact .fl { font-size: 9.5px; color: rgba(255,255,255,0.36); text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 1px; }
-.fact .fv { font-size: 12.5px; font-weight: 600; color: rgba(255,255,255,0.88); }
+.fact .fl { font-size: 10px; color: rgba(255,255,255,0.38); text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 1px; }
+.fact .fv { font-size: 13px; font-weight: 600; color: rgba(255,255,255,0.9); }
 .fact.wide { grid-column: 1/-1; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 10px; }
-.fact.wide .fv { color: var(--blue); font-size: 13.5px; font-weight: 700; }
+.fact.wide .fv { color: var(--blue); font-size: 14px; font-weight: 700; }
 
 .timeline { padding: 20px 22px 6px; }
 .tl-label {
-  font-size: 9.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.09em;
-  color: var(--text-muted); margin-bottom: 18px;
+  font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.09em;
+  color: var(--text-soft); margin-bottom: 18px;
 }
-.step { display: flex; gap: 13px; padding-bottom: 18px; position: relative; }
+
+.step { display: flex; gap: 14px; padding-bottom: 20px; position: relative; }
 .step:last-child { padding-bottom: 0; }
-.step-track { display:flex; flex-direction:column; align-items:center; flex-shrink:0; width:26px; }
+.step-track { display: flex; flex-direction: column; align-items: center; flex-shrink: 0; width: 28px; }
 .s-dot {
-  width: 26px; height: 26px; border-radius: 50%;
+  width: 28px; height: 28px; border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
-  font-size: 10.5px; font-weight: 800; flex-shrink: 0; position: relative; z-index: 1;
+  font-size: 11px; font-weight: 800; flex-shrink: 0; z-index: 1;
 }
-.s-line { width: 2px; flex: 1; background: var(--border); margin-top: 4px; min-height: 14px; }
+.s-line { width: 2px; flex: 1; background: var(--border); margin-top: 5px; min-height: 16px; }
 .step:last-child .s-line { display: none; }
 
-.s-body { flex: 1; padding-top: 2px; }
-.s-meta { display:flex; align-items:center; gap:6px; margin-bottom:3px; }
-.s-tag { font-size:9px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; padding:2px 8px; border-radius:100px; }
-.s-day { font-size:10.5px; color:var(--text-muted); }
-.s-title { font-size:12.5px; font-weight:700; color:var(--navy); margin-bottom:3px; line-height:1.3; }
-.s-desc { font-size:11.5px; color:var(--text-mid); line-height:1.65; }
-.s-desc .hl { font-weight:600; color:var(--navy); }
+.s-body { flex: 1; padding-top: 3px; }
+.s-meta { display: flex; align-items: center; gap: 7px; margin-bottom: 4px; }
+.s-tag {
+  font-size: 9.5px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+  padding: 2px 9px; border-radius: 100px;
+}
+.s-day { font-size: 11px; color: var(--text-soft); font-weight: 500; }
+.s-title { font-size: 13.5px; font-weight: 800; color: var(--navy); margin-bottom: 4px; line-height: 1.3; }
+.s-desc { font-size: 12.5px; color: var(--text-mid); font-weight: 500; line-height: 1.65; }
+.s-desc .hl { font-weight: 700; color: var(--navy); }
 
-/* step variants */
-.ss .s-dot { background:var(--amber-bg); color:var(--amber); }
-.ss .s-tag { background:var(--amber-bg); color:var(--amber-dk); }
-.sb .s-dot { background:var(--teal-bg); color:var(--teal); }
-.sb .s-tag { background:var(--teal-bg); color:var(--teal-dk); }
-.sv .s-dot { background:var(--indigo-bg); color:var(--indigo); }
-.sv .s-tag { background:var(--indigo-bg); color:var(--indigo-dk); }
-.sc2 .s-dot { background:var(--blue2-bg); color:var(--blue2); }
-.sc2 .s-tag { background:var(--blue2-bg); color:var(--blue2-dk); }
-.sp .s-dot { background:var(--purple-bg); color:var(--purple); }
-.sp .s-tag { background:var(--purple-bg); color:var(--purple-dk); }
-.sf .s-dot { background:var(--coral-bg); color:var(--coral); }
-.sf .s-tag { background:var(--coral-bg); color:var(--coral-dk); }
-.sfin .s-dot { background:var(--green-bg); color:var(--green); }
-.sfin .s-tag { background:var(--green-bg); color:var(--green-dk); }
+.ss  .s-dot { background: var(--amber-bg); color: var(--amber); }
+.ss  .s-tag { background: var(--amber-bg); color: var(--amber-dk); }
+.sb  .s-dot { background: var(--teal-bg);  color: var(--teal); }
+.sb  .s-tag { background: var(--teal-bg);  color: var(--teal-dk); }
+.sv  .s-dot { background: var(--indigo-bg);color: var(--indigo); }
+.sv  .s-tag { background: var(--indigo-bg);color: var(--indigo-dk); }
+.sc2 .s-dot { background: var(--blue2-bg); color: var(--blue2); }
+.sc2 .s-tag { background: var(--blue2-bg); color: var(--blue2-dk); }
+.sp  .s-dot { background: var(--purple-bg);color: var(--purple); }
+.sp  .s-tag { background: var(--purple-bg);color: var(--purple-dk); }
+.sfin .s-dot { background: var(--green-bg); color: var(--green); }
+.sfin .s-tag { background: var(--green-bg); color: var(--green-dk); }
 
 .fin-summary {
-  margin: 8px 22px 22px;
-  background: var(--navy); border-radius: 10px; padding: 16px 18px;
-  display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px;
+  margin: 8px 22px 22px; background: var(--navy); border-radius: 10px;
+  padding: 16px 18px; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px;
 }
-.fc .fl { font-size:9.5px; color:rgba(255,255,255,0.38); text-transform:uppercase; letter-spacing:0.07em; margin-bottom:3px; }
-.fc .fv { font-size:14px; font-weight:700; color:var(--blue); }
-.fc.grn .fv { color:#34c98a; }
+.fc .fl { font-size: 10px; color: rgba(255,255,255,0.38); text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 3px; }
+.fc .fv { font-size: 15px; font-weight: 800; color: var(--blue); }
+.fc.grn .fv { color: #2ecc8a; }
 
 /* ── FOOTER ── */
-footer {
-  background: var(--navy); border-top: 4px solid var(--blue); margin-top: 20px;
-}
+footer { background: var(--navy); border-top: 4px solid var(--blue); margin-top: 20px; }
 .footer-inner {
-  max-width: 1440px; margin: 0 auto; padding: 18px 40px;
+  max-width: 1400px; margin: 0 auto; padding: 20px 32px;
   display: flex; justify-content: space-between; align-items: center;
 }
-footer span { font-size: 12px; color: rgba(255,255,255,0.32); }
-footer strong { color: rgba(255,255,255,0.55); }
+footer span { font-size: 13px; color: rgba(255,255,255,0.35); font-weight: 500; }
+footer strong { color: rgba(255,255,255,0.6); }
 
-@media (max-width: 1100px) {
+/* ── RESPONSIVE ── */
+@media (max-width: 1180px) {
   .two-col { grid-template-columns: 1fr; }
   .right-col { position: static; }
-  .p-grid.cols-4 { grid-template-columns: 1fr 1fr; }
+  .case-card { max-width: 700px; }
 }
-@media (max-width: 640px) {
+@media (max-width: 900px) {
+  .cols-4 { grid-template-columns: 1fr 1fr; }
+  .cols-3 { grid-template-columns: 1fr 1fr; }
+  .p-note { display: none; }
+  /* hide the circular arrows between cards on 2-col wrap — they'd be in wrong place */
+  .tc + .tc::before { display: none; }
+}
+@media (max-width: 600px) {
+  body { font-size: 15px; }
+  .hero-inner { height: 60px; padding: 0 16px; }
+  .hero-title { font-size: 15px; }
+  .hero-sub, .hero-pills { display: none; }
+  .flow-inner { padding: 0 16px; }
+  .flow-btn { font-size: 10px; padding: 10px 4px; }
   .wrap { padding: 20px 16px 48px; }
-  .hero-inner { padding: 0 16px; }
-  .p-grid.cols-4, .p-grid.cols-3, .p-grid.cols-2 { grid-template-columns: 1fr; }
+  .intro-strip { padding: 18px 18px; gap: 14px; }
+  .intro-icon { display: none; }
+  .intro-strip h2 { font-size: 15px; }
+  .intro-strip p { font-size: 13.5px; }
+  .cols-4, .cols-3, .cols-2 { grid-template-columns: 1fr; }
   .tc { border-right: none !important; border-bottom: 1px solid var(--border); }
   .tc:last-child { border-bottom: none; }
-  .comp-grid { grid-template-columns: 1fr 1fr; }
-  .hero-pills { display: none; }
+  .tc + .tc::before { display: none; }
+  .phase-head { flex-wrap: wrap; }
+  .comp-grid { grid-template-columns: 1fr; }
+  .fin-bar { flex-direction: column; border-radius: 0 0 13px 13px; }
+  .fbi { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.08); }
+  .fbi:last-child { border-bottom: none; }
+  .fbi + .fbi::before { display: none; }
+  .fin-summary { grid-template-columns: 1fr; }
+  .footer-inner { flex-direction: column; gap: 6px; text-align: center; }
 }
 </style>
 </head>
@@ -342,7 +434,7 @@ footer strong { color: rgba(255,255,255,0.55); }
       <div class="h-div"></div>
       <div>
         <div class="hero-title">Sales Agent Role Framework</div>
-        <div class="hero-sub">India Office &nbsp;·&nbsp; Full-Circle Ownership &nbsp;·&nbsp; Single Point of Contact</div>
+        <div class="hero-sub">India Office &nbsp;·&nbsp; Single Point of Contact &nbsp;·&nbsp; Full-Circle Ownership</div>
       </div>
     </div>
     <div class="hero-pills">
@@ -353,6 +445,39 @@ footer strong { color: rgba(255,255,255,0.55); }
   </div>
 </header>
 
+<!-- PROCESS FLOW NAV -->
+<nav class="flow-bar" aria-label="Phase navigation">
+  <div class="flow-inner">
+    <div class="flow-step f1">
+      <a class="flow-btn" href="#p1"><span class="f-num">1</span>Sales</a>
+      <span class="flow-arrow">›</span>
+    </div>
+    <div class="flow-step f2">
+      <a class="flow-btn" href="#p2"><span class="f-num">2</span>Booking</a>
+      <span class="flow-arrow">›</span>
+    </div>
+    <div class="flow-step f3">
+      <a class="flow-btn" href="#p3"><span class="f-num">3</span>Flights</a>
+      <span class="flow-arrow">›</span>
+    </div>
+    <div class="flow-step f4">
+      <a class="flow-btn" href="#p4"><span class="f-num">4</span>Visa</a>
+      <span class="flow-arrow">›</span>
+    </div>
+    <div class="flow-step f5">
+      <a class="flow-btn" href="#p5"><span class="f-num">5</span>Confirm</a>
+      <span class="flow-arrow">›</span>
+    </div>
+    <div class="flow-step f6">
+      <a class="flow-btn" href="#p6"><span class="f-num">6</span>Support</a>
+      <span class="flow-arrow">›</span>
+    </div>
+    <div class="flow-step f7">
+      <a class="flow-btn" href="#p7"><span class="f-num">7</span>Finance</a>
+    </div>
+  </div>
+</nav>
+
 <div class="wrap">
 
   <!-- INTRO -->
@@ -360,15 +485,15 @@ footer strong { color: rgba(255,255,255,0.55); }
     <div class="intro-icon">✈</div>
     <div>
       <h2>One agent. One booking. Total ownership.</h2>
-      <p>The Trip Factory Sales Agent is the single named point of contact for both the end client and the trade agent throughout the entire booking lifecycle. While certain specialist tasks — such as flight ticketing and visa processing — are handled by dedicated internal teams or outsourced partners, the agent retains full ownership and accountability for ensuring these are initiated, progressing, and completed correctly and on time. No handoffs. No gaps. No excuses.</p>
+      <p>The Trip Factory Sales Agent is the single named point of contact for both the end client and the trade agent throughout the entire booking lifecycle. While specialist tasks — flight ticketing and visa processing — are handled by dedicated internal teams or outsourced partners, the agent retains full ownership and accountability for ensuring these are initiated, progressing on time, and completed correctly. No handoffs. No gaps. No excuses.</p>
     </div>
   </div>
 
   <div class="two-col">
   <div class="left-col">
 
-    <!-- PHASE 1: SALES -->
-    <div class="phase c-amber">
+    <!-- P1 SALES -->
+    <div id="p1" class="phase c-amber">
       <div class="phase-head">
         <div class="p-num">1</div>
         <div class="p-badge">Phase 1</div>
@@ -380,8 +505,8 @@ footer strong { color: rgba(255,255,255,0.55); }
           <h4>Enquiry handling</h4>
           <ul>
             <li>Respond to B2C and B2B leads within SLA</li>
-            <li>Qualify travel dates, group size, budget &amp; all requirements</li>
-            <li>Identify dietary, accessibility and visa needs upfront</li>
+            <li>Qualify dates, group size, budget &amp; all requirements</li>
+            <li>Identify dietary, accessibility &amp; visa needs upfront</li>
             <li>Log every enquiry in CRM with full detail immediately</li>
             <li>Follow up every live enquiry — never let it go cold</li>
           </ul>
@@ -391,88 +516,88 @@ footer strong { color: rgba(255,255,255,0.55); }
           <ul>
             <li>Match client profile to the most suitable itinerary</li>
             <li>Present guided, semi-guided &amp; independent options</li>
-            <li>Upsell premium hotels, upgrades &amp; signature experiences</li>
-            <li>Share a branded day-by-day itinerary PDF or digital proposal</li>
-            <li>Position TripFactory expertise vs competitor offerings</li>
+            <li>Upsell premium hotels, upgrades &amp; experiences</li>
+            <li>Share a branded day-by-day itinerary PDF</li>
+            <li>Position TripFactory expertise vs competitors clearly</li>
           </ul>
         </div>
         <div class="tc">
           <h4>Quoting &amp; negotiation</h4>
           <ul>
             <li>Build a fully itemised cost sheet with correct margins</li>
-            <li>Apply trade agent commission structures accurately</li>
-            <li>Provide a competitive quote with a clear validity period</li>
-            <li>Counter-negotiate commercially without eroding margin</li>
-            <li>Offer tiered options at different price points if needed</li>
+            <li>Apply agent commission structures accurately</li>
+            <li>Provide a competitive quote with a validity period</li>
+            <li>Counter-negotiate without eroding margin</li>
+            <li>Offer tiered options at different price points</li>
           </ul>
         </div>
         <div class="tc">
           <h4>Closing the sale</h4>
           <ul>
-            <li>Confirm all verbal agreements via a written summary email</li>
-            <li>Collect deposit in line with the agreed payment schedule</li>
-            <li>Issue booking confirmation to client and agent same day</li>
-            <li>Open the booking file in the system immediately on deposit</li>
+            <li>Confirm all verbal agreements in writing by email</li>
+            <li>Collect deposit per the agreed payment schedule</li>
+            <li>Issue booking confirmation to client &amp; agent same day</li>
+            <li>Open booking file in system immediately on deposit</li>
             <li>Set balance payment deadline reminders in advance</li>
           </ul>
         </div>
       </div>
     </div>
 
-    <!-- PHASE 2: BOOKING COMPONENTS -->
-    <div class="phase c-teal">
+    <!-- P2 BOOKING -->
+    <div id="p2" class="phase c-teal">
       <div class="phase-head">
         <div class="p-num">2</div>
         <div class="p-badge">Phase 2</div>
         <div class="p-title">Component Booking</div>
-        <div class="p-note">Hotels · Transfers · Tours &amp; Experiences</div>
+        <div class="p-note">Hotels · Transfers · Tours</div>
       </div>
       <div class="p-grid cols-4">
         <div class="tc">
           <h4>Hotels &amp; accommodation</h4>
           <ul>
             <li>Cross-check availability against every night of the tour</li>
-            <li>Book the correct room type, meal plan &amp; occupancy exactly</li>
+            <li>Book the correct room type, meal plan &amp; occupancy</li>
             <li>Confirm floor, non-smoking, view &amp; special preferences</li>
             <li>Request early check-in / late checkout where required</li>
-            <li>Add special notes: anniversary, honeymoon, medical needs</li>
+            <li>Add special notes: anniversary, honeymoon, medical</li>
           </ul>
         </div>
         <div class="tc">
           <h4>Transfers &amp; ground</h4>
           <ul>
-            <li>Book all airport, inter-hotel and inter-city transfers</li>
-            <li>Confirm vehicle type is correct for group size and luggage</li>
-            <li>Coordinate cruise port and rail station pick-ups precisely</li>
-            <li>Collect and share driver contact details before departure</li>
-            <li>Provide suppliers with meet-and-greet sign board instructions</li>
+            <li>Book all airport, inter-hotel &amp; inter-city transfers</li>
+            <li>Confirm correct vehicle type for group size &amp; luggage</li>
+            <li>Coordinate cruise port &amp; rail station pick-ups</li>
+            <li>Collect and share driver contact details pre-departure</li>
+            <li>Provide meet-and-greet sign board instructions</li>
           </ul>
         </div>
         <div class="tc">
           <h4>Tours, guides &amp; experiences</h4>
           <ul>
-            <li>Book all escorted day tours with fully licensed local guides</li>
-            <li>Pre-purchase attraction tickets — skip-the-line where available</li>
-            <li>Confirm guide language matches client's preference</li>
-            <li>Organise cruise, rail or coach passes as required by the tour</li>
-            <li>Arrange travel insurance appropriate to the full itinerary</li>
+            <li>Book escorted day tours with fully licensed guides</li>
+            <li>Pre-purchase tickets — skip-the-line where available</li>
+            <li>Confirm guide language matches client preference</li>
+            <li>Organise cruise, rail or coach passes as required</li>
+            <li>Arrange travel insurance for the full itinerary</li>
           </ul>
         </div>
         <div class="tc">
           <h4>Booking file &amp; records</h4>
           <ul>
             <li>Maintain a complete, up-to-date booking file at all times</li>
-            <li>File all supplier confirmations against the booking immediately</li>
+            <li>File all supplier confirmations against the booking</li>
             <li>Flag any supplier unable to confirm within 24 hours</li>
-            <li>Record all amendments with date, reason and authorisation</li>
-            <li>Ensure every component is confirmed before issuing invoice</li>
+            <li>Record all amendments: date, reason, authorisation</li>
+            <li>Ensure every component confirmed before issuing invoice</li>
           </ul>
         </div>
       </div>
     </div>
 
-    <!-- PHASE 3: FLIGHTS — coordinated, not booked -->
-    <div class="phase c-blue2">
+    <!-- P3 FLIGHTS -->
+    <div id="p3" class="phase c-blue2">
       <div class="phase-head">
         <div class="p-num">3</div>
         <div class="p-badge">Phase 3</div>
@@ -481,47 +606,47 @@ footer strong { color: rgba(255,255,255,0.55); }
       </div>
       <div class="p-grid cols-3">
         <div class="tc">
-          <span class="tc-label">Agent responsibility</span>
+          <span class="tc-label" style="background:var(--blue2-bg);color:var(--blue2-dk)">Agent initiates</span>
           <h4>Brief the flights team</h4>
           <ul>
             <li>Submit a complete flight request to the flights team promptly</li>
-            <li>Include passenger names exactly as they appear in passport</li>
-            <li>Specify preferred airlines, routing, cabin class and budget</li>
-            <li>Flag meal preferences, FF numbers and seat requirements</li>
+            <li>Include passenger names exactly as per passport</li>
+            <li>Specify airline preference, routing, cabin class &amp; budget</li>
+            <li>Flag meal preferences, FF numbers &amp; seat requirements</li>
             <li>State the deadline by which tickets must be issued</li>
           </ul>
         </div>
         <div class="tc">
-          <span class="tc-label">Agent responsibility</span>
-          <h4>Follow up &amp; verify</h4>
+          <span class="tc-label" style="background:var(--blue2-bg);color:var(--blue2-dk)">Agent follows up</span>
+          <h4>Chase &amp; verify</h4>
           <ul>
-            <li>Chase the flights team daily until confirmation is received</li>
-            <li>Verify confirmed flight details against the original brief</li>
-            <li>Check names, dates, routing and class are all correct</li>
+            <li>Chase the flights team daily until confirmation received</li>
+            <li>Verify confirmed details match the original brief exactly</li>
+            <li>Check names, dates, routing &amp; class are all correct</li>
             <li>Confirm ticket numbers are on file before releasing to client</li>
-            <li>Monitor for any schedule changes or involuntary re-routes</li>
+            <li>Monitor for schedule changes or involuntary re-routes</li>
           </ul>
         </div>
         <div class="tc">
-          <span class="tc-label">Agent responsibility</span>
+          <span class="tc-label" style="background:var(--blue2-bg);color:var(--blue2-dk)">Agent communicates</span>
           <h4>Client communication</h4>
           <ul>
-            <li>Communicate confirmed flight details to client promptly</li>
-            <li>Ensure client understands check-in times and terminal info</li>
-            <li>Add e-tickets to the travel document pack before dispatch</li>
-            <li>Action any client-requested amendments through the flights team</li>
-            <li>Escalate pricing disputes or ticketing delays to management</li>
+            <li>Confirm flight details to client promptly on ticketing</li>
+            <li>Ensure client understands check-in times &amp; terminal info</li>
+            <li>Add e-tickets to the travel document pack</li>
+            <li>Action any client amendments through the flights team</li>
+            <li>Escalate pricing disputes or delays to management</li>
           </ul>
         </div>
       </div>
       <div class="resp-notice rn-blue">
-        <div class="rn-icon">&#9432;</div>
-        <div><strong>Important:</strong> Flights are ticketed by the internal flights team, not by the sales agent. However, the sales agent is fully responsible for initiating the request, chasing for completion, verifying accuracy, and ensuring tickets are in the client's hands before departure. If tickets are wrong or delayed, accountability sits with the agent.</div>
+        <div class="rn-icon">i</div>
+        <div><strong>Note:</strong> Flights are ticketed by the internal flights team, not the sales agent. However, the agent is fully responsible for initiating the request, chasing completion, verifying accuracy, and ensuring e-tickets reach the client before departure. If tickets are wrong or delayed, accountability sits with the agent.</div>
       </div>
     </div>
 
-    <!-- PHASE 4: VISA -->
-    <div class="phase c-indigo">
+    <!-- P4 VISA -->
+    <div id="p4" class="phase c-indigo">
       <div class="phase-head">
         <div class="p-num">4</div>
         <div class="p-badge">Phase 4</div>
@@ -530,58 +655,58 @@ footer strong { color: rgba(255,255,255,0.55); }
       </div>
       <div class="p-grid cols-4">
         <div class="tc">
-          <span class="tc-label">Agent responsibility</span>
+          <span class="tc-label" style="background:var(--indigo-bg);color:var(--indigo-dk)">Agent initiates</span>
           <h4>Initiate the application</h4>
           <ul>
-            <li>Identify visa requirements at the point of booking confirmation</li>
-            <li>Advise client on all visa categories required for the itinerary</li>
-            <li>Issue a visa invitation letter or sponsorship document if needed</li>
-            <li>Refer client to the approved external visa processing partner</li>
+            <li>Identify all visa requirements at point of booking</li>
+            <li>Advise client on visa categories needed for the itinerary</li>
+            <li>Issue a visa invitation or sponsorship letter if required</li>
+            <li>Refer client to the approved external visa partner</li>
             <li>Set the application start deadline on the booking file</li>
           </ul>
         </div>
         <div class="tc">
-          <span class="tc-label">Agent responsibility</span>
+          <span class="tc-label" style="background:var(--indigo-bg);color:var(--indigo-dk)">Agent collects</span>
           <h4>Document collection</h4>
           <ul>
-            <li>Provide client with the full document checklist for each visa</li>
+            <li>Provide client with the full document checklist</li>
             <li>Chase client for outstanding documents within 48 hours</li>
-            <li>Review submitted documents for obvious errors before forwarding</li>
-            <li>Confirm the visa agent has received and accepted the full set</li>
-            <li>Log the submission date and reference number on the booking file</li>
+            <li>Review submitted documents for obvious errors</li>
+            <li>Confirm visa partner has received the complete set</li>
+            <li>Log the submission date &amp; reference on the booking file</li>
           </ul>
         </div>
         <div class="tc">
-          <span class="tc-label">Agent responsibility</span>
+          <span class="tc-label" style="background:var(--indigo-bg);color:var(--indigo-dk)">Agent tracks</span>
           <h4>Progress tracking</h4>
           <ul>
             <li>Follow up with the visa company at least twice per week</li>
             <li>Record each update against the booking in CRM</li>
             <li>Communicate progress or delays to the client proactively</li>
             <li>Escalate any concerns to management at the 3-week mark</li>
-            <li>Never assume the visa is progressing without written confirmation</li>
+            <li>Never assume progress without written confirmation</li>
           </ul>
         </div>
         <div class="tc">
-          <span class="tc-label">Agent responsibility</span>
+          <span class="tc-label" style="background:var(--indigo-bg);color:var(--indigo-dk)">Agent verifies</span>
           <h4>Completion &amp; verification</h4>
           <ul>
             <li>Confirm visa has been granted and received by the client</li>
-            <li>Verify visa validity dates cover the full travel period</li>
-            <li>Check number of entries matches the itinerary requirements</li>
-            <li>Add visa confirmation to the pre-departure briefing checklist</li>
-            <li>Escalate any refusal immediately and explore alternative options</li>
+            <li>Verify validity dates cover the full travel period</li>
+            <li>Check number of entries matches the itinerary</li>
+            <li>Add visa confirmation to pre-departure briefing checklist</li>
+            <li>Escalate any refusal immediately and explore alternatives</li>
           </ul>
         </div>
       </div>
       <div class="resp-notice rn-amber">
-        <div class="rn-icon">&#9888;</div>
-        <div><strong>Important:</strong> Visa processing is handled by an external partner. The sales agent is accountable for initiating the process on time, tracking progress proactively, and ensuring the visa is granted and verified before the pre-departure briefing. A client travelling without a valid visa is a critical failure — the agent must never assume this is someone else's responsibility.</div>
+        <div class="rn-icon">!</div>
+        <div><strong>Important:</strong> Visa processing is handled by an external partner. The agent is accountable for initiating the process on time, tracking it proactively, and verifying the visa is granted and correct before the pre-departure briefing. A client travelling without a valid visa is a critical failure — this is never someone else's responsibility.</div>
       </div>
     </div>
 
-    <!-- PHASE 5: CONFIRM & DOCS -->
-    <div class="phase c-blue2">
+    <!-- P5 CONFIRM -->
+    <div id="p5" class="phase c-blue2">
       <div class="phase-head">
         <div class="p-num">5</div>
         <div class="p-badge">Phase 5</div>
@@ -593,47 +718,47 @@ footer strong { color: rgba(255,255,255,0.55); }
           <h4>Supplier confirmations</h4>
           <ul>
             <li>Chase every supplier for written confirmation of all services</li>
-            <li>Verify names, dates and room types against the original booking</li>
+            <li>Verify names, dates &amp; room types vs original booking</li>
             <li>Resolve every discrepancy before issuing client documents</li>
             <li>Re-confirm all services 72 hours before departure</li>
-            <li>Escalate unresolved supplier issues to management immediately</li>
+            <li>Escalate unresolved supplier issues to management</li>
           </ul>
         </div>
         <div class="tc">
           <h4>Travel document pack</h4>
           <ul>
-            <li>Compile all vouchers, e-tickets and hotel confirmations</li>
+            <li>Compile all vouchers, e-tickets &amp; hotel confirmations</li>
             <li>Produce a clear day-by-day itinerary in the client's language</li>
-            <li>Include hotel addresses in local script for taxi and navigation use</li>
-            <li>Add emergency contacts, local SIM and currency guidance</li>
-            <li>Dispatch the complete pack minimum 10 days before travel</li>
+            <li>Include hotel addresses in local script for taxis</li>
+            <li>Add emergency contacts, local SIM &amp; currency guidance</li>
+            <li>Dispatch the complete pack at least 10 days before travel</li>
           </ul>
         </div>
         <div class="tc">
           <h4>Pre-departure briefing</h4>
           <ul>
-            <li>Call client to walk through the entire itinerary in full detail</li>
-            <li>Confirm passport validity meets destination entry requirements</li>
-            <li>Confirm visa has been received and is correct — check dates</li>
-            <li>Brief on local customs, weather expectations and dress codes</li>
-            <li>Provide agent's direct WhatsApp as 24/7 in-trip emergency contact</li>
+            <li>Call client to walk through the full itinerary in detail</li>
+            <li>Confirm passport validity meets destination requirements</li>
+            <li>Confirm visa has been received — check dates &amp; entries</li>
+            <li>Brief on local customs, weather &amp; dress codes</li>
+            <li>Share direct WhatsApp as 24/7 in-trip emergency contact</li>
           </ul>
         </div>
         <div class="tc">
           <h4>Agent / trade handover</h4>
           <ul>
-            <li>Send a complete booking summary to the trade agent partner</li>
-            <li>Confirm commission amount due and exact payment timeline</li>
-            <li>Share the emergency escalation contact with the agent</li>
-            <li>Notify agent immediately of any last-minute amendments</li>
-            <li>Ensure agent is confident to respond to their client's questions</li>
+            <li>Send a complete booking summary to the trade agent</li>
+            <li>Confirm commission due &amp; exact payment timeline</li>
+            <li>Share emergency escalation contact with the agent</li>
+            <li>Notify agent of any last-minute changes immediately</li>
+            <li>Ensure agent can confidently answer their client's questions</li>
           </ul>
         </div>
       </div>
     </div>
 
-    <!-- PHASE 6: SUPPORT -->
-    <div class="phase c-purple">
+    <!-- P6 SUPPORT -->
+    <div id="p6" class="phase c-purple">
       <div class="phase-head">
         <div class="p-num">6</div>
         <div class="p-badge">Phase 6</div>
@@ -644,30 +769,30 @@ footer strong { color: rgba(255,255,255,0.55); }
         <div class="tc">
           <h4>Issue resolution</h4>
           <ul>
-            <li>Be reachable on WhatsApp throughout the client travel window</li>
-            <li>Handle hotel complaints and room issues immediately and directly</li>
-            <li>Re-arrange missed or failed transfers without any delay</li>
-            <li>Re-book flights cancelled or significantly disrupted</li>
-            <li>Escalate critical issues to the ops team and management</li>
+            <li>Be reachable on WhatsApp throughout the travel window</li>
+            <li>Handle hotel complaints &amp; room issues immediately</li>
+            <li>Re-arrange missed or failed transfers without delay</li>
+            <li>Re-book disrupted or cancelled flights promptly</li>
+            <li>Escalate critical issues to ops team &amp; management</li>
           </ul>
         </div>
         <div class="tc">
           <h4>Customer queries</h4>
           <ul>
-            <li>Answer client questions on tours, timings and all logistics</li>
-            <li>Assist with on-ground restaurant and activity requests</li>
-            <li>Coordinate with local guides for on-trip amendments or additions</li>
-            <li>Provide local emergency numbers and medical facility guidance</li>
-            <li>Keep the client calm, informed and feeling fully supported</li>
+            <li>Answer questions on tours, timings &amp; all logistics</li>
+            <li>Assist with on-ground restaurant &amp; activity requests</li>
+            <li>Coordinate with local guides for amendments</li>
+            <li>Provide local emergency &amp; medical facility guidance</li>
+            <li>Keep the client calm, informed &amp; fully supported</li>
           </ul>
         </div>
         <div class="tc">
           <h4>Agent queries</h4>
           <ul>
-            <li>Respond to all trade agent queries within 2 working hours</li>
-            <li>Provide status updates on the client's trip when requested</li>
-            <li>Relay any on-trip incidents or changes to agent promptly</li>
-            <li>Handle client complaints relayed via the agent diplomatically</li>
+            <li>Respond to trade agent queries within 2 working hours</li>
+            <li>Provide status updates on the client's trip on request</li>
+            <li>Relay on-trip incidents or changes to agent promptly</li>
+            <li>Handle agent-relayed complaints diplomatically</li>
             <li>Manage agent expectations professionally throughout</li>
           </ul>
         </div>
@@ -675,17 +800,17 @@ footer strong { color: rgba(255,255,255,0.55); }
           <h4>Post-trip follow-up</h4>
           <ul>
             <li>Welcome client home with a warm personalised message</li>
-            <li>Actively request a Google or TripAdvisor review within 3 days</li>
+            <li>Actively request a Google or TripAdvisor review</li>
             <li>Gather constructive feedback for the operations team</li>
             <li>Log supplier performance issues for future reference</li>
-            <li>Initiate the re-sell conversation for the next holiday</li>
+            <li>Initiate the re-sell conversation for next year's holiday</li>
           </ul>
         </div>
       </div>
     </div>
 
-    <!-- PHASE 7: FINANCIAL -->
-    <div class="phase c-coral">
+    <!-- P7 FINANCE -->
+    <div id="p7" class="phase c-coral">
       <div class="phase-head">
         <div class="p-num">7</div>
         <div class="p-badge">Phase 7</div>
@@ -696,19 +821,19 @@ footer strong { color: rgba(255,255,255,0.55); }
         <div class="tc">
           <h4>Cost build &amp; margin control</h4>
           <ul>
-            <li>Build a fully itemised cost sheet for every booking before quoting</li>
+            <li>Build a fully itemised cost sheet before every quote</li>
             <li>Maintain the minimum required margin on every component</li>
-            <li>Never issue a quote without completing the full cost build first</li>
-            <li>Review margin impact whenever an amendment is made</li>
-            <li>Escalate to management before accepting below-minimum margin</li>
+            <li>Never issue a quote without completing the full cost build</li>
+            <li>Review margin impact whenever any amendment is made</li>
+            <li>Escalate to management before accepting below-min margin</li>
           </ul>
         </div>
         <div class="tc">
           <h4>Client invoicing &amp; collections</h4>
           <ul>
-            <li>Issue the correct invoice immediately once booking is confirmed</li>
-            <li>Track deposit and final balance payment deadlines without exception</li>
-            <li>Send automated payment reminders 7 days and 2 days before due date</li>
+            <li>Issue the correct invoice immediately on booking confirmation</li>
+            <li>Track deposit and balance payment deadlines without exception</li>
+            <li>Send payment reminders 7 days and 2 days before due date</li>
             <li>Follow up overdue payments assertively within 24 hours</li>
             <li>Issue formal receipts immediately on every payment received</li>
           </ul>
@@ -716,47 +841,46 @@ footer strong { color: rgba(255,255,255,0.55); }
         <div class="tc">
           <h4>Supplier invoice validation</h4>
           <ul>
-            <li>Validate every supplier invoice against the agreed contract rate</li>
+            <li>Validate every supplier invoice against the agreed rate</li>
             <li>Flag any discrepancy to the supplier in writing before paying</li>
-            <li>Never approve a supplier invoice with incorrect amounts</li>
+            <li>Never approve an invoice with incorrect amounts</li>
             <li>Ensure all supplier payments are processed on or before due date</li>
-            <li>Cross-check payment confirmation number against the booking record</li>
+            <li>Cross-check payment confirmation number against booking record</li>
           </ul>
         </div>
         <div class="tc">
           <h4>Zero-error &amp; audit policy</h4>
           <ul>
             <li>Agent carries full personal accountability for all financial errors</li>
-            <li>Double-check every name, date, cost and reference before confirming</li>
-            <li>Complete the mandatory pre-departure financial audit 7 days out</li>
-            <li>Document all amendments: date, reason, authorisation, financial impact</li>
-            <li>Financial losses due to agent error are reviewed in appraisal</li>
+            <li>Double-check every name, date, cost &amp; reference before confirming</li>
+            <li>Complete the mandatory financial audit checklist 7 days pre-departure</li>
+            <li>Document all amendments: date, reason, authorisation &amp; financial impact</li>
+            <li>Financial losses caused by agent error are reviewed at appraisal</li>
           </ul>
         </div>
       </div>
-      <!-- Financial milestone tracker -->
       <div class="fin-bar">
-        <div class="fin-bar-item">
+        <div class="fbi">
           <div class="fbi-label">On booking</div>
           <div class="fbi-value">Deposit collected</div>
           <div class="fbi-desc">30% · Receipt issued same day</div>
         </div>
-        <div class="fin-bar-item">
+        <div class="fbi">
           <div class="fbi-label">On quoting</div>
           <div class="fbi-value">Cost build complete</div>
           <div class="fbi-desc">Margin verified before sending</div>
         </div>
-        <div class="fin-bar-item">
+        <div class="fbi">
           <div class="fbi-label">On confirmation</div>
-          <div class="fbi-value">Supplier invoices validated</div>
-          <div class="fbi-desc">Rates checked against contract</div>
+          <div class="fbi-value">Invoices validated</div>
+          <div class="fbi-desc">Rates checked vs contract</div>
         </div>
-        <div class="fin-bar-item">
+        <div class="fbi">
           <div class="fbi-label">7 days pre-dep</div>
           <div class="fbi-value">Balance collected</div>
           <div class="fbi-desc">Full payment on file · Audit done</div>
         </div>
-        <div class="fin-bar-item">
+        <div class="fbi">
           <div class="fbi-label">Post-trip</div>
           <div class="fbi-value">Financial close</div>
           <div class="fbi-desc">Commission processed · File closed</div>
@@ -770,23 +894,23 @@ footer strong { color: rgba(255,255,255,0.55); }
       <div class="comp-grid">
         <div class="comp-item">
           <strong>Destination knowledge</strong>
-          <span>Deep familiarity with European products, routing, visa requirements and local ground conditions</span>
+          <span>Deep familiarity with European products, routing, visa requirements and ground conditions</span>
         </div>
         <div class="comp-item">
-          <strong>GDS &amp; systems proficiency</strong>
-          <span>Confident with Amadeus or Galileo, NDC channels, internal booking and CRM platforms</span>
+          <strong>GDS &amp; systems</strong>
+          <span>Confident with Amadeus or Galileo, NDC channels, internal booking platforms and CRM</span>
         </div>
         <div class="comp-item">
-          <strong>Communication skills</strong>
-          <span>Clear, professional and warm communication with clients, trade agents, flights team and suppliers</span>
+          <strong>Communication</strong>
+          <span>Clear, warm and professional with clients, trade agents, the flights team and suppliers</span>
         </div>
         <div class="comp-item">
           <strong>Attention to detail</strong>
-          <span>Meticulous accuracy on names, dates, visa validity, costs and documents — errors cost money and trust</span>
+          <span>Meticulous accuracy on names, dates, visa validity, costs and documents — errors cost money</span>
         </div>
         <div class="comp-item">
           <strong>Financial acumen</strong>
-          <span>Comfortable with margin calculations, cost builds, invoicing, supplier validation and reconciliation</span>
+          <span>Comfortable with margin builds, invoicing, supplier validation and full reconciliation</span>
         </div>
         <div class="comp-item">
           <strong>Ownership &amp; follow-through</strong>
@@ -803,9 +927,8 @@ footer strong { color: rgba(255,255,255,0.55); }
       <div class="case-head">
         <div class="case-eyebrow">Live booking example — India office</div>
         <h2>European Escorted Tour<br>Mumbai → Paris · Alps · Rome</h2>
-        <p>A complete walkthrough of how a Trip Factory agent handles a real booking from enquiry to financial close</p>
+        <p>How a Trip Factory agent handles a real booking from first enquiry to financial close</p>
       </div>
-
       <div class="case-facts">
         <div class="fact"><div class="fl">Client</div><div class="fv">Mr &amp; Mrs Kapoor</div></div>
         <div class="fact"><div class="fl">Trade agent</div><div class="fv">Horizon Travels, Andheri</div></div>
@@ -813,7 +936,6 @@ footer strong { color: rgba(255,255,255,0.55); }
         <div class="fact"><div class="fl">Departs</div><div class="fv">Mumbai (BOM) — 18 Jun</div></div>
         <div class="fact wide"><div class="fl">Total booking value</div><div class="fv">INR 4,89,500 · 2 pax · Anniversary trip</div></div>
       </div>
-
       <div class="timeline">
         <div class="tl-label">Booking journey — day by day</div>
 
@@ -822,7 +944,7 @@ footer strong { color: rgba(255,255,255,0.55); }
           <div class="s-body">
             <div class="s-meta"><span class="s-tag">Sell</span><span class="s-day">Day 1</span></div>
             <div class="s-title">Enquiry received &amp; qualified</div>
-            <div class="s-desc">Horizon Travels emails an enquiry: <span class="hl">14N Europe, June, INR 4.5–5L, vegetarian meals, anniversary trip.</span> Agent responds within 1 hour, logs in CRM and calls to qualify: 4-star minimum, no train legs, private transfers throughout.</div>
+            <div class="s-desc">Horizon Travels emails: <span class="hl">14N Europe, June, INR 4.5–5L, vegetarian, anniversary trip.</span> Agent responds within 1 hour, logs full requirement in CRM, calls to qualify: 4-star min, no trains, private transfers throughout.</div>
           </div>
         </div>
 
@@ -831,7 +953,7 @@ footer strong { color: rgba(255,255,255,0.55); }
           <div class="s-body">
             <div class="s-meta"><span class="s-tag">Sell</span><span class="s-day">Day 2–5</span></div>
             <div class="s-title">Proposal, negotiation &amp; deposit</div>
-            <div class="s-desc">Branded itinerary PDF sent: <span class="hl">Paris 4N · Interlaken 4N · Rome 4N.</span> Margin set at 18%. Confirmed Day 5. <span class="hl">Deposit INR 1,44,000 (30%) collected</span> and receipt issued same day. Booking file opened.</div>
+            <div class="s-desc">Branded itinerary PDF: <span class="hl">Paris 4N · Interlaken 4N · Rome 4N.</span> Margin set at 18%. Confirmed Day 5. <span class="hl">Deposit INR 1,44,000 (30%) collected</span> and receipt issued. Booking file opened immediately.</div>
           </div>
         </div>
 
@@ -840,7 +962,7 @@ footer strong { color: rgba(255,255,255,0.55); }
           <div class="s-body">
             <div class="s-meta"><span class="s-tag">Book</span><span class="s-day">Day 6–8</span></div>
             <div class="s-title">Hotels, tours &amp; transfers booked</div>
-            <div class="s-desc"><span class="hl">Hotels:</span> Duquesne Eiffel, Metropole, Quirinale — all 4* BB, anniversary notes added. <span class="hl">Tours:</span> Versailles, Jungfraujoch, Vatican &amp; Colosseum skip-the-line, English-Hindi guide. Private airport transfers all cities confirmed.</div>
+            <div class="s-desc"><span class="hl">Hotels:</span> Duquesne Eiffel, Metropole, Quirinale — all 4* BB, anniversary notes added. <span class="hl">Tours:</span> Versailles, Jungfraujoch, Vatican &amp; Colosseum skip-the-line, English-Hindi guide confirmed. Private transfers all three cities confirmed.</div>
           </div>
         </div>
 
@@ -848,8 +970,8 @@ footer strong { color: rgba(255,255,255,0.55); }
           <div class="step-track"><div class="s-dot">4</div><div class="s-line"></div></div>
           <div class="s-body">
             <div class="s-meta"><span class="s-tag">Flights</span><span class="s-day">Day 6</span></div>
-            <div class="s-title">Flight request submitted to flights team</div>
-            <div class="s-desc">Agent submits full flight brief: <span class="hl">AI 131 BOM–CDG 18 Jun · AI 112 FCO–BOM 2 Jul.</span> Names per passport, VGML meals, aisle seats together. Agent chases daily and verifies confirmation before adding e-tickets to the document pack.</div>
+            <div class="s-title">Flight request submitted &amp; tracked</div>
+            <div class="s-desc">Agent submits brief to flights team: <span class="hl">AI 131 BOM–CDG 18 Jun · AI 112 FCO–BOM 2 Jul,</span> names per passport, VGML meals, aisle seats. Agent chases daily until confirmed and verifies all details before adding e-tickets to the document pack.</div>
           </div>
         </div>
 
@@ -858,7 +980,7 @@ footer strong { color: rgba(255,255,255,0.55); }
           <div class="s-body">
             <div class="s-meta"><span class="s-tag">Visa</span><span class="s-day">Day 7 onwards</span></div>
             <div class="s-title">Schengen visa — initiated &amp; tracked</div>
-            <div class="s-desc">Agent issues visa invitation letter and refers Kapoors to the approved visa partner. Document checklist shared. Agent <span class="hl">follows up with visa company twice per week,</span> logging every update in CRM. Visa confirmed received and verified 3 weeks before departure.</div>
+            <div class="s-desc">Agent issues invitation letter and refers Kapoors to the approved visa partner. Document checklist shared. <span class="hl">Agent follows up with visa company twice per week,</span> logging every update. Visa confirmed and validity verified 3 weeks before departure.</div>
           </div>
         </div>
 
@@ -867,7 +989,7 @@ footer strong { color: rgba(255,255,255,0.55); }
           <div class="s-body">
             <div class="s-meta"><span class="s-tag">Confirm</span><span class="s-day">Day 30–40</span></div>
             <div class="s-title">Balance, documents &amp; pre-dep call</div>
-            <div class="s-desc"><span class="hl">Balance INR 3,36,000 collected.</span> All supplier confirmations cross-checked. Full document pack dispatched 10 days before departure. Pre-dep call: visa confirmed, e-tickets verified, briefed on EUR cash, adapters and vegetarian restaurant lists. <span class="hl">Agent WhatsApp shared as 24/7 contact.</span></div>
+            <div class="s-desc"><span class="hl">Balance INR 3,36,000 collected.</span> All supplier confirmations cross-checked. Full document pack dispatched 10 days pre-departure. Pre-dep call: visa and e-tickets confirmed, client briefed on EUR cash, adaptors and vegetarian restaurant lists. <span class="hl">Agent WhatsApp shared as 24/7 in-trip contact.</span></div>
           </div>
         </div>
 
@@ -876,7 +998,7 @@ footer strong { color: rgba(255,255,255,0.55); }
           <div class="s-body">
             <div class="s-meta"><span class="s-tag">Support</span><span class="s-day">Day 44 · Paris</span></div>
             <div class="s-title">In-trip issue — hotel has no reservation</div>
-            <div class="s-desc"><span class="hl">"Hotel says they cannot find our reservation."</span> Agent calls Paris hotel directly at 10 PM IST (6:30 PM local). Name spelling discrepancy identified and resolved within 20 minutes. CRM incident log updated.</div>
+            <div class="s-desc"><span class="hl">"Hotel says they cannot find our booking."</span> Agent calls the Paris hotel directly at 10 PM IST. Name spelling discrepancy identified and resolved in 20 minutes. CRM incident log updated.</div>
           </div>
         </div>
 
@@ -885,7 +1007,7 @@ footer strong { color: rgba(255,255,255,0.55); }
           <div class="s-body">
             <div class="s-meta"><span class="s-tag">Support</span><span class="s-day">Day 48</span></div>
             <div class="s-title">Mid-trip amendment — extra night Rome</div>
-            <div class="s-desc">Horizon requests <span class="hl">one extra night at Hotel Quirinale — INR 9,500 supplement.</span> Agent confirms availability, quotes, gets approval, books and reissues voucher same day. Supplement collected from Horizon within 24 hours.</div>
+            <div class="s-desc">Horizon requests <span class="hl">one additional night at Hotel Quirinale — INR 9,500 supplement.</span> Agent confirms availability, quotes, gets approval, books and reissues voucher the same day. Supplement collected within 24 hours.</div>
           </div>
         </div>
 
@@ -894,7 +1016,7 @@ footer strong { color: rgba(255,255,255,0.55); }
           <div class="s-body">
             <div class="s-meta"><span class="s-tag">Support</span><span class="s-day">Day 60</span></div>
             <div class="s-title">Post-trip follow-up &amp; re-sell</div>
-            <div class="s-desc">Welcome-home WhatsApp sent. Google review collected. Feedback noted: Jungfraujoch was the highlight; Rome transfer slightly late — logged for supplier review. <span class="hl">Re-sell initiated: Amalfi or Scandinavia next year?</span></div>
+            <div class="s-desc">Welcome-home WhatsApp sent. Google review collected. Feedback noted and logged for supplier review. <span class="hl">Re-sell initiated: Amalfi Coast or Scandinavia next year?</span></div>
           </div>
         </div>
 
@@ -903,20 +1025,19 @@ footer strong { color: rgba(255,255,255,0.55); }
           <div class="s-body">
             <div class="s-meta"><span class="s-tag">Finance</span><span class="s-day">Day 62</span></div>
             <div class="s-title">Financial close</div>
-            <div class="s-desc">All supplier invoices validated against agreed rates. Extra night supplement reconciled. Horizon Travels commission processed. Booking file reviewed and formally closed. <span class="hl">Zero errors. Zero financial loss.</span></div>
+            <div class="s-desc">All supplier invoices validated against agreed rates. Extra night supplement reconciled. Commission processed. Booking formally closed. <span class="hl">Zero errors. Zero financial loss.</span></div>
           </div>
         </div>
 
-      </div><!-- /timeline -->
-
+      </div>
       <div class="fin-summary">
         <div class="fc"><div class="fl">Total cost</div><div class="fv">₹3,93,600</div></div>
         <div class="fc"><div class="fl">Total revenue</div><div class="fv">₹4,89,500</div></div>
         <div class="fc grn"><div class="fl">Net margin</div><div class="fv">₹95,900 · 19.6%</div></div>
       </div>
-
-    </div><!-- /case-card -->
+    </div>
   </div><!-- /right-col -->
+
   </div><!-- /two-col -->
 </div><!-- /wrap -->
 
