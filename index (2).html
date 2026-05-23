@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ORN — Global Product & Supply Structure</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --gold: #C9A84C;
+  --gold-lt: #E8C96A;
+  --gold-dk: #8B6914;
+  --gold-pale: #FBF3DC;
+  --gold-mid: #F0E0A0;
+  --black: #0A0A0A;
+  --dark: #141414;
+  --card: #1E1E1E;
+  --card2: #252525;
+  --offwhite: #F0EDE6;
+  --gray: #888;
+  --lgray: #555;
+  --red: #C0392B;
+  --red-pale: #2A1515;
+  --green: #27AE60;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: var(--black);
+  color: var(--offwhite);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ── HEADER ─────────────────────────────────────────────── */
+header {
+  background: var(--dark);
+  border-bottom: 2px solid var(--gold);
+  padding: 28px 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky; top: 0; z-index: 100;
+}
+.logo-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--gold);
+  letter-spacing: 3px;
+}
+.header-sub { font-size: 12px; color: var(--gray); margin-top: 3px; letter-spacing: 1px; }
+.badge {
+  background: var(--gold);
+  color: var(--black);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  padding: 5px 14px;
+  border-radius: 2px;
+}
+
+/* ── NAV PILLS ───────────────────────────────────────────── */
+nav {
+  display: flex;
+  gap: 8px;
+  padding: 20px 60px;
+  border-bottom: 1px solid #222;
+  flex-wrap: wrap;
+}
+.nav-pill {
+  background: transparent;
+  border: 1px solid #333;
+  color: var(--gray);
+  padding: 7px 18px;
+  border-radius: 40px;
+  font-size: 12px;
+  font-family: 'DM Sans', sans-serif;
+  cursor: pointer;
+  transition: all .25s;
+  letter-spacing: .5px;
+}
+.nav-pill:hover, .nav-pill.active {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: var(--black);
+  font-weight: 600;
+}
+
+/* ── SECTIONS ────────────────────────────────────────────── */
+.section { padding: 60px 60px 80px; display: none; animation: fadeIn .4s ease; }
+.section.active { display: block; }
+@keyframes fadeIn { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
+
+.section-label {
+  font-size: 11px;
+  letter-spacing: 4px;
+  color: var(--gold-dk);
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 42px;
+  font-weight: 700;
+  color: var(--gold);
+  line-height: 1.1;
+  margin-bottom: 8px;
+}
+.section-sub {
+  font-size: 14px;
+  color: var(--gray);
+  font-style: italic;
+  margin-bottom: 48px;
+  border-bottom: 1px solid #222;
+  padding-bottom: 20px;
+}
+
+/* ── TOOLTIP ─────────────────────────────────────────────── */
+.tooltip-wrap { position: relative; display: inline-block; }
+[data-tip] { cursor: pointer; }
+.tip-box {
+  position: absolute;
+  bottom: calc(100% + 12px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--card2);
+  border: 1px solid var(--gold);
+  border-radius: 8px;
+  padding: 14px 18px;
+  width: 280px;
+  font-size: 13px;
+  color: var(--offwhite);
+  line-height: 1.6;
+  z-index: 200;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity .2s, transform .2s;
+  transform: translateX(-50%) translateY(6px);
+  box-shadow: 0 20px 60px rgba(0,0,0,.8);
+}
+.tip-box::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 6px solid transparent;
+  border-top-color: var(--gold);
+}
+.tip-box .tip-title {
+  font-family: 'Cormorant Garamond', serif;
+  color: var(--gold);
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+[data-tip]:hover .tip-box {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ── ORG CHART ───────────────────────────────────────────── */
+.org-wrap { display: flex; flex-direction: column; align-items: center; gap: 0; }
+
+.org-node {
+  background: var(--card);
+  border: 2px solid var(--gold);
+  border-radius: 10px;
+  padding: 22px 36px;
+  text-align: center;
+  transition: all .25s;
+  cursor: pointer;
+  position: relative;
+}
+.org-node:hover { border-color: var(--gold-lt); box-shadow: 0 0 40px rgba(201,168,76,.18); transform: translateY(-2px); }
+.org-node.top { border-width: 3px; padding: 28px 60px; width: 560px; background: linear-gradient(135deg, #1e1e1e 0%, #252010 100%); }
+.org-node .name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--gold);
+}
+.org-node.top .name { font-size: 32px; }
+.org-node .role { font-size: 13px; color: var(--gray); margin-top: 4px; font-style: italic; }
+.org-node .tags { display: flex; gap: 6px; justify-content: center; flex-wrap: wrap; margin-top: 10px; }
+.tag {
+  font-size: 10px;
+  padding: 3px 10px;
+  border-radius: 20px;
+  letter-spacing: .5px;
+  font-weight: 600;
+}
+.tag-gold { background: rgba(201,168,76,.15); color: var(--gold); border: 1px solid rgba(201,168,76,.3); }
+.tag-gray { background: rgba(255,255,255,.06); color: var(--gray); border: 1px solid #333; }
+
+.connector {
+  width: 2px;
+  height: 40px;
+  background: linear-gradient(to bottom, var(--gold), #333);
+  margin: 0 auto;
+  position: relative;
+}
+.connector::after {
+  content: '↓';
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--gold);
+  font-size: 14px;
+}
+.connector-label {
+  text-align: center;
+  font-size: 11px;
+  color: var(--lgray);
+  letter-spacing: 1px;
+  margin: 6px 0;
+}
+
+.org-row { display: flex; gap: 24px; justify-content: center; align-items: flex-start; }
+.org-col { display: flex; flex-direction: column; align-items: center; gap: 0; }
+
+.h-line {
+  height: 2px;
+  background: linear-gradient(to right, transparent, var(--gold-dk), transparent);
+  width: 100%;
+  margin: 0;
+}
+
+.branch-row {
+  display: flex;
+  gap: 0;
+  justify-content: center;
+  width: 100%;
+  position: relative;
+}
+.branch-row::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: calc(25% + 12px);
+  right: calc(25% + 12px);
+  height: 2px;
+  background: var(--gold-dk);
+}
+
+.org-node.mid { width: 300px; border-color: var(--gold-dk); }
+.org-node.small { width: 220px; border-color: #333; font-size: 13px; }
+.org-node.small .name { font-size: 17px; }
+.org-node.disha { width: 600px; background: linear-gradient(135deg, #141414 0%, #1a1a0e 100%); border-color: #8B6914; }
+
+.func-list { text-align: left; margin-top: 12px; }
+.func-list li {
+  font-size: 12px;
+  color: var(--gray);
+  list-style: none;
+  padding: 2px 0;
+}
+.func-list li::before { content: '▸ '; color: var(--gold-dk); }
+
+/* ── SUPPLY BOUNDARY BOX ─────────────────────────────────── */
+.boundary-box {
+  border: 2px solid var(--red);
+  border-radius: 12px;
+  background: var(--red-pale);
+  padding: 36px 40px;
+  margin: 0 auto;
+  max-width: 900px;
+}
+.boundary-box h3 {
+  font-family: 'Cormorant Garamond', serif;
+  color: var(--red);
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 24px;
+}
+.boundary-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+.b-col h4 { font-size: 13px; font-weight: 600; margin-bottom: 14px; letter-spacing: 1px; }
+.b-col.owns h4 { color: var(--green); }
+.b-col.notown h4 { color: var(--red); }
+.b-item {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  margin-bottom: 12px;
+  font-size: 13px;
+  color: var(--offwhite);
+}
+.b-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+.plain-eng {
+  margin-top: 28px;
+  padding: 18px 24px;
+  background: rgba(201,168,76,.06);
+  border-left: 3px solid var(--gold);
+  border-radius: 0 8px 8px 0;
+  font-size: 14px;
+  color: var(--offwhite);
+  line-height: 1.7;
+}
+.plain-eng strong { color: var(--gold); }
+
+/* ── DESTINATION TABLE ───────────────────────────────────── */
+.region-block { margin-bottom: 48px; }
+.region-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--gold);
+  padding: 10px 0 8px;
+  border-bottom: 1px solid var(--gold-dk);
+  margin-bottom: 0;
+  letter-spacing: 1px;
+}
+
+.dest-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+.dest-table th {
+  background: var(--dark);
+  color: var(--gold);
+  padding: 10px 12px;
+  text-align: left;
+  font-size: 11px;
+  letter-spacing: 1px;
+  font-weight: 600;
+  border-bottom: 1px solid var(--gold-dk);
+}
+.dest-table th.center { text-align: center; }
+.dest-table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid #1e1e1e;
+  color: var(--offwhite);
+  vertical-align: middle;
+}
+.dest-table tr:nth-child(even) td { background: rgba(255,255,255,.02); }
+.dest-table tr:hover td { background: rgba(201,168,76,.04); }
+.dest-table td.dest-name { font-weight: 600; color: var(--offwhite); }
+.dest-table td.manager { color: var(--gold-lt); font-size: 13px; }
+.dest-table td.model { color: var(--lgray); font-size: 12px; font-style: italic; }
+.dest-table td.center { text-align: center; }
+.tick { color: var(--gold-dk); font-size: 15px; font-weight: 700; }
+.tba-row td { color: var(--lgray) !important; font-style: italic; }
+.tba-badge {
+  font-size: 10px;
+  background: #222;
+  color: var(--lgray);
+  padding: 2px 8px;
+  border-radius: 20px;
+  border: 1px solid #333;
+}
+
+.manager-pill {
+  display: inline-block;
+  cursor: pointer;
+  position: relative;
+}
+.manager-pill:hover { color: var(--gold); text-decoration: underline; text-underline-offset: 3px; }
+
+/* ── PRINCIPLES ──────────────────────────────────────────── */
+.principles-grid { display: grid; gap: 0; }
+.principle-row {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  border-bottom: 1px solid #1e1e1e;
+}
+.principle-row:nth-child(odd) .p-label { background: var(--card); }
+.principle-row:nth-child(even) .p-label { background: var(--card2); }
+.principle-row:nth-child(odd) .p-text { background: rgba(251,243,220,.04); }
+.p-label {
+  padding: 18px 20px;
+  font-weight: 600;
+  color: var(--gold);
+  font-size: 13px;
+  border-left: 4px solid var(--gold-dk);
+}
+.p-text {
+  padding: 18px 24px;
+  color: var(--offwhite);
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+/* ── SIGN-OFF PANEL ──────────────────────────────────────── */
+.signoff-panel {
+  background: var(--card);
+  border: 1px solid #333;
+  border-radius: 12px;
+  padding: 40px;
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: center;
+}
+.signoff-panel h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 28px;
+  color: var(--gold);
+  margin-bottom: 8px;
+}
+.signoff-panel p { color: var(--gray); font-size: 13px; margin-bottom: 32px; }
+.sig-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; text-align: left; }
+.sig-box {
+  border: 1px solid #333;
+  border-radius: 8px;
+  padding: 20px;
+  transition: border-color .25s;
+}
+.sig-box:hover { border-color: var(--gold-dk); }
+.sig-box .sig-name { font-weight: 600; color: var(--gold); font-size: 15px; margin-bottom: 4px; }
+.sig-box .sig-role { font-size: 12px; color: var(--gray); margin-bottom: 16px; }
+.sig-line {
+  border-top: 1px solid #444;
+  padding-top: 10px;
+  font-size: 11px;
+  color: var(--lgray);
+  letter-spacing: 1px;
+}
+.sig-date { margin-top: 10px; font-size: 11px; color: var(--lgray); }
+
+.doc-meta {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  margin-top: 40px;
+  padding-top: 24px;
+  border-top: 1px solid #222;
+  font-size: 11px;
+  color: var(--lgray);
+  letter-spacing: .5px;
+}
+.doc-meta span { display: flex; align-items: center; gap: 6px; }
+.doc-meta .dot { width: 4px; height: 4px; background: var(--gold-dk); border-radius: 50%; }
+
+/* ── PERSON LEGEND ───────────────────────────────────────── */
+.person-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+.person-chip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--card);
+  border: 1px solid #333;
+  border-radius: 40px;
+  padding: 6px 14px 6px 8px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all .2s;
+  position: relative;
+}
+.person-chip:hover { border-color: var(--gold-dk); background: var(--card2); }
+.person-chip .avatar {
+  width: 26px; height: 26px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 10px; font-weight: 700;
+  color: var(--black);
+  flex-shrink: 0;
+}
+.person-chip .chip-name { color: var(--offwhite); font-weight: 500; }
+.person-chip .chip-dest { color: var(--gold-dk); font-size: 10px; }
+
+/* scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--dark); }
+::-webkit-scrollbar-thumb { background: var(--gold-dk); border-radius: 3px; }
+
+/* responsive */
+@media (max-width: 900px) {
+  header, nav, .section { padding-left: 24px; padding-right: 24px; }
+  .org-node.top { width: 100%; }
+  .org-node.mid { width: 100%; }
+  .boundary-cols { grid-template-columns: 1fr; }
+  .sig-grid { grid-template-columns: 1fr; }
+  .org-row { flex-direction: column; align-items: center; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <div class="logo-text">ORN</div>
+    <div class="header-sub">GLOBAL PRODUCT & SUPPLY — DESTINATION STRUCTURE — MAY 2026</div>
+  </div>
+  <span class="badge">CONFIDENTIAL</span>
+</header>
+
+<nav>
+  <button class="nav-pill active" onclick="show('structure',this)">01 — Global Structure</button>
+  <button class="nav-pill" onclick="show('supply',this)">02 — Supply Boundary</button>
+  <button class="nav-pill" onclick="show('destinations',this)">03 — Destination Ownership</button>
+  <button class="nav-pill" onclick="show('principles',this)">04 — Key Principles</button>
+  <button class="nav-pill" onclick="show('signoff',this)">05 — Sign-Off</button>
+</nav>
+
+<!-- ══ 01 STRUCTURE ══════════════════════════════════════════════════ -->
+<section id="structure" class="section active">
+  <div class="section-label">Section 01</div>
+  <div class="section-title">Global Structure<br>at a Glance</div>
+  <div class="section-sub">Hover over any box to see role details. One clear reporting line — no ambiguity.</div>
+
+  <div class="org-wrap">
+
+    <!-- AJAY -->
+    <div class="tooltip-wrap" data-tip>
+      <div class="org-node top">
+        <div class="name">Ajay Kawa</div>
+        <div class="role">Global Chief of Product & Supply — UK Based</div>
+        <div class="tags">
+          <span class="tag tag-gold">GLOBAL LEAD</span>
+          <span class="tag tag-gray">All regions report here</span>
+        </div>
+      </div>
+      <div class="tip-box">
+        <div class="tip-title">Ajay Kawa</div>
+        Directs all Contract Managers globally. Allocates destinations. Sets commercial standards and strategy. Final sign-off on all key decisions. Personally owns USA, Canada & Mexico.
+      </div>
+    </div>
+
+    <div class="connector"></div>
+    <div class="connector-label">ALL CONTRACT MANAGERS REPORT TO AJAY</div>
+
+    <!-- SACHIN + ASHISH -->
+    <div class="org-row" style="gap:32px">
+
+      <!-- SACHIN BRANCH -->
+      <div class="org-col">
+        <div class="tooltip-wrap" data-tip>
+          <div class="org-node mid">
+            <div class="name">Sachin Keni</div>
+            <div class="role">Product Director — India Based</div>
+            <div class="tags"><span class="tag tag-gold">INDIA PRODUCT</span></div>
+          </div>
+          <div class="tip-box" style="left:60%">
+            <div class="tip-title">Sachin Keni — Product Director</div>
+            Owns all India market product, GIT & Marketing. Manages Destination Managers in India. Also owns Singapore. Does NOT touch other Contract Managers' destinations.
+          </div>
+        </div>
+        <div class="connector" style="height:30px"></div>
+        <div class="org-node small" style="width:280px">
+          <ul class="func-list">
+            <li>India market product & GIT</li>
+            <li>Destination Managers — India</li>
+            <li>Marketing — demand creation</li>
+            <li>Singapore contract</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ASHISH BRANCH -->
+      <div class="org-col">
+        <div class="tooltip-wrap" data-tip>
+          <div class="org-node mid" style="border-color:#555">
+            <div class="name">Ashish Yadav</div>
+            <div class="role">Supply Director — India Based</div>
+            <div class="tags"><span class="tag tag-gray">SUPPLY ONLY</span></div>
+          </div>
+          <div class="tip-box" style="left:40%">
+            <div class="tip-title">Ashish Yadav — Supply Director</div>
+            Secures best commercial rates for India markets. Framework supplier agreements. Does NOT own any destination commercially. Sri Lanka sits under his remit. See Section 02 for the full boundary.
+          </div>
+        </div>
+        <div class="connector" style="height:30px; background: linear-gradient(to bottom, #555, #333)"></div>
+        <div class="org-node small" style="width:280px; border-color:#333">
+          <ul class="func-list">
+            <li>India supply — best commercial rates</li>
+            <li>Supplier framework agreements</li>
+            <li>Sri Lanka contract</li>
+            <li>Does NOT own destinations</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="connector" style="height:30px; margin-top:8px"></div>
+    <div class="connector-label">DATA LOADING & QC — ALL DESTINATIONS</div>
+
+    <!-- DISHA -->
+    <div class="tooltip-wrap" data-tip>
+      <div class="org-node disha">
+        <div class="name">Disha Mogee</div>
+        <div class="role">Supply Support & Global Data Loading — Mumbai</div>
+        <div class="tags">
+          <span class="tag tag-gray">Reports to Ashish/Sachin</span>
+          <span class="tag tag-gray">Services ALL managers</span>
+        </div>
+      </div>
+      <div class="tip-box">
+        <div class="tip-title">Disha Mogee — Mumbai Hub</div>
+        Loads rates & content for ALL destinations globally. Hotel & supplier onboarding. Quality control. Rate management. Does NOT own any destination commercially — purely operational.
+      </div>
+    </div>
+
+    <!-- CONTRACT MANAGERS ROW -->
+    <div class="connector" style="height:40px; margin-top:8px"></div>
+    <div class="connector-label" style="margin-bottom:16px">CONTRACT MANAGERS — each owns their destination exclusively</div>
+
+    <div style="display:flex; flex-wrap:wrap; gap:12px; justify-content:center; max-width:1100px">
+
+      <div class="tooltip-wrap" data-tip>
+        <div class="org-node small" style="width:180px">
+          <div class="name" style="font-size:15px">Ken Newton</div>
+          <div class="role">Europe, Africa, UK/Ireland</div>
+        </div>
+        <div class="tip-box">
+          <div class="tip-title">Ken Newton</div>
+          Owns: France, Germany, Spain, Portugal, Italy, Switzerland, Austria, Benelux, Scandinavia, UK FIT & Tours, Ireland, Scotland, Kenya, Zambia/Zimbabwe, South Africa, Morocco.
+        </div>
+      </div>
+
+      <div class="tooltip-wrap" data-tip>
+        <div class="org-node small" style="width:180px">
+          <div class="name" style="font-size:15px">Manish Suchde</div>
+          <div class="role">Middle East, Indian Ocean & Global</div>
+        </div>
+        <div class="tip-box">
+          <div class="tip-title">Manish Suchde</div>
+          Owns: UAE/Dubai, Oman, Egypt, Qatar, Kuwait/Bahrain, Maldives, Mauritius, Seychelles, Global Hotel Chains, Cruising (Global).
+        </div>
+      </div>
+
+      <div class="tooltip-wrap" data-tip>
+        <div class="org-node small" style="width:180px">
+          <div class="name" style="font-size:15px">David Tan</div>
+          <div class="role">Far East & North Asia</div>
+        </div>
+        <div class="tip-box">
+          <div class="tip-title">David Tan</div>
+          Owns: Thailand, Vietnam, Cambodia, Japan, China, South Korea, Hong Kong, Taiwan.
+        </div>
+      </div>
+
+      <div class="tooltip-wrap" data-tip>
+        <div class="org-node small" style="width:180px">
+          <div class="name" style="font-size:15px">Maricar Manalo Chao</div>
+          <div class="role">Philippines</div>
+        </div>
+        <div class="tip-box">
+          <div class="tip-title">Maricar Manalo Chao</div>
+          Sole owner of Philippines — full contracting across hotels, attractions and transfers. Inbound & outbound.
+        </div>
+      </div>
+
+      <div class="tooltip-wrap" data-tip>
+        <div class="org-node small" style="width:180px">
+          <div class="name" style="font-size:15px">Noor Adilah</div>
+          <div class="role">Malaysia</div>
+        </div>
+        <div class="tip-box">
+          <div class="tip-title">Noor Adilah</div>
+          Sole owner of Malaysia — full contracting across hotels, attractions and transfers. Inbound & outbound.
+        </div>
+      </div>
+
+      <div class="tooltip-wrap" data-tip>
+        <div class="org-node small" style="width:180px">
+          <div class="name" style="font-size:15px">Sachin Kurte</div>
+          <div class="role">Indonesia / Bali</div>
+        </div>
+        <div class="tip-box">
+          <div class="tip-title">Sachin Kurte</div>
+          Sole owner of Indonesia / Bali — full contracting across all components. Inbound & outbound.
+        </div>
+      </div>
+
+      <div class="tooltip-wrap" data-tip>
+        <div class="org-node small" style="width:180px">
+          <div class="name" style="font-size:15px">Baris Intepe</div>
+          <div class="role">Turkey</div>
+        </div>
+        <div class="tip-box">
+          <div class="tip-title">Baris Intepe</div>
+          Sole owner of Turkey — hotels, attractions, transfers, MICE & GIT. Inbound & outbound.
+        </div>
+      </div>
+
+      <div class="tooltip-wrap" data-tip>
+        <div class="org-node small" style="width:180px">
+          <div class="name" style="font-size:15px">Krystoff Jamruski</div>
+          <div class="role">Poland & Eastern Europe</div>
+        </div>
+        <div class="tip-box">
+          <div class="tip-title">Krystoff Jamruski</div>
+          Owns Poland & Eastern Europe — full contracting including MICE & GIT. Role to be formally confirmed.
+        </div>
+      </div>
+
+      <div class="tooltip-wrap" data-tip>
+        <div class="org-node small" style="width:180px">
+          <div class="name" style="font-size:15px">Maria Noelia Bonvin</div>
+          <div class="role">South America</div>
+        </div>
+        <div class="tip-box">
+          <div class="tip-title">Maria Noelia Bonvin</div>
+          Owns South America, Brazil, Peru/Andes — hotels, attractions, transfers, local DMC model.
+        </div>
+      </div>
+
+      <div class="tooltip-wrap" data-tip>
+        <div class="org-node small" style="width:180px">
+          <div class="name" style="font-size:15px">Yukti Kumar</div>
+          <div class="role">Australia & Pacific</div>
+        </div>
+        <div class="tip-box">
+          <div class="tip-title">Yukti Kumar</div>
+          Owns Australia, New Zealand, Fiji/Pacific Islands — full contracting including MICE & GIT.
+        </div>
+      </div>
+
+      <div class="tooltip-wrap" data-tip>
+        <div class="org-node small" style="width:180px">
+          <div class="name" style="font-size:15px">Yassir</div>
+          <div class="role">Saudi Arabia & Pakistan</div>
+        </div>
+        <div class="tip-box">
+          <div class="tip-title">Yassir</div>
+          Owns Saudi Arabia and Pakistan — direct contracts + local DMC model.
+        </div>
+      </div>
+
+      <div class="tooltip-wrap" data-tip>
+        <div class="org-node small" style="width:180px">
+          <div class="name" style="font-size:15px">Linda (TAG)</div>
+          <div class="role">USA / Australia Partnership</div>
+        </div>
+        <div class="tip-box">
+          <div class="tip-title">Linda — TAG Partnership</div>
+          TAG partnership model covering USA/Australia. Coordinate with Ajay (USA) and Yukti (Australia) to ensure no scope overlap.
+        </div>
+      </div>
+
+    </div><!-- end contract manager row -->
+
+  </div><!-- end org-wrap -->
+</section>
+
+<!-- ══ 02 SUPPLY BOUNDARY ════════════════════════════════════════════ -->
+<section id="supply" class="section">
+  <div class="section-label">Section 02</div>
+  <div class="section-title">Ashish Yadav / Supply<br>The Clear Boundary</div>
+  <div class="section-sub">This section exists because it has caused confusion. Read it carefully — it defines exactly what Supply does and does not own.</div>
+
+  <div class="boundary-box">
+    <h3>SUPPLY — ASHISH YADAV: WHAT HE DOES AND DOES NOT OWN</h3>
+    <div class="boundary-cols">
+      <div class="b-col owns">
+        <h4>✔ WHAT SUPPLY OWNS (Ashish's remit)</h4>
+        <div class="b-item"><span class="b-icon" style="color:var(--green)">✔</span><span>Rate loading coordination — working with Disha to ensure all rates are in the system</span></div>
+        <div class="b-item"><span class="b-icon" style="color:var(--green)">✔</span><span>Quality & compliance standards — ensuring all suppliers meet ORN standards</span></div>
+        <div class="b-item"><span class="b-icon" style="color:var(--green)">✔</span><span>India supply specifically — hotels, transport, experiences for the India market</span></div>
+        <div class="b-item"><span class="b-icon" style="color:var(--green)">✔</span><span>Sri Lanka — sits under Ashish's commercial remit</span></div>
+        <div class="b-item"><span class="b-icon" style="color:var(--green)">✔</span><span>Framework supplier agreements — review of master terms globally</span></div>
+      </div>
+      <div class="b-col notown">
+        <h4>✘ WHAT SUPPLY DOES NOT OWN</h4>
+        <div class="b-item"><span class="b-icon" style="color:var(--red)">✘</span><span>Destination product creation — building itineraries, packages or tours for any Contract Manager's destination</span></div>
+        <div class="b-item"><span class="b-icon" style="color:var(--red)">✘</span><span>Destination-specific contracting — if David Tan owns Thailand, Ashish does NOT contract Thailand suppliers</span></div>
+        <div class="b-item"><span class="b-icon" style="color:var(--red)">✘</span><span>GIT loading & contracting — this sits in Product (Sachin for India; Contract Manager for their destination)</span></div>
+        <div class="b-item"><span class="b-icon" style="color:var(--red)">✘</span><span>Marketing or demand creation — this sits within Product</span></div>
+        <div class="b-item"><span class="b-icon" style="color:var(--red)">✘</span><span>Any destination in the ownership table that has a named Contract Manager</span></div>
+      </div>
+    </div>
+    <div class="plain-eng">
+      <strong>In plain English:</strong> Ashish ensures the commercial and operational standards across supply. Contract Managers own their destinations completely — they source, contract and build product. These roles are complementary. <strong>They do not overlap.</strong> If a destination has a named Contract Manager, Ashish has no commercial role in that destination.
+    </div>
+  </div>
+</section>
+
+<!-- ══ 03 DESTINATIONS ═══════════════════════════════════════════════ -->
+<section id="destinations" class="section">
+  <div class="section-label">Section 03</div>
+  <div class="section-title">Global Destination<br>Ownership Table</div>
+  <div class="section-sub">One destination. One owner. ✔ = active &nbsp;|&nbsp; blank = not in scope &nbsp;|&nbsp; TBA = unallocated — Ajay to assign. Hover over manager names for details.</div>
+
+  <div id="dest-content"></div>
+</section>
+
+<!-- ══ 04 PRINCIPLES ═════════════════════════════════════════════════ -->
+<section id="principles" class="section">
+  <div class="section-label">Section 04</div>
+  <div class="section-title">Key Principles</div>
+  <div class="section-sub">These are the agreed rules. They apply globally and without exception.</div>
+
+  <div class="principles-grid" style="max-width:900px">
+    <div class="principle-row">
+      <div class="p-label">One Owner Per Destination</div>
+      <div class="p-text">Every destination has exactly one Contract Manager. If your name is on a destination, you own it completely — contracting, suppliers, product. No one else may touch it.</div>
+    </div>
+    <div class="principle-row">
+      <div class="p-label">Supply ≠ Destination Ownership</div>
+      <div class="p-text">Ashish Yadav (Supply) secures commercial rates and framework terms for India and overall compliance. He does NOT own, contract or build product for any destination that has a named Contract Manager. See Section 02.</div>
+    </div>
+    <div class="principle-row">
+      <div class="p-label">No Overlaps — Ever</div>
+      <div class="p-text">Overlaps are not permitted. If two people believe they own the same destination, it is escalated to Ajay Kawa immediately for resolution.</div>
+    </div>
+    <div class="principle-row">
+      <div class="p-label">Disha / Mumbai Hub</div>
+      <div class="p-text">Disha loads rates and content for ALL destinations globally. She does not own any destination commercially — she is the operational backbone that services all managers.</div>
+    </div>
+    <div class="principle-row">
+      <div class="p-label">GIT sits in Product</div>
+      <div class="p-text">GIT loading and contracting is a Product responsibility — Sachin for India, the named Contract Manager for all other destinations. It is not a Supply function.</div>
+    </div>
+    <div class="principle-row">
+      <div class="p-label">Global Chains & Cruise</div>
+      <div class="p-text">Manish Suchde owns global hotel chain and cruise agreements. These are cross-market and complement all destination managers — they do not override destination-specific contracting.</div>
+    </div>
+    <div class="principle-row">
+      <div class="p-label">Reporting</div>
+      <div class="p-text">All Contract Managers report to Ajay Kawa. Sachin and Ashish also report to Ajay. Disha reports to Ashish / Sachin.</div>
+    </div>
+    <div class="principle-row">
+      <div class="p-label">Unallocated Destinations</div>
+      <div class="p-text">Any destination marked TBA is unallocated. No one may begin contracting or building product for a TBA destination until Ajay formally assigns it.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 05 SIGN-OFF ═══════════════════════════════════════════════════ -->
+<section id="signoff" class="section">
+  <div class="section-label">Section 05</div>
+  <div class="section-title">Sign-Off</div>
+  <div class="section-sub">This document represents the agreed global structure for ORN Product & Supply as of May 2026.</div>
+
+  <div class="signoff-panel">
+    <h3>Document Approval</h3>
+    <p>By signing, each party confirms they have read, understood and agreed to their role, their destination ownership and the principles set out in this document.</p>
+    <div class="sig-grid">
+      <div class="sig-box">
+        <div class="sig-name">Ajay Kawa</div>
+        <div class="sig-role">Global Chief of Product & Supply</div>
+        <div class="sig-line">Signature: ____________________</div>
+        <div class="sig-date">Date: _____ / _____ / 2026</div>
+      </div>
+      <div class="sig-box">
+        <div class="sig-name">Sachin Keni</div>
+        <div class="sig-role">Product Director — India</div>
+        <div class="sig-line">Signature: ____________________</div>
+        <div class="sig-date">Date: _____ / _____ / 2026</div>
+      </div>
+      <div class="sig-box">
+        <div class="sig-name">Ashish Yadav</div>
+        <div class="sig-role">Supply Director — India</div>
+        <div class="sig-line">Signature: ____________________</div>
+        <div class="sig-date">Date: _____ / _____ / 2026</div>
+      </div>
+      <div class="sig-box">
+        <div class="sig-name">Contract Managers</div>
+        <div class="sig-role">All named destinations accepted</div>
+        <div class="sig-line">Signature: ____________________</div>
+        <div class="sig-date">Date: _____ / _____ / 2026</div>
+      </div>
+    </div>
+
+    <div class="doc-meta">
+      <span><span class="dot"></span> TripFactory / ORN</span>
+      <span><span class="dot"></span> Internal Use Only</span>
+      <span><span class="dot"></span> ajay.kawa@tripfactory.com</span>
+      <span><span class="dot"></span> May 2026</span>
+      <span><span class="dot"></span> v1.0</span>
+    </div>
+  </div>
+</section>
+
+<script>
+// ── NAV ──────────────────────────────────────────────────────────────
+function show(id, btn) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-pill').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+// ── DESTINATION DATA ─────────────────────────────────────────────────
+const MANAGERS = {
+  "Ajay Kawa": "Global Chief — personally owns USA, Canada, Mexico",
+  "Sachin Keni": "Product Director — India market, Singapore, GIT & Marketing",
+  "Ashish Yadav": "Supply Director — Sri Lanka, India supply, framework agreements",
+  "David Tan": "Far East & North Asia — Thailand, Vietnam, Cambodia, Japan, China, S.Korea, HK, Taiwan",
+  "Maricar Manalo Chao": "Philippines — full contracting, inbound & outbound",
+  "Noor Adilah": "Malaysia — full contracting, inbound & outbound",
+  "Sachin Kurte": "Indonesia / Bali — full contracting, inbound & outbound",
+  "Ken Newton": "Europe, UK/Ireland, Africa — France, Germany, Spain, Italy, Switzerland, Austria, Benelux, Scandinavia, UK FIT, Ireland, Scotland, Kenya, Zambia/Zimbabwe, South Africa, Morocco",
+  "Manish Suchde": "Middle East & Indian Ocean — UAE, Oman, Egypt, Qatar, Kuwait/Bahrain, Maldives, Mauritius, Seychelles + Global Hotel Chains & Cruising",
+  "Baris Intepe": "Turkey — hotels, attractions, transfers, MICE & GIT",
+  "Krystoff Jamruski": "Poland & Eastern Europe — role TBC formally",
+  "Maria Noelia Bonvin": "South America, Brazil, Peru/Andes",
+  "Yukti Kumar": "Australia, New Zealand, Fiji & Pacific Islands",
+  "Yassir": "Saudi Arabia & Pakistan",
+  "Linda (TAG)": "USA/Australia TAG partnership — coordinate with Ajay & Yukti",
+};
+
+const AVATARS = {
+  "Ajay Kawa":"AK","Sachin Keni":"SK","Ashish Yadav":"AY","David Tan":"DT",
+  "Maricar Manalo Chao":"MC","Noor Adilah":"NA","Sachin Kurte":"SK2",
+  "Ken Newton":"KN","Manish Suchde":"MS","Baris Intepe":"BI",
+  "Krystoff Jamruski":"KJ","Maria Noelia Bonvin":"MB","Yukti Kumar":"YK",
+  "Yassir":"YA","Linda (TAG)":"LT",
+};
+const COLORS = ["#C9A84C","#8B6914","#E8C96A","#6B4A0E","#A07820",
+                "#D4A850","#7A5010","#B89040","#906A14","#C0902C",
+                "#E0B060","#805010","#D09030","#A07030","#B08020"];
+
+function managerCell(name) {
+  if (!name || name === "— TBA —") return `<span class="tba-badge">TBA</span>`;
+  const tip = MANAGERS[name] || name;
+  const initials = (AVATARS[name] || name.slice(0,2)).toUpperCase();
+  const colorIdx = Object.keys(MANAGERS).indexOf(name) % COLORS.length;
+  const color = COLORS[colorIdx < 0 ? 0 : colorIdx];
+  return `<span class="manager-pill tooltip-wrap" data-tip>
+    <span style="font-weight:600;color:var(--gold-lt)">${name}</span>
+    <div class="tip-box" style="width:240px">
+      <div class="tip-title">${name}</div>
+      ${tip}
+    </div>
+  </span>`;
+}
+
+function tick(v) {
+  if (v === "Y" || v === true) return `<span class="tick">✔</span>`;
+  return ``;
+}
+
+function buildTable(rows) {
+  const headers = ['Destination','Contract Manager','Supply Model','In','Out','Hotels','Attr','Trans','MICE','GIT','FD'];
+  let html = `<table class="dest-table"><thead><tr>`;
+  headers.forEach((h,i) => {
+    html += `<th class="${i>2?'center':''}">${h}</th>`;
+  });
+  html += `</tr></thead><tbody>`;
+  rows.forEach(r => {
+    const isTba = !r.manager || r.manager === "— TBA —";
+    html += `<tr class="${isTba?'tba-row':''}">
+      <td class="dest-name">${r.dest}</td>
+      <td class="manager">${managerCell(r.manager)}</td>
+      <td class="model">${r.model||''}</td>
+      <td class="center">${tick(r.in)}</td>
+      <td class="center">${tick(r.out)}</td>
+      <td class="center">${tick(r.hotels)}</td>
+      <td class="center">${tick(r.attr)}</td>
+      <td class="center">${tick(r.trans)}</td>
+      <td class="center">${tick(r.mice)}</td>
+      <td class="center">${tick(r.git)}</td>
+      <td class="center">${tick(r.fd)}</td>
+    </tr>`;
+  });
+  html += `</tbody></table>`;
+  return html;
+}
+
+const Y="Y", N="";
+const DMC="Direct contracts + local DMC";
+const regions = [
+  { label:"FAR EAST & SOUTH EAST ASIA", rows:[
+    {dest:"Thailand",         manager:"David Tan",         model:DMC,                                in:Y,out:N,hotels:Y,attr:N,trans:N,mice:N,git:N,fd:N},
+    {dest:"Vietnam",          manager:"David Tan",         model:DMC,                                in:Y,out:Y,hotels:Y,attr:Y,trans:Y,mice:N,git:N,fd:N},
+    {dest:"Cambodia",         manager:"David Tan",         model:DMC,                                in:Y,out:Y,hotels:Y,attr:Y,trans:Y,mice:N,git:N,fd:N},
+    {dest:"Philippines",      manager:"Maricar Manalo Chao",model:DMC,                               in:Y,out:Y,hotels:Y,attr:Y,trans:Y,mice:N,git:N,fd:N},
+    {dest:"Malaysia",         manager:"Noor Adilah",       model:DMC,                                in:Y,out:Y,hotels:Y,attr:Y,trans:Y,mice:N,git:N,fd:N},
+    {dest:"Singapore",        manager:"Sachin Keni",       model:DMC,                                in:Y,out:Y,hotels:Y,attr:Y,trans:Y,mice:N,git:N,fd:N},
+    {dest:"Indonesia / Bali", manager:"Sachin Kurte",      model:DMC,                                in:Y,out:Y,hotels:Y,attr:Y,trans:Y,mice:N,git:N,fd:N},
+  ]},
+  { label:"NORTH ASIA", rows:[
+    {dest:"Japan",            manager:"David Tan",         model:DMC, in:Y,out:Y,hotels:Y,attr:Y,trans:Y,mice:N,git:N,fd:N},
+    {dest:"China",            manager:"David Tan",         model:DMC, in:Y,out:Y,hotels:Y,attr:Y,trans:Y,mice:N,git:N,fd:N},
+    {dest:"South Korea",      manager:"David Tan",         model:DMC, in:Y,out:Y,hotels:Y,attr:Y,trans:Y,mice:N,git:N,fd:N},
+    {dest:"Hong Kong",        manager:"David Tan",         model:DMC, in:Y,out:Y,hotels:Y,attr:Y,trans:Y,mice:N,git:N,fd:N},
+    {dest:"Taiwan",           manager:"David Tan",         model:DMC, in:Y,out:Y,hotels:Y,attr:Y,trans:Y,mice:N,git:N,fd:N},
+  ]},
+  { label:"SOUTH ASIA", rows:[
+    {dest:"India — All",      manager:"Sachin Keni",       model:"Direct via India Product team",    in:Y,out:Y,hotels:Y,attr:Y,trans:Y,mice:Y,git:Y,fd:Y},
+    {dest:"Sri Lanka",        manager:"Ashish Yadav",      model:DMC,                                in:Y,out:Y,hotels:Y,attr:Y,trans:Y,mice:N,git:N,fd:N},
+    {dest:"Maldives",         manager:"Manish Suchde",     model:DMC,                                in:Y,out:Y,hotels:Y,attr:Y,trans:Y,mice:N,git:N,fd:N},
+    {dest:"Pakistan",         manager:"Yassir",            model:DMC,                                in:Y,out:Y,hotels:Y,attr:Y,trans:Y,mice:N,git:N,fd:N},
+  ]},
+  { label:"MIDDLE EAST", rows:[
+    {dest:"UAE / Dubai",      manager:"Manish Suchde",     model:DMC, in:Y,out:Y,hotels:Y,attr:Y,trans:Y,mice:N,git:N,fd:N},
+    {dest:"Saudi Arabia",     manager:"Yassir",            model:DMC, in:Y,out:Y,hotels:Y,attr:Y,trans:Y,mice:N,git:N,fd:N},
+    {dest:"Oman",             manager:"Manish Suchde",     model:DMC, in:Y,out:Y,hotels:Y,attr:Y,trans:Y,mice:N,git:N,fd:N},
+    {dest:"Egypt",            manager:"Manish Suchde",     model:DMC, in:Y,out:Y,hotels:Y,attr:Y,trans:Y,mice:N,git:N,fd:N},
+    {dest:"Qatar",            manager:"Manish Suchde",     model:DMC, in:Y,out:Y,hotels:Y,attr:Y,trans:Y,mice:N,git:N,fd:N},
+    {dest:"Kuwait / Bahrain", manager:"Manish Suchde",     model:DMC, in:Y,out:Y,hotels:Y,attr:Y,trans:Y,mice:N,git:N,fd:N},
+  ]},
+  { label:"AFRICA — EAST", rows:[
+    {dest:"Kenya",            manager:"Ken Newton",        model:DMC, in:Y,out:Y,hotels:Y,attr:Y,trans:Y,mice:N,git:N,fd:N},
+    {dest:"Zambia / Zimbabwe",manager:"Ken Newton",        model:DMC, in:Y,out:Y,hotels:Y,attr:Y,trans:Y,mice:N,git:N,fd:N},
+  ]},
+  { label:"AFRICA — SOUTHERN", rows:[
+    {dest:"South Africa",     manager:"Ken Newton",        model:DMC, in:Y,out:Y,hotels:Y,attr:Y,trans:Y,mice:N,git:N,fd:N},
+    {dest:"Mauritius",        manager:"Manish Suchde",     model:DMC, in:Y,out:Y,hotels:Y,attr:Y,trans:Y,mice:N,git:N,fd:N},
+    {dest:"Seychelles",       manager:"Manish Suchde",     model:DMC, in:Y,out:Y,hotels:Y,attr:Y,trans:Y,mice:N,git:N,fd:N},
+  ]},
+  { label:"AFRICA — WEST & NORTH", rows:[
+    {dest:"Morocco",          manager:"Ken Newton",        model:DMC, in:Y,out:Y,hotels:Y,attr:Y,trans:Y,mice:N,git:N,fd:N},
+  ]},
+  { label:"EUROPE — WESTERN", rows:[
+    {dest:"France",           manager:"Ken Newton",        model:DMC, in:Y,out:Y,hotels:Y,attr:Y,trans:Y,mice:Y,git:Y,fd:N},
+    {dest:"Germany",          manager:"Ken Newton",        model:DMC, in:Y,out:Y,hotels:Y,attr:Y,trans:Y,mice:Y,git:Y,fd:N},
+    {dest:"Spain",            manager:"Ken Newton",        model:DMC, in:Y,out:Y,hotels:Y,attr:Y,trans:Y,mice:N,git:N,fd:N},
+    {dest:"Portugal",         manager:"Ken Newton",        model:DMC, in:Y,out:Y,hotels:Y,attr:Y,trans:Y,mice:N,git:N,fd:N},
+    {dest:"Italy",            manager:"Ken Newton",        model:DMC, in:Y,out:Y,hotels:Y,attr:Y,trans:Y,mice:N,git:N,fd:N},
+    {dest:"Switzerland",      manager:"Ken Newton",        model:DMC, in:Y,out:Y,hotels:Y,attr:Y,trans:Y,mice:N,git:N,fd:N},
+    {dest:"Austria",          manager:"Ken Newton",        model:DMC, in:Y,out:Y,hotels:Y,attr:Y,trans:Y,mice:N,git:N,fd:N},
+    {dest:"Netherlands / Benelux",manager:"Ken Newton",    model:DMC, in:Y,out:Y,hotels:Y,attr:Y,trans:Y,mice:N,git:N,fd:N},
+    {dest:"Scandinavia",      manager:"Ken Newton",        model:DMC, in:Y,out:Y,hotels:Y,attr:Y,trans:Y,mice:N,git:N,fd:N},
+  ]},
+  { label:"EUROPE — EASTERN & CENTRAL", rows:[
+    {dest:"Poland / E. Europe",manager:"Krystoff Jamruski",model:DMC+" (TBC)", in:Y,out:Y,hotels:Y,attr:Y,trans:Y,mice:Y,git:Y,fd:N},
+    {dest:"Turkey",           manager:"Baris Intepe",      model:DMC, in:Y,out:Y,hotels:Y,attr:Y,trans:Y,mice:Y,git:Y,fd:N},
+    {dest:"Croatia / Balkans",manager:"— TBA —",          model:"",  in:N,out:N,hotels:N,attr:N,trans:N,mice:N,git:N,fd:N},
+    {dest:"Romania / Bulgaria",manager:"— TBA —",         model:"",  in:N,out:N,hotels:N,attr:N,trans:N,mice:N,git:N,fd:N},
+  ]},
+  { label:"UK & IRELAND", rows:[
+    {dest:"UK FIT & Tours",   manager:"Ken Newton",        model:"Direct FIT product & itineraries", in:Y,out:N,hotels:Y,attr:Y,trans:Y,mice:N,git:N,fd:N},
+    {dest:"Ireland",          manager:"Ken Newton",        model:"Direct FIT product & itineraries", in:Y,out:Y,hotels:Y,attr:Y,trans:Y,mice:N,git:N,fd:N},
+    {dest:"Scotland",         manager:"Ken Newton",        model:"Direct FIT product & itineraries", in:Y,out:Y,hotels:Y,attr:Y,trans:Y,mice:N,git:N,fd:N},
+  ]},
+  { label:"NORTH AMERICA", rows:[
+    {dest:"USA",              manager:"Ajay Kawa",         model:DMC, in:Y,out:Y,hotels:Y,attr:Y,trans:Y,mice:Y,git:Y,fd:N},
+    {dest:"USA / Australia",  manager:"Linda (TAG)",       model:"TAG partnership model", in:Y,out:Y,hotels:Y,attr:Y,trans:Y,mice:Y,git:Y,fd:N},
+    {dest:"Canada",           manager:"Ajay Kawa",         model:DMC, in:Y,out:Y,hotels:Y,attr:Y,trans:Y,mice:N,git:N,fd:N},
+    {dest:"Mexico",           manager:"Ajay Kawa",         model:DMC, in:Y,out:Y,hotels:Y,attr:Y,trans:Y,mice:N,git:N,fd:N},
+  ]},
+  { label:"CENTRAL & SOUTH AMERICA", rows:[
+    {dest:"South America",    manager:"Maria Noelia Bonvin",model:"Local DMC + direct hotels", in:Y,out:Y,hotels:Y,attr:Y,trans:Y,mice:N,git:N,fd:N},
+    {dest:"Brazil",           manager:"Maria Noelia Bonvin",model:"Local DMC + direct hotels", in:Y,out:Y,hotels:Y,attr:Y,trans:Y,mice:N,git:N,fd:N},
+    {dest:"Peru / Andes",     manager:"Maria Noelia Bonvin",model:"Local DMC + direct hotels", in:Y,out:Y,hotels:Y,attr:Y,trans:Y,mice:N,git:N,fd:N},
+  ]},
+  { label:"AUSTRALIA & PACIFIC", rows:[
+    {dest:"Australia",        manager:"Yukti Kumar",       model:"Local DMC + direct hotels", in:Y,out:Y,hotels:Y,attr:Y,trans:Y,mice:Y,git:Y,fd:N},
+    {dest:"New Zealand",      manager:"Yukti Kumar",       model:"Local DMC + direct hotels", in:Y,out:Y,hotels:Y,attr:Y,trans:Y,mice:N,git:N,fd:N},
+    {dest:"Fiji / Pacific Islands",manager:"Yukti Kumar",  model:"Local DMC + direct hotels", in:Y,out:Y,hotels:Y,attr:Y,trans:Y,mice:N,git:N,fd:N},
+  ]},
+  { label:"GLOBAL / CROSS-MARKET", rows:[
+    {dest:"Global Hotel Chains",manager:"Manish Suchde",   model:"Global chain agreements",  in:Y,out:Y,hotels:Y,attr:N,trans:N,mice:N,git:N,fd:N},
+    {dest:"Cruising (Global)", manager:"Manish Suchde",    model:"Global cruise line contracts",in:Y,out:Y,hotels:Y,attr:N,trans:N,mice:N,git:N,fd:N},
+  ]},
+];
+
+// Build destination tables
+const destContent = document.getElementById('dest-content');
+regions.forEach(r => {
+  const block = document.createElement('div');
+  block.className = 'region-block';
+  block.innerHTML = `<div class="region-title">${r.label}</div>${buildTable(r.rows)}`;
+  destContent.appendChild(block);
+});
+</script>
+</body>
+</html>
