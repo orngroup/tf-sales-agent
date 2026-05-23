@@ -2,735 +2,795 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Trip Factory Sales Agent — Role Framework</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TripFactory · Sales Agent Role Framework</title>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --navy:       #1a2744;
+  --navy-mid:   #1e2f56;
+  --navy-light: #253660;
+  --blue:       #2196d3;
+  --blue-bg:    #e8f6fd;
+  --white:      #ffffff;
+  --surface:    #f6f8fc;
+  --border:     #e3eaf4;
+  --text:       #1a2744;
+  --text-mid:   #4a5a7a;
+  --text-muted: #8a9ab8;
+  --amber:      #d48a15; --amber-bg: #fff8ed; --amber-dk: #9a6010;
+  --teal:       #1a9e75; --teal-bg:  #eafaf4; --teal-dk:  #0f6e56;
+  --blue2:      #2196d3; --blue2-bg: #e8f6fd; --blue2-dk: #1260a0;
+  --purple:     #6b63cc; --purple-bg:#f0effe; --purple-dk:#4a44a0;
+  --coral:      #d95228; --coral-bg: #fdf0eb; --coral-dk: #a03818;
+  --green:      #3a9e22; --green-bg: #edf8e8; --green-dk: #27700a;
+  --indigo:     #3d5af1; --indigo-bg:#eef0ff; --indigo-dk:#2638c0;
+}
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  background: var(--surface);
+  color: var(--text);
+  line-height: 1.6;
+}
 
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+/* ── HERO ── */
+.hero {
+  background: var(--navy);
+  border-bottom: 4px solid var(--blue);
+  position: sticky; top: 0; z-index: 100;
+}
+.hero-inner {
+  max-width: 1440px; margin: 0 auto;
+  padding: 0 40px; height: 70px;
+  display: flex; align-items: center; justify-content: space-between; gap: 24px;
+}
+.hero-left { display: flex; align-items: center; gap: 18px; }
+.logo-wrap {
+  background: white; border-radius: 7px; padding: 5px 11px;
+  height: 46px; display: flex; align-items: center;
+}
+.logo-wrap img { height: 32px; width: auto; }
+.h-div { width: 1px; height: 30px; background: rgba(255,255,255,0.15); }
+.hero-title { font-size: 19px; font-weight: 800; color: white; letter-spacing: -0.3px; }
+.hero-sub { font-size: 10.5px; color: rgba(255,255,255,0.42); font-weight: 500; letter-spacing: 0.07em; text-transform: uppercase; margin-top: 1px; }
+.hero-pills { display: flex; gap: 7px; flex-wrap: wrap; justify-content: flex-end; }
+.pill {
+  background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
+  color: rgba(255,255,255,0.72); font-size: 10.5px; font-weight: 600;
+  padding: 5px 13px; border-radius: 100px; white-space: nowrap;
+}
 
-  body {
-    font-family: 'Plus Jakarta Sans', 'Helvetica Neue', Arial, sans-serif;
-    background: #ffffff;
-    color: #1a2744;
-    font-size: 10px;
-    line-height: 1.5;
-  }
+/* ── LAYOUT ── */
+.wrap { max-width: 1440px; margin: 0 auto; padding: 36px 40px 64px; }
 
-  /* ── HERO ── */
-  .hero {
-    background: #1a2744;
-    padding: 22px 32px 18px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-bottom: 4px solid #2196d3;
-  }
-  .hero-left {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-  }
-  .hero-logo {
-    height: 48px;
-    width: auto;
-    background: #ffffff;
-    border-radius: 6px;
-    padding: 4px 8px;
-  }
-  .hero-divider {
-    width: 1px;
-    height: 36px;
-    background: rgba(255,255,255,0.2);
-  }
-  .hero-text h1 {
-    font-size: 19px;
-    font-weight: 800;
-    color: #ffffff;
-    line-height: 1.15;
-    letter-spacing: -0.3px;
-  }
-  .hero-text p {
-    font-size: 9px;
-    color: rgba(255,255,255,0.5);
-    font-weight: 500;
-    letter-spacing: 0.07em;
-    text-transform: uppercase;
-    margin-top: 3px;
-  }
-  .hero-pills {
-    display: flex;
-    gap: 8px;
-    flex-shrink: 0;
-  }
-  .pill {
-    background: rgba(255,255,255,0.1);
-    border: 1px solid rgba(255,255,255,0.2);
-    color: rgba(255,255,255,0.85);
-    font-size: 8px;
-    font-weight: 600;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    padding: 5px 10px;
-    border-radius: 100px;
-  }
+/* ── INTRO STRIP ── */
+.intro-strip {
+  background: white; border: 1px solid var(--border);
+  border-left: 5px solid var(--blue); border-radius: 10px;
+  padding: 20px 28px; margin-bottom: 28px;
+  display: flex; align-items: flex-start; gap: 20px;
+}
+.intro-icon {
+  width: 46px; height: 46px; background: var(--blue-bg); border-radius: 9px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px; flex-shrink: 0; margin-top: 2px;
+}
+.intro-strip h2 { font-size: 15px; font-weight: 700; color: var(--navy); margin-bottom: 5px; }
+.intro-strip p { font-size: 13px; color: var(--text-mid); line-height: 1.7; max-width: 820px; }
 
-  /* ── MAIN GRID ── */
-  .main {
-    display: flex;
-    align-items: flex-start;
-    gap: 0;
-    width: 100%;
-  }
-  .left-col {
-    flex: 1 1 0;
-    min-width: 0;
-    padding: 20px 22px 24px 28px;
-    border-right: 1px solid #e8edf5;
-  }
-  .right-col {
-    width: 270px;
-    flex-shrink: 0;
-    background: #f5f7fb;
-    padding: 0;
-  }
+/* ── TWO-COL ── */
+.two-col { display: grid; grid-template-columns: 1fr 380px; gap: 28px; align-items: start; }
 
-  /* ── INTRO ── */
-  .intro-text {
-    font-size: 9px;
-    color: #5a6a8a;
-    line-height: 1.7;
-    margin-bottom: 16px;
-    padding-bottom: 14px;
-    border-bottom: 1px solid #e8edf5;
-  }
+/* ── PHASES ── */
+.phase {
+  background: white; border: 1px solid var(--border);
+  border-radius: 14px; margin-bottom: 20px; overflow: hidden;
+}
+.phase-head {
+  padding: 18px 24px 15px;
+  display: flex; align-items: center; gap: 12px;
+  border-bottom: 1px solid var(--border);
+}
+.p-num {
+  width: 34px; height: 34px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; font-weight: 800; flex-shrink: 0;
+}
+.p-badge {
+  font-size: 9.5px; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase;
+  padding: 3px 10px; border-radius: 100px; flex-shrink: 0;
+}
+.p-title { font-size: 16px; font-weight: 700; color: var(--navy); }
+.p-note { margin-left: auto; font-size: 11.5px; color: var(--text-muted); font-style: italic; white-space: nowrap; }
 
-  /* ── PHASES ── */
-  .phase {
-    margin-bottom: 16px;
-  }
-  .phase-header {
-    display: flex;
-    align-items: center;
-    gap: 9px;
-    margin-bottom: 9px;
-    padding-bottom: 8px;
-    border-bottom: 1.5px solid currentColor;
-  }
-  .phase-num {
-    width: 22px;
-    height: 22px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 9px;
-    font-weight: 800;
-    flex-shrink: 0;
-  }
-  .phase-badge {
-    font-size: 8px;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    padding: 2px 8px;
-    border-radius: 100px;
-  }
-  .phase-title {
-    font-size: 12px;
-    font-weight: 700;
-    color: #1a2744;
-    flex: 1;
-  }
+.p-grid { display: grid; gap: 0; }
+.p-grid.cols-4 { grid-template-columns: repeat(4,1fr); }
+.p-grid.cols-3 { grid-template-columns: repeat(3,1fr); }
+.p-grid.cols-2 { grid-template-columns: repeat(2,1fr); }
 
-  .phase-grid {
-    display: flex;
-    gap: 7px;
-  }
-  .task-card {
-    flex: 1;
-    background: #ffffff;
-    border: 1px solid #e8edf5;
-    border-top: 2.5px solid currentColor;
-    border-radius: 6px;
-    padding: 9px 10px;
-  }
-  .task-card h4 {
-    font-size: 9px;
-    font-weight: 700;
-    color: #1a2744;
-    margin-bottom: 5px;
-    letter-spacing: 0.01em;
-  }
-  .task-card ul {
-    list-style: none;
-    padding: 0;
-  }
-  .task-card li {
-    font-size: 8.5px;
-    color: #5a6a8a;
-    line-height: 1.6;
-    padding-left: 9px;
-    position: relative;
-    margin-bottom: 1px;
-  }
-  .task-card li::before {
-    content: '–';
-    position: absolute;
-    left: 0;
-    color: #c0cce0;
-    font-size: 8px;
-  }
+.tc {
+  padding: 16px 18px;
+  border-right: 1px solid var(--border);
+}
+.tc:last-child { border-right: none; }
 
-  /* Phase colour tokens */
-  .p1 { color: #e08c1a; }
-  .p1 .phase-header { border-color: #e08c1a; }
-  .p1 .phase-num { background: #fff5e0; color: #e08c1a; }
-  .p1 .phase-badge { background: #fff5e0; color: #b06a10; }
-  .p1 .task-card { border-top-color: #e08c1a; }
+.tc-label {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-size: 9px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+  padding: 2px 8px; border-radius: 100px; margin-bottom: 7px;
+}
+.tc h4 {
+  font-size: 12.5px; font-weight: 700; color: var(--navy);
+  margin-bottom: 9px; padding-bottom: 8px; border-bottom: 1px solid var(--border);
+}
+.tc ul { list-style: none; }
+.tc li {
+  font-size: 12px; color: var(--text-mid); line-height: 1.62;
+  padding: 3px 0 3px 15px; position: relative;
+}
+.tc li::before {
+  content: '';
+  position: absolute; left: 0; top: 10px;
+  width: 5px; height: 5px; border-radius: 50%;
+  opacity: 0.4;
+}
 
-  .p2 { color: #1a9e75; }
-  .p2 .phase-header { border-color: #1a9e75; }
-  .p2 .phase-num { background: #e0f5ee; color: #1a9e75; }
-  .p2 .phase-badge { background: #e0f5ee; color: #0f6e56; }
-  .p2 .task-card { border-top-color: #1a9e75; }
+/* Responsibility notice boxes */
+.resp-notice {
+  display: flex; align-items: flex-start; gap: 10px;
+  margin: 0; padding: 11px 18px 11px 20px;
+  border-top: 1px solid var(--border);
+  background: var(--surface);
+  font-size: 11.5px; color: var(--text-mid); line-height: 1.55;
+}
+.resp-notice .rn-icon {
+  width: 22px; height: 22px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; flex-shrink: 0; margin-top: 1px;
+}
+.resp-notice strong { color: var(--navy); font-weight: 600; }
 
-  .p3 { color: #2196d3; }
-  .p3 .phase-header { border-color: #2196d3; }
-  .p3 .phase-num { background: #e3f4fd; color: #2196d3; }
-  .p3 .phase-badge { background: #e3f4fd; color: #1565a0; }
-  .p3 .task-card { border-top-color: #2196d3; }
+/* Financial milestone bar */
+.fin-bar {
+  background: var(--navy); border-radius: 0 0 13px 13px;
+  padding: 14px 20px;
+  display: flex; gap: 0; overflow: hidden;
+}
+.fin-bar-item {
+  flex: 1; padding: 6px 14px; border-right: 1px solid rgba(255,255,255,0.1);
+  display: flex; flex-direction: column; gap: 2px;
+}
+.fin-bar-item:last-child { border-right: none; }
+.fbi-label { font-size: 9px; font-weight: 600; letter-spacing: 0.07em; text-transform: uppercase; color: rgba(255,255,255,0.38); }
+.fbi-value { font-size: 12.5px; font-weight: 700; color: var(--blue); }
+.fbi-desc { font-size: 10.5px; color: rgba(255,255,255,0.5); }
 
-  .p4 { color: #7f77dd; }
-  .p4 .phase-header { border-color: #7f77dd; }
-  .p4 .phase-num { background: #eeedfe; color: #7f77dd; }
-  .p4 .phase-badge { background: #eeedfe; color: #534ab7; }
-  .p4 .task-card { border-top-color: #7f77dd; }
+/* Phase colour classes */
+.c-amber .p-num { background:var(--amber-bg); color:var(--amber); }
+.c-amber .p-badge { background:var(--amber-bg); color:var(--amber-dk); }
+.c-amber .phase-head { border-top: 3px solid var(--amber); }
+.c-amber .tc li::before { background:var(--amber); }
+.c-amber .tc-label { background:var(--amber-bg); color:var(--amber-dk); }
 
-  .p5 { color: #e05a2b; }
-  .p5 .phase-header { border-color: #e05a2b; }
-  .p5 .phase-num { background: #fdeee8; color: #e05a2b; }
-  .p5 .phase-badge { background: #fdeee8; color: #b03a18; }
-  .p5 .task-card { border-top-color: #e05a2b; }
+.c-teal .p-num { background:var(--teal-bg); color:var(--teal); }
+.c-teal .p-badge { background:var(--teal-bg); color:var(--teal-dk); }
+.c-teal .phase-head { border-top: 3px solid var(--teal); }
+.c-teal .tc li::before { background:var(--teal); }
+.c-teal .tc-label { background:var(--teal-bg); color:var(--teal-dk); }
 
-  .p6 { color: #3a9e22; }
-  .p6 .phase-header { border-color: #3a9e22; }
-  .p6 .phase-num { background: #eaf5e0; color: #3a9e22; }
-  .p6 .phase-badge { background: #eaf5e0; color: #27700a; }
-  .p6 .task-card { border-top-color: #3a9e22; }
+.c-blue2 .p-num { background:var(--blue2-bg); color:var(--blue2); }
+.c-blue2 .p-badge { background:var(--blue2-bg); color:var(--blue2-dk); }
+.c-blue2 .phase-head { border-top: 3px solid var(--blue2); }
+.c-blue2 .tc li::before { background:var(--blue2); }
+.c-blue2 .tc-label { background:var(--blue2-bg); color:var(--blue2-dk); }
 
-  /* Competencies */
-  .comp-section {
-    margin-top: 14px;
-    padding-top: 12px;
-    border-top: 1px solid #e8edf5;
-  }
-  .comp-label {
-    font-size: 8px;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: #8a9ab8;
-    margin-bottom: 8px;
-  }
-  .comp-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-  }
-  .comp-item {
-    background: #f0f4fa;
-    border: 1px solid #dde5f0;
-    border-radius: 5px;
-    padding: 6px 9px;
-    flex: 0 0 calc(33.33% - 4px);
-  }
-  .comp-item strong {
-    display: block;
-    font-size: 8.5px;
-    font-weight: 700;
-    color: #1a2744;
-    margin-bottom: 1px;
-  }
-  .comp-item span {
-    font-size: 8px;
-    color: #7a8aaa;
-    line-height: 1.4;
-  }
+.c-purple .p-num { background:var(--purple-bg); color:var(--purple); }
+.c-purple .p-badge { background:var(--purple-bg); color:var(--purple-dk); }
+.c-purple .phase-head { border-top: 3px solid var(--purple); }
+.c-purple .tc li::before { background:var(--purple); }
+.c-purple .tc-label { background:var(--purple-bg); color:var(--purple-dk); }
 
-  /* ── RIGHT COL — CASE STUDY ── */
-  .cs-head {
-    background: #1a2744;
-    padding: 16px 16px 14px;
-  }
-  .cs-eyebrow {
-    font-size: 8px;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: #2196d3;
-    margin-bottom: 4px;
-  }
-  .cs-head h2 {
-    font-size: 12px;
-    font-weight: 800;
-    color: #ffffff;
-    line-height: 1.3;
-    margin-bottom: 3px;
-  }
-  .cs-head p {
-    font-size: 8px;
-    color: rgba(255,255,255,0.45);
-  }
+.c-coral .p-num { background:var(--coral-bg); color:var(--coral); }
+.c-coral .p-badge { background:var(--coral-bg); color:var(--coral-dk); }
+.c-coral .phase-head { border-top: 3px solid var(--coral); }
+.c-coral .tc li::before { background:var(--coral); }
+.c-coral .tc-label { background:var(--coral-bg); color:var(--coral-dk); }
 
-  .cs-facts {
-    background: #1e2f56;
-    padding: 10px 14px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0;
-  }
-  .cs-fact {
-    width: 50%;
-    padding: 4px 0;
-  }
-  .cs-fact .fl { font-size: 7.5px; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 0.06em; }
-  .cs-fact .fv { font-size: 9px; font-weight: 600; color: rgba(255,255,255,0.9); }
-  .cs-fact.full { width: 100%; border-top: 1px solid rgba(255,255,255,0.08); margin-top: 4px; padding-top: 6px; }
-  .cs-fact.full .fv { color: #2196d3; font-size: 10px; }
+.c-green .p-num { background:var(--green-bg); color:var(--green); }
+.c-green .p-badge { background:var(--green-bg); color:var(--green-dk); }
+.c-green .phase-head { border-top: 3px solid var(--green); }
+.c-green .tc li::before { background:var(--green); }
+.c-green .tc-label { background:var(--green-bg); color:var(--green-dk); }
 
-  /* Timeline */
-  .timeline { padding: 12px 0 12px; }
-  .cs-step {
-    display: flex;
-    gap: 9px;
-    padding: 7px 14px 7px 12px;
-    position: relative;
-  }
-  .step-line {
-    position: absolute;
-    left: 18px;
-    top: 28px;
-    bottom: -6px;
-    width: 1px;
-    background: #dde5f0;
-  }
-  .cs-step:last-child .step-line { display: none; }
-  .step-dot {
-    width: 18px;
-    height: 18px;
-    border-radius: 50%;
-    font-size: 8px;
-    font-weight: 800;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    position: relative;
-    z-index: 1;
-  }
-  .step-body { flex: 1; min-width: 0; }
-  .step-meta {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    margin-bottom: 3px;
-    flex-wrap: wrap;
-  }
-  .step-tag {
-    font-size: 7px;
-    font-weight: 700;
-    letter-spacing: 0.07em;
-    text-transform: uppercase;
-    padding: 1.5px 6px;
-    border-radius: 100px;
-  }
-  .step-day { font-size: 8px; color: #8a9ab8; }
-  .step-title { font-size: 9px; font-weight: 700; color: #1a2744; display: block; margin-bottom: 2px; }
-  .step-desc { font-size: 8px; color: #6a7a9a; line-height: 1.6; }
-  .step-desc .hl { color: #1a2744; font-weight: 600; }
+.c-indigo .p-num { background:var(--indigo-bg); color:var(--indigo); }
+.c-indigo .p-badge { background:var(--indigo-bg); color:var(--indigo-dk); }
+.c-indigo .phase-head { border-top: 3px solid var(--indigo); }
+.c-indigo .tc li::before { background:var(--indigo); }
+.c-indigo .tc-label { background:var(--indigo-bg); color:var(--indigo-dk); }
 
-  .sd-sell .step-dot { background: #fff5e0; color: #e08c1a; }
-  .sd-sell .step-tag { background: #fff5e0; color: #b06a10; }
-  .sd-book .step-dot { background: #e0f5ee; color: #1a9e75; }
-  .sd-book .step-tag { background: #e0f5ee; color: #0f6e56; }
-  .sd-conf .step-dot { background: #e3f4fd; color: #2196d3; }
-  .sd-conf .step-tag { background: #e3f4fd; color: #1565a0; }
-  .sd-supp .step-dot { background: #eeedfe; color: #7f77dd; }
-  .sd-supp .step-tag { background: #eeedfe; color: #534ab7; }
-  .sd-fin  .step-dot { background: #fdeee8; color: #e05a2b; }
-  .sd-fin  .step-tag { background: #fdeee8; color: #b03a18; }
+/* resp-notice colour variants */
+.rn-amber { background: #fffbf3; border-top-color: #f5d98e; }
+.rn-amber .rn-icon { background: var(--amber-bg); color: var(--amber); }
+.rn-blue { background: #f0f8ff; border-top-color: #b3d9f5; }
+.rn-blue .rn-icon { background: var(--blue2-bg); color: var(--blue2); }
 
-  /* Financial summary */
-  .fin-summary {
-    margin: 4px 12px 12px;
-    background: #1a2744;
-    border-radius: 7px;
-    padding: 10px 12px;
-    display: flex;
-    justify-content: space-between;
-    gap: 6px;
-  }
-  .fin-cell .fl { font-size: 7.5px; color: rgba(255,255,255,0.45); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 2px; }
-  .fin-cell .fv { font-size: 10px; font-weight: 700; color: #2196d3; }
-  .fin-cell.green .fv { color: #1a9e75; }
+/* Competencies */
+.comp-card {
+  background: white; border: 1px solid var(--border); border-radius: 14px; padding: 24px;
+}
+.comp-card h3 {
+  font-size: 11px; font-weight: 700; color: var(--text-muted);
+  text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px;
+}
+.comp-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; }
+.comp-item {
+  background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 14px 16px;
+}
+.comp-item strong { display:block; font-size:13px; font-weight:700; color:var(--navy); margin-bottom:3px; }
+.comp-item span { font-size:12px; color:var(--text-muted); line-height:1.5; }
 
-  /* Footer */
-  .footer {
-    background: #1a2744;
-    border-top: 3px solid #2196d3;
-    padding: 10px 28px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .footer span { font-size: 8px; color: rgba(255,255,255,0.35); font-weight: 500; }
-  .footer strong { color: rgba(255,255,255,0.6); }
+/* ── RIGHT COL ── */
+.right-col { position: sticky; top: 90px; }
 
-  /* Print */
-  @page {
-    size: A3 landscape;
-    margin: 0;
-  }
-  @media print {
-    body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-  }
+.case-card {
+  background: white; border: 1px solid var(--border); border-radius: 14px; overflow: hidden;
+}
+.case-head {
+  background: var(--navy); padding: 24px 24px 20px;
+}
+.case-eyebrow {
+  font-size: 9.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--blue); margin-bottom: 7px;
+}
+.case-head h2 { font-size: 17px; font-weight: 800; color: white; line-height: 1.3; margin-bottom: 5px; }
+.case-head p { font-size: 12px; color: rgba(255,255,255,0.42); }
+
+.case-facts {
+  background: var(--navy-mid); padding: 16px 22px;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 10px 0;
+}
+.fact .fl { font-size: 9.5px; color: rgba(255,255,255,0.36); text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 1px; }
+.fact .fv { font-size: 12.5px; font-weight: 600; color: rgba(255,255,255,0.88); }
+.fact.wide { grid-column: 1/-1; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 10px; }
+.fact.wide .fv { color: var(--blue); font-size: 13.5px; font-weight: 700; }
+
+.timeline { padding: 20px 22px 6px; }
+.tl-label {
+  font-size: 9.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.09em;
+  color: var(--text-muted); margin-bottom: 18px;
+}
+.step { display: flex; gap: 13px; padding-bottom: 18px; position: relative; }
+.step:last-child { padding-bottom: 0; }
+.step-track { display:flex; flex-direction:column; align-items:center; flex-shrink:0; width:26px; }
+.s-dot {
+  width: 26px; height: 26px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 10.5px; font-weight: 800; flex-shrink: 0; position: relative; z-index: 1;
+}
+.s-line { width: 2px; flex: 1; background: var(--border); margin-top: 4px; min-height: 14px; }
+.step:last-child .s-line { display: none; }
+
+.s-body { flex: 1; padding-top: 2px; }
+.s-meta { display:flex; align-items:center; gap:6px; margin-bottom:3px; }
+.s-tag { font-size:9px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; padding:2px 8px; border-radius:100px; }
+.s-day { font-size:10.5px; color:var(--text-muted); }
+.s-title { font-size:12.5px; font-weight:700; color:var(--navy); margin-bottom:3px; line-height:1.3; }
+.s-desc { font-size:11.5px; color:var(--text-mid); line-height:1.65; }
+.s-desc .hl { font-weight:600; color:var(--navy); }
+
+/* step variants */
+.ss .s-dot { background:var(--amber-bg); color:var(--amber); }
+.ss .s-tag { background:var(--amber-bg); color:var(--amber-dk); }
+.sb .s-dot { background:var(--teal-bg); color:var(--teal); }
+.sb .s-tag { background:var(--teal-bg); color:var(--teal-dk); }
+.sv .s-dot { background:var(--indigo-bg); color:var(--indigo); }
+.sv .s-tag { background:var(--indigo-bg); color:var(--indigo-dk); }
+.sc2 .s-dot { background:var(--blue2-bg); color:var(--blue2); }
+.sc2 .s-tag { background:var(--blue2-bg); color:var(--blue2-dk); }
+.sp .s-dot { background:var(--purple-bg); color:var(--purple); }
+.sp .s-tag { background:var(--purple-bg); color:var(--purple-dk); }
+.sf .s-dot { background:var(--coral-bg); color:var(--coral); }
+.sf .s-tag { background:var(--coral-bg); color:var(--coral-dk); }
+.sfin .s-dot { background:var(--green-bg); color:var(--green); }
+.sfin .s-tag { background:var(--green-bg); color:var(--green-dk); }
+
+.fin-summary {
+  margin: 8px 22px 22px;
+  background: var(--navy); border-radius: 10px; padding: 16px 18px;
+  display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px;
+}
+.fc .fl { font-size:9.5px; color:rgba(255,255,255,0.38); text-transform:uppercase; letter-spacing:0.07em; margin-bottom:3px; }
+.fc .fv { font-size:14px; font-weight:700; color:var(--blue); }
+.fc.grn .fv { color:#34c98a; }
+
+/* ── FOOTER ── */
+footer {
+  background: var(--navy); border-top: 4px solid var(--blue); margin-top: 20px;
+}
+.footer-inner {
+  max-width: 1440px; margin: 0 auto; padding: 18px 40px;
+  display: flex; justify-content: space-between; align-items: center;
+}
+footer span { font-size: 12px; color: rgba(255,255,255,0.32); }
+footer strong { color: rgba(255,255,255,0.55); }
+
+@media (max-width: 1100px) {
+  .two-col { grid-template-columns: 1fr; }
+  .right-col { position: static; }
+  .p-grid.cols-4 { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 640px) {
+  .wrap { padding: 20px 16px 48px; }
+  .hero-inner { padding: 0 16px; }
+  .p-grid.cols-4, .p-grid.cols-3, .p-grid.cols-2 { grid-template-columns: 1fr; }
+  .tc { border-right: none !important; border-bottom: 1px solid var(--border); }
+  .tc:last-child { border-bottom: none; }
+  .comp-grid { grid-template-columns: 1fr 1fr; }
+  .hero-pills { display: none; }
+}
 </style>
 </head>
 <body>
 
-<div class="hero">
-  <div class="hero-left">
-    <img class="hero-logo" src="data:image/png;base64,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" alt="TripFactory logo">
-    <div class="hero-divider"></div>
-    <div class="hero-text">
-      <h1>Sales Agent Role Framework</h1>
-      <p>India Office &nbsp;·&nbsp; Full-Circle Ownership &nbsp;·&nbsp; Single Point of Contact</p>
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="logo-wrap"><img src="data:image/png;base64,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" alt="TripFactory"></div>
+      <div class="h-div"></div>
+      <div>
+        <div class="hero-title">Sales Agent Role Framework</div>
+        <div class="hero-sub">India Office &nbsp;·&nbsp; Full-Circle Ownership &nbsp;·&nbsp; Single Point of Contact</div>
+      </div>
+    </div>
+    <div class="hero-pills">
+      <span class="pill">7 phases</span>
+      <span class="pill">Zero-error accountability</span>
+      <span class="pill">Sell · Book · Visa · Confirm · Support · Finance</span>
     </div>
   </div>
-  <div class="hero-pills">
-    <div class="pill">6 phases</div>
-    <div class="pill">24 task areas</div>
-    <div class="pill">Zero-error accountability</div>
+</header>
+
+<div class="wrap">
+
+  <!-- INTRO -->
+  <div class="intro-strip">
+    <div class="intro-icon">✈</div>
+    <div>
+      <h2>One agent. One booking. Total ownership.</h2>
+      <p>The Trip Factory Sales Agent is the single named point of contact for both the end client and the trade agent throughout the entire booking lifecycle. While certain specialist tasks — such as flight ticketing and visa processing — are handled by dedicated internal teams or outsourced partners, the agent retains full ownership and accountability for ensuring these are initiated, progressing, and completed correctly and on time. No handoffs. No gaps. No excuses.</p>
+    </div>
   </div>
-</div>
 
-<div class="main">
-
-  <!-- LEFT: ROLE FRAMEWORK -->
+  <div class="two-col">
   <div class="left-col">
 
-    <p class="intro-text">The Trip Factory Sales Agent owns every touchpoint of a booking — from the first enquiry to the final financial close. They are the single, named point of contact for both the end client and the trade agent, and carry full accountability for accuracy, service quality, and financial outcome.</p>
-
-    <!-- P1 -->
-    <div class="phase p1">
-      <div class="phase-header">
-        <div class="phase-num">1</div>
-        <div class="phase-badge">Phase 1</div>
-        <div class="phase-title">Sales &amp; Consultation</div>
+    <!-- PHASE 1: SALES -->
+    <div class="phase c-amber">
+      <div class="phase-head">
+        <div class="p-num">1</div>
+        <div class="p-badge">Phase 1</div>
+        <div class="p-title">Sales &amp; Consultation</div>
+        <div class="p-note">Enquiry → confirmed booking</div>
       </div>
-      <div class="phase-grid">
-        <div class="task-card">
+      <div class="p-grid cols-4">
+        <div class="tc">
           <h4>Enquiry handling</h4>
           <ul>
             <li>Respond to B2C and B2B leads within SLA</li>
-            <li>Qualify dates, group size, budget &amp; special needs</li>
-            <li>Identify dietary, accessibility &amp; visa requirements</li>
-            <li>Log all enquiries in CRM with full notes</li>
+            <li>Qualify travel dates, group size, budget &amp; all requirements</li>
+            <li>Identify dietary, accessibility and visa needs upfront</li>
+            <li>Log every enquiry in CRM with full detail immediately</li>
+            <li>Follow up every live enquiry — never let it go cold</li>
           </ul>
         </div>
-        <div class="task-card">
+        <div class="tc">
           <h4>Tour recommendation</h4>
           <ul>
-            <li>Match client profile to best-fit itinerary</li>
-            <li>Present guided vs independent options</li>
-            <li>Upsell premium hotels, business class &amp; extras</li>
-            <li>Share branded itinerary PDF / digital proposal</li>
+            <li>Match client profile to the most suitable itinerary</li>
+            <li>Present guided, semi-guided &amp; independent options</li>
+            <li>Upsell premium hotels, upgrades &amp; signature experiences</li>
+            <li>Share a branded day-by-day itinerary PDF or digital proposal</li>
+            <li>Position TripFactory expertise vs competitor offerings</li>
           </ul>
         </div>
-        <div class="task-card">
+        <div class="tc">
           <h4>Quoting &amp; negotiation</h4>
           <ul>
-            <li>Build accurate cost sheet with correct margins</li>
-            <li>Apply agent commission structures correctly</li>
-            <li>Provide competitive quote with validity period</li>
-            <li>Counter-negotiate without eroding margin floor</li>
+            <li>Build a fully itemised cost sheet with correct margins</li>
+            <li>Apply trade agent commission structures accurately</li>
+            <li>Provide a competitive quote with a clear validity period</li>
+            <li>Counter-negotiate commercially without eroding margin</li>
+            <li>Offer tiered options at different price points if needed</li>
           </ul>
         </div>
-        <div class="task-card">
+        <div class="tc">
           <h4>Closing the sale</h4>
           <ul>
-            <li>Confirm verbal agreement via written summary</li>
-            <li>Collect deposit as per payment schedule</li>
-            <li>Send booking confirmation to client &amp; agent</li>
-            <li>Open booking file in system immediately</li>
+            <li>Confirm all verbal agreements via a written summary email</li>
+            <li>Collect deposit in line with the agreed payment schedule</li>
+            <li>Issue booking confirmation to client and agent same day</li>
+            <li>Open the booking file in the system immediately on deposit</li>
+            <li>Set balance payment deadline reminders in advance</li>
           </ul>
         </div>
       </div>
     </div>
 
-    <!-- P2 -->
-    <div class="phase p2">
-      <div class="phase-header">
-        <div class="phase-num">2</div>
-        <div class="phase-badge">Phase 2</div>
-        <div class="phase-title">Component Booking</div>
+    <!-- PHASE 2: BOOKING COMPONENTS -->
+    <div class="phase c-teal">
+      <div class="phase-head">
+        <div class="p-num">2</div>
+        <div class="p-badge">Phase 2</div>
+        <div class="p-title">Component Booking</div>
+        <div class="p-note">Hotels · Transfers · Tours &amp; Experiences</div>
       </div>
-      <div class="phase-grid">
-        <div class="task-card">
-          <h4>Flights</h4>
-          <ul>
-            <li>Source best fares via GDS / NDC / consolidators</li>
-            <li>Book correct name, passport, meal preferences</li>
-            <li>Add frequent flyer numbers &amp; seat selections</li>
-            <li>Monitor for schedule changes and re-routes</li>
-          </ul>
-        </div>
-        <div class="task-card">
+      <div class="p-grid cols-4">
+        <div class="tc">
           <h4>Hotels &amp; accommodation</h4>
           <ul>
-            <li>Cross-check availability against all tour dates</li>
-            <li>Book correct room type, meal plan &amp; occupancy</li>
-            <li>Confirm floor, non-smoking &amp; special preferences</li>
-            <li>Request early check-in / late checkout if needed</li>
+            <li>Cross-check availability against every night of the tour</li>
+            <li>Book the correct room type, meal plan &amp; occupancy exactly</li>
+            <li>Confirm floor, non-smoking, view &amp; special preferences</li>
+            <li>Request early check-in / late checkout where required</li>
+            <li>Add special notes: anniversary, honeymoon, medical needs</li>
           </ul>
         </div>
-        <div class="task-card">
+        <div class="tc">
           <h4>Transfers &amp; ground</h4>
           <ul>
-            <li>Book all airport and inter-city transfers</li>
-            <li>Confirm correct vehicle type for group size</li>
-            <li>Coordinate port pick-ups for cruise legs</li>
-            <li>Share driver details with client before travel</li>
+            <li>Book all airport, inter-hotel and inter-city transfers</li>
+            <li>Confirm vehicle type is correct for group size and luggage</li>
+            <li>Coordinate cruise port and rail station pick-ups precisely</li>
+            <li>Collect and share driver contact details before departure</li>
+            <li>Provide suppliers with meet-and-greet sign board instructions</li>
           </ul>
         </div>
-        <div class="task-card">
-          <h4>Tours, guides &amp; extras</h4>
+        <div class="tc">
+          <h4>Tours, guides &amp; experiences</h4>
           <ul>
-            <li>Book escorted day tours with licensed guides</li>
-            <li>Pre-purchase entrance tickets — skip-the-line</li>
-            <li>Manage visa invitations &amp; travel insurance</li>
-            <li>Coordinate cruise / rail passes as required</li>
+            <li>Book all escorted day tours with fully licensed local guides</li>
+            <li>Pre-purchase attraction tickets — skip-the-line where available</li>
+            <li>Confirm guide language matches client's preference</li>
+            <li>Organise cruise, rail or coach passes as required by the tour</li>
+            <li>Arrange travel insurance appropriate to the full itinerary</li>
+          </ul>
+        </div>
+        <div class="tc">
+          <h4>Booking file &amp; records</h4>
+          <ul>
+            <li>Maintain a complete, up-to-date booking file at all times</li>
+            <li>File all supplier confirmations against the booking immediately</li>
+            <li>Flag any supplier unable to confirm within 24 hours</li>
+            <li>Record all amendments with date, reason and authorisation</li>
+            <li>Ensure every component is confirmed before issuing invoice</li>
           </ul>
         </div>
       </div>
     </div>
 
-    <!-- P3 -->
-    <div class="phase p3">
-      <div class="phase-header">
-        <div class="phase-num">3</div>
-        <div class="phase-badge">Phase 3</div>
-        <div class="phase-title">Confirmation &amp; Documentation</div>
+    <!-- PHASE 3: FLIGHTS — coordinated, not booked -->
+    <div class="phase c-blue2">
+      <div class="phase-head">
+        <div class="p-num">3</div>
+        <div class="p-badge">Phase 3</div>
+        <div class="p-title">Flight Coordination</div>
+        <div class="p-note">Booked by flights team · Agent owns the outcome</div>
       </div>
-      <div class="phase-grid">
-        <div class="task-card">
+      <div class="p-grid cols-3">
+        <div class="tc">
+          <span class="tc-label">Agent responsibility</span>
+          <h4>Brief the flights team</h4>
+          <ul>
+            <li>Submit a complete flight request to the flights team promptly</li>
+            <li>Include passenger names exactly as they appear in passport</li>
+            <li>Specify preferred airlines, routing, cabin class and budget</li>
+            <li>Flag meal preferences, FF numbers and seat requirements</li>
+            <li>State the deadline by which tickets must be issued</li>
+          </ul>
+        </div>
+        <div class="tc">
+          <span class="tc-label">Agent responsibility</span>
+          <h4>Follow up &amp; verify</h4>
+          <ul>
+            <li>Chase the flights team daily until confirmation is received</li>
+            <li>Verify confirmed flight details against the original brief</li>
+            <li>Check names, dates, routing and class are all correct</li>
+            <li>Confirm ticket numbers are on file before releasing to client</li>
+            <li>Monitor for any schedule changes or involuntary re-routes</li>
+          </ul>
+        </div>
+        <div class="tc">
+          <span class="tc-label">Agent responsibility</span>
+          <h4>Client communication</h4>
+          <ul>
+            <li>Communicate confirmed flight details to client promptly</li>
+            <li>Ensure client understands check-in times and terminal info</li>
+            <li>Add e-tickets to the travel document pack before dispatch</li>
+            <li>Action any client-requested amendments through the flights team</li>
+            <li>Escalate pricing disputes or ticketing delays to management</li>
+          </ul>
+        </div>
+      </div>
+      <div class="resp-notice rn-blue">
+        <div class="rn-icon">&#9432;</div>
+        <div><strong>Important:</strong> Flights are ticketed by the internal flights team, not by the sales agent. However, the sales agent is fully responsible for initiating the request, chasing for completion, verifying accuracy, and ensuring tickets are in the client's hands before departure. If tickets are wrong or delayed, accountability sits with the agent.</div>
+      </div>
+    </div>
+
+    <!-- PHASE 4: VISA -->
+    <div class="phase c-indigo">
+      <div class="phase-head">
+        <div class="p-num">4</div>
+        <div class="p-badge">Phase 4</div>
+        <div class="p-title">Visa Application Management</div>
+        <div class="p-note">Outsourced processing · Agent owns the timeline</div>
+      </div>
+      <div class="p-grid cols-4">
+        <div class="tc">
+          <span class="tc-label">Agent responsibility</span>
+          <h4>Initiate the application</h4>
+          <ul>
+            <li>Identify visa requirements at the point of booking confirmation</li>
+            <li>Advise client on all visa categories required for the itinerary</li>
+            <li>Issue a visa invitation letter or sponsorship document if needed</li>
+            <li>Refer client to the approved external visa processing partner</li>
+            <li>Set the application start deadline on the booking file</li>
+          </ul>
+        </div>
+        <div class="tc">
+          <span class="tc-label">Agent responsibility</span>
+          <h4>Document collection</h4>
+          <ul>
+            <li>Provide client with the full document checklist for each visa</li>
+            <li>Chase client for outstanding documents within 48 hours</li>
+            <li>Review submitted documents for obvious errors before forwarding</li>
+            <li>Confirm the visa agent has received and accepted the full set</li>
+            <li>Log the submission date and reference number on the booking file</li>
+          </ul>
+        </div>
+        <div class="tc">
+          <span class="tc-label">Agent responsibility</span>
+          <h4>Progress tracking</h4>
+          <ul>
+            <li>Follow up with the visa company at least twice per week</li>
+            <li>Record each update against the booking in CRM</li>
+            <li>Communicate progress or delays to the client proactively</li>
+            <li>Escalate any concerns to management at the 3-week mark</li>
+            <li>Never assume the visa is progressing without written confirmation</li>
+          </ul>
+        </div>
+        <div class="tc">
+          <span class="tc-label">Agent responsibility</span>
+          <h4>Completion &amp; verification</h4>
+          <ul>
+            <li>Confirm visa has been granted and received by the client</li>
+            <li>Verify visa validity dates cover the full travel period</li>
+            <li>Check number of entries matches the itinerary requirements</li>
+            <li>Add visa confirmation to the pre-departure briefing checklist</li>
+            <li>Escalate any refusal immediately and explore alternative options</li>
+          </ul>
+        </div>
+      </div>
+      <div class="resp-notice rn-amber">
+        <div class="rn-icon">&#9888;</div>
+        <div><strong>Important:</strong> Visa processing is handled by an external partner. The sales agent is accountable for initiating the process on time, tracking progress proactively, and ensuring the visa is granted and verified before the pre-departure briefing. A client travelling without a valid visa is a critical failure — the agent must never assume this is someone else's responsibility.</div>
+      </div>
+    </div>
+
+    <!-- PHASE 5: CONFIRM & DOCS -->
+    <div class="phase c-blue2">
+      <div class="phase-head">
+        <div class="p-num">5</div>
+        <div class="p-badge">Phase 5</div>
+        <div class="p-title">Confirmation &amp; Documentation</div>
+        <div class="p-note">Every detail verified before departure</div>
+      </div>
+      <div class="p-grid cols-4">
+        <div class="tc">
           <h4>Supplier confirmations</h4>
           <ul>
-            <li>Chase every supplier for written confirmation</li>
-            <li>Verify names, dates &amp; room types vs booking</li>
-            <li>Resolve discrepancies before issuing documents</li>
-            <li>Re-confirm all services 72 hrs before departure</li>
+            <li>Chase every supplier for written confirmation of all services</li>
+            <li>Verify names, dates and room types against the original booking</li>
+            <li>Resolve every discrepancy before issuing client documents</li>
+            <li>Re-confirm all services 72 hours before departure</li>
+            <li>Escalate unresolved supplier issues to management immediately</li>
           </ul>
         </div>
-        <div class="task-card">
+        <div class="tc">
           <h4>Travel document pack</h4>
           <ul>
-            <li>Compile vouchers, e-tickets, hotel confirmations</li>
-            <li>Produce day-by-day itinerary in client language</li>
-            <li>Include emergency contacts &amp; local SIM guidance</li>
-            <li>Send full pack at least 10 days before departure</li>
+            <li>Compile all vouchers, e-tickets and hotel confirmations</li>
+            <li>Produce a clear day-by-day itinerary in the client's language</li>
+            <li>Include hotel addresses in local script for taxi and navigation use</li>
+            <li>Add emergency contacts, local SIM and currency guidance</li>
+            <li>Dispatch the complete pack minimum 10 days before travel</li>
           </ul>
         </div>
-        <div class="task-card">
+        <div class="tc">
           <h4>Pre-departure briefing</h4>
           <ul>
-            <li>Call client to walk through entire itinerary</li>
-            <li>Confirm passport validity &amp; visa requirements</li>
-            <li>Brief on local customs, weather &amp; dress codes</li>
-            <li>Provide 24/7 emergency contact number</li>
+            <li>Call client to walk through the entire itinerary in full detail</li>
+            <li>Confirm passport validity meets destination entry requirements</li>
+            <li>Confirm visa has been received and is correct — check dates</li>
+            <li>Brief on local customs, weather expectations and dress codes</li>
+            <li>Provide agent's direct WhatsApp as 24/7 in-trip emergency contact</li>
           </ul>
         </div>
-        <div class="task-card">
+        <div class="tc">
           <h4>Agent / trade handover</h4>
           <ul>
-            <li>Send booking summary to trade agent partner</li>
-            <li>Confirm commission due and payment timeline</li>
-            <li>Provide agent with emergency escalation contact</li>
-            <li>Notify agent of any last-minute changes</li>
+            <li>Send a complete booking summary to the trade agent partner</li>
+            <li>Confirm commission amount due and exact payment timeline</li>
+            <li>Share the emergency escalation contact with the agent</li>
+            <li>Notify agent immediately of any last-minute amendments</li>
+            <li>Ensure agent is confident to respond to their client's questions</li>
           </ul>
         </div>
       </div>
     </div>
 
-    <!-- P4 -->
-    <div class="phase p4">
-      <div class="phase-header">
-        <div class="phase-num">4</div>
-        <div class="phase-badge">Phase 4</div>
-        <div class="phase-title">In-trip &amp; Post-trip Support</div>
+    <!-- PHASE 6: SUPPORT -->
+    <div class="phase c-purple">
+      <div class="phase-head">
+        <div class="p-num">6</div>
+        <div class="p-badge">Phase 6</div>
+        <div class="p-title">In-trip &amp; Post-trip Support</div>
+        <div class="p-note">Always reachable · Issues owned end to end</div>
       </div>
-      <div class="phase-grid">
-        <div class="task-card">
+      <div class="p-grid cols-4">
+        <div class="tc">
           <h4>Issue resolution</h4>
           <ul>
-            <li>Be reachable throughout client travel window</li>
-            <li>Handle hotel complaints &amp; missed transfers</li>
-            <li>Re-book flights on cancellation immediately</li>
-            <li>Escalate to supplier management if needed</li>
+            <li>Be reachable on WhatsApp throughout the client travel window</li>
+            <li>Handle hotel complaints and room issues immediately and directly</li>
+            <li>Re-arrange missed or failed transfers without any delay</li>
+            <li>Re-book flights cancelled or significantly disrupted</li>
+            <li>Escalate critical issues to the ops team and management</li>
           </ul>
         </div>
-        <div class="task-card">
+        <div class="tc">
           <h4>Customer queries</h4>
           <ul>
-            <li>Answer client questions on tours &amp; logistics</li>
-            <li>Assist with on-ground restaurant &amp; activity requests</li>
-            <li>Coordinate with local guides for amendments</li>
-            <li>Keep client calm and informed at all times</li>
+            <li>Answer client questions on tours, timings and all logistics</li>
+            <li>Assist with on-ground restaurant and activity requests</li>
+            <li>Coordinate with local guides for on-trip amendments or additions</li>
+            <li>Provide local emergency numbers and medical facility guidance</li>
+            <li>Keep the client calm, informed and feeling fully supported</li>
           </ul>
         </div>
-        <div class="task-card">
+        <div class="tc">
           <h4>Agent queries</h4>
           <ul>
-            <li>Respond to trade agent queries within 2 hours</li>
-            <li>Provide live status updates on client's tour</li>
-            <li>Relay on-trip changes back to agent promptly</li>
-            <li>Manage agent expectations professionally</li>
+            <li>Respond to all trade agent queries within 2 working hours</li>
+            <li>Provide status updates on the client's trip when requested</li>
+            <li>Relay any on-trip incidents or changes to agent promptly</li>
+            <li>Handle client complaints relayed via the agent diplomatically</li>
+            <li>Manage agent expectations professionally throughout</li>
           </ul>
         </div>
-        <div class="task-card">
+        <div class="tc">
           <h4>Post-trip follow-up</h4>
           <ul>
-            <li>Welcome client home with personalised message</li>
-            <li>Collect Google / TripAdvisor review actively</li>
-            <li>Gather improvement feedback for ops team</li>
-            <li>Initiate re-sell conversation for next holiday</li>
+            <li>Welcome client home with a warm personalised message</li>
+            <li>Actively request a Google or TripAdvisor review within 3 days</li>
+            <li>Gather constructive feedback for the operations team</li>
+            <li>Log supplier performance issues for future reference</li>
+            <li>Initiate the re-sell conversation for the next holiday</li>
           </ul>
         </div>
       </div>
     </div>
 
-    <!-- P5 -->
-    <div class="phase p5">
-      <div class="phase-header">
-        <div class="phase-num">5</div>
-        <div class="phase-badge">Phase 5</div>
-        <div class="phase-title">Financial Accountability</div>
+    <!-- PHASE 7: FINANCIAL -->
+    <div class="phase c-coral">
+      <div class="phase-head">
+        <div class="p-num">7</div>
+        <div class="p-badge">Phase 7</div>
+        <div class="p-title">Financial Accountability</div>
+        <div class="p-note">Agent is financially responsible at every stage</div>
       </div>
-      <div class="phase-grid">
-        <div class="task-card">
-          <h4>Cost control &amp; margin</h4>
+      <div class="p-grid cols-4">
+        <div class="tc">
+          <h4>Cost build &amp; margin control</h4>
           <ul>
-            <li>Build cost sheets with all components itemised</li>
-            <li>Maintain minimum margin per booking type</li>
-            <li>Validate supplier invoices against agreed rates</li>
-            <li>Flag any rate discrepancies before payment</li>
+            <li>Build a fully itemised cost sheet for every booking before quoting</li>
+            <li>Maintain the minimum required margin on every component</li>
+            <li>Never issue a quote without completing the full cost build first</li>
+            <li>Review margin impact whenever an amendment is made</li>
+            <li>Escalate to management before accepting below-minimum margin</li>
           </ul>
         </div>
-        <div class="task-card">
-          <h4>Invoicing &amp; collections</h4>
+        <div class="tc">
+          <h4>Client invoicing &amp; collections</h4>
           <ul>
-            <li>Issue correct invoice to client / trade agent</li>
-            <li>Track deposit and balance payment deadlines</li>
-            <li>Follow up on overdue payments within 24 hrs</li>
-            <li>Issue receipts immediately on every payment</li>
+            <li>Issue the correct invoice immediately once booking is confirmed</li>
+            <li>Track deposit and final balance payment deadlines without exception</li>
+            <li>Send automated payment reminders 7 days and 2 days before due date</li>
+            <li>Follow up overdue payments assertively within 24 hours</li>
+            <li>Issue formal receipts immediately on every payment received</li>
           </ul>
         </div>
-        <div class="task-card">
-          <h4>Supplier payments</h4>
+        <div class="tc">
+          <h4>Supplier invoice validation</h4>
           <ul>
-            <li>Ensure supplier payments are made on time</li>
-            <li>Avoid cancellation risk from non-payment</li>
-            <li>Cross-check payment confirmation with booking</li>
-            <li>Escalate urgent payments to accounts team</li>
+            <li>Validate every supplier invoice against the agreed contract rate</li>
+            <li>Flag any discrepancy to the supplier in writing before paying</li>
+            <li>Never approve a supplier invoice with incorrect amounts</li>
+            <li>Ensure all supplier payments are processed on or before due date</li>
+            <li>Cross-check payment confirmation number against the booking record</li>
           </ul>
         </div>
-        <div class="task-card">
-          <h4>Zero-error policy</h4>
+        <div class="tc">
+          <h4>Zero-error &amp; audit policy</h4>
           <ul>
-            <li>Agent carries full accountability for booking errors</li>
-            <li>Double-check all names, dates &amp; costs before confirm</li>
-            <li>Perform final audit checklist 7 days pre-departure</li>
-            <li>Document all amendments with reasons on file</li>
+            <li>Agent carries full personal accountability for all financial errors</li>
+            <li>Double-check every name, date, cost and reference before confirming</li>
+            <li>Complete the mandatory pre-departure financial audit 7 days out</li>
+            <li>Document all amendments: date, reason, authorisation, financial impact</li>
+            <li>Financial losses due to agent error are reviewed in appraisal</li>
           </ul>
         </div>
       </div>
-    </div>
-
-    <!-- P6 -->
-    <div class="phase p6">
-      <div class="phase-header">
-        <div class="phase-num">6</div>
-        <div class="phase-badge">Phase 6</div>
-        <div class="phase-title">Reporting &amp; Continuous Improvement</div>
-      </div>
-      <div class="phase-grid">
-        <div class="task-card">
-          <h4>Performance tracking</h4>
-          <ul>
-            <li>Log conversion rate on all enquiries handled</li>
-            <li>Report monthly booking value &amp; margin</li>
-            <li>Track repeat bookings &amp; referrals generated</li>
-            <li>Review error rate — target zero financial losses</li>
-          </ul>
+      <!-- Financial milestone tracker -->
+      <div class="fin-bar">
+        <div class="fin-bar-item">
+          <div class="fbi-label">On booking</div>
+          <div class="fbi-value">Deposit collected</div>
+          <div class="fbi-desc">30% · Receipt issued same day</div>
         </div>
-        <div class="task-card">
-          <h4>Product knowledge</h4>
-          <ul>
-            <li>Attend supplier webinars &amp; product training</li>
-            <li>Keep European tour product knowledge current</li>
-            <li>Share market intelligence with team</li>
-            <li>Suggest new tours / routes to product team</li>
-          </ul>
+        <div class="fin-bar-item">
+          <div class="fbi-label">On quoting</div>
+          <div class="fbi-value">Cost build complete</div>
+          <div class="fbi-desc">Margin verified before sending</div>
         </div>
-        <div class="task-card">
-          <h4>Team collaboration</h4>
-          <ul>
-            <li>Brief ops team on complex bookings in advance</li>
-            <li>Handover files cleanly when on leave</li>
-            <li>Share learnings from issue resolution events</li>
-            <li>Mentor junior agents on booking process</li>
-          </ul>
+        <div class="fin-bar-item">
+          <div class="fbi-label">On confirmation</div>
+          <div class="fbi-value">Supplier invoices validated</div>
+          <div class="fbi-desc">Rates checked against contract</div>
         </div>
-        <div class="task-card">
-          <h4>Systems &amp; tools</h4>
-          <ul>
-            <li>Maintain clean, up-to-date CRM records always</li>
-            <li>Use correct booking system for each component</li>
-            <li>File all supplier communications on the booking</li>
-            <li>Comply with data protection &amp; GDPR standards</li>
-          </ul>
+        <div class="fin-bar-item">
+          <div class="fbi-label">7 days pre-dep</div>
+          <div class="fbi-value">Balance collected</div>
+          <div class="fbi-desc">Full payment on file · Audit done</div>
+        </div>
+        <div class="fin-bar-item">
+          <div class="fbi-label">Post-trip</div>
+          <div class="fbi-value">Financial close</div>
+          <div class="fbi-desc">Commission processed · File closed</div>
         </div>
       </div>
     </div>
 
     <!-- COMPETENCIES -->
-    <div class="comp-section">
-      <div class="comp-label">Key competencies required</div>
+    <div class="comp-card">
+      <h3>Key competencies required</h3>
       <div class="comp-grid">
         <div class="comp-item">
           <strong>Destination knowledge</strong>
-          <span>European products, routing, visa rules</span>
+          <span>Deep familiarity with European products, routing, visa requirements and local ground conditions</span>
         </div>
         <div class="comp-item">
-          <strong>GDS proficiency</strong>
-          <span>Amadeus / Galileo, NDC, booking tools</span>
+          <strong>GDS &amp; systems proficiency</strong>
+          <span>Confident with Amadeus or Galileo, NDC channels, internal booking and CRM platforms</span>
         </div>
         <div class="comp-item">
-          <strong>Communication</strong>
-          <span>Client, agent &amp; supplier management</span>
+          <strong>Communication skills</strong>
+          <span>Clear, professional and warm communication with clients, trade agents, flights team and suppliers</span>
         </div>
         <div class="comp-item">
           <strong>Attention to detail</strong>
-          <span>Names, dates, costs — always verified</span>
+          <span>Meticulous accuracy on names, dates, visa validity, costs and documents — errors cost money and trust</span>
         </div>
         <div class="comp-item">
           <strong>Financial acumen</strong>
-          <span>Margins, invoicing &amp; reconciliation</span>
+          <span>Comfortable with margin calculations, cost builds, invoicing, supplier validation and reconciliation</span>
         </div>
         <div class="comp-item">
-          <strong>Problem-solving</strong>
-          <span>Calm, decisive &amp; solution-focused</span>
+          <strong>Ownership &amp; follow-through</strong>
+          <span>Proactively chases every open item — flights, visas, confirmations — without waiting to be asked</span>
         </div>
       </div>
     </div>
@@ -739,181 +799,133 @@
 
   <!-- RIGHT: CASE STUDY -->
   <div class="right-col">
-    <div class="cs-head">
-      <div class="cs-eyebrow">Live booking example</div>
-      <h2>European Escorted Tour<br>Mumbai → Paris · Alps · Rome</h2>
-      <p>How an agent handles a real booking end to end</p>
-    </div>
+    <div class="case-card">
+      <div class="case-head">
+        <div class="case-eyebrow">Live booking example — India office</div>
+        <h2>European Escorted Tour<br>Mumbai → Paris · Alps · Rome</h2>
+        <p>A complete walkthrough of how a Trip Factory agent handles a real booking from enquiry to financial close</p>
+      </div>
 
-    <div class="cs-facts">
-      <div class="cs-fact">
-        <div class="fl">Client</div>
-        <div class="fv">Mr &amp; Mrs Kapoor</div>
+      <div class="case-facts">
+        <div class="fact"><div class="fl">Client</div><div class="fv">Mr &amp; Mrs Kapoor</div></div>
+        <div class="fact"><div class="fl">Trade agent</div><div class="fv">Horizon Travels, Andheri</div></div>
+        <div class="fact"><div class="fl">Tour</div><div class="fv">Best of Europe — 14 nights</div></div>
+        <div class="fact"><div class="fl">Departs</div><div class="fv">Mumbai (BOM) — 18 Jun</div></div>
+        <div class="fact wide"><div class="fl">Total booking value</div><div class="fv">INR 4,89,500 · 2 pax · Anniversary trip</div></div>
       </div>
-      <div class="cs-fact">
-        <div class="fl">Trade agent</div>
-        <div class="fv">Horizon Travels</div>
-      </div>
-      <div class="cs-fact">
-        <div class="fl">Tour</div>
-        <div class="fv">Best of Europe 14N</div>
-      </div>
-      <div class="cs-fact">
-        <div class="fl">Departs</div>
-        <div class="fv">BOM — 18 Jun</div>
-      </div>
-      <div class="cs-fact full">
-        <div class="fl">Total booking value</div>
-        <div class="fv">INR 4,89,500 · 2 pax · Anniversary</div>
-      </div>
-    </div>
 
-    <div class="timeline">
+      <div class="timeline">
+        <div class="tl-label">Booking journey — day by day</div>
 
-      <div class="cs-step sd-sell">
-        <div class="step-dot">1</div>
-        <div class="step-line"></div>
-        <div class="step-body">
-          <div class="step-meta"><span class="step-tag">Sell</span><span class="step-day">Day 1</span></div>
-          <span class="step-title">Enquiry received</span>
-          <div class="step-desc">Horizon Travels emails for Kapoor couple: <span class="hl">14N Europe, June, INR 4.5–5L, vegetarian, anniversary trip.</span> Agent responds in 1 hr, logs CRM, calls to clarify: 4-star min, no trains, private transfers.</div>
+        <div class="step ss">
+          <div class="step-track"><div class="s-dot">1</div><div class="s-line"></div></div>
+          <div class="s-body">
+            <div class="s-meta"><span class="s-tag">Sell</span><span class="s-day">Day 1</span></div>
+            <div class="s-title">Enquiry received &amp; qualified</div>
+            <div class="s-desc">Horizon Travels emails an enquiry: <span class="hl">14N Europe, June, INR 4.5–5L, vegetarian meals, anniversary trip.</span> Agent responds within 1 hour, logs in CRM and calls to qualify: 4-star minimum, no train legs, private transfers throughout.</div>
+          </div>
         </div>
-      </div>
 
-      <div class="cs-step sd-sell">
-        <div class="step-dot">2</div>
-        <div class="step-line"></div>
-        <div class="step-body">
-          <div class="step-meta"><span class="step-tag">Sell</span><span class="step-day">Day 2</span></div>
-          <span class="step-title">Proposal sent</span>
-          <div class="step-desc">Branded PDF: <span class="hl">Paris 4N · Interlaken 4N · Rome 4N.</span> Air India flights, 4-star hotels, private transfers, English-Hindi guides. Margin 18%. Valid 7 days.</div>
+        <div class="step ss">
+          <div class="step-track"><div class="s-dot">2</div><div class="s-line"></div></div>
+          <div class="s-body">
+            <div class="s-meta"><span class="s-tag">Sell</span><span class="s-day">Day 2–5</span></div>
+            <div class="s-title">Proposal, negotiation &amp; deposit</div>
+            <div class="s-desc">Branded itinerary PDF sent: <span class="hl">Paris 4N · Interlaken 4N · Rome 4N.</span> Margin set at 18%. Confirmed Day 5. <span class="hl">Deposit INR 1,44,000 (30%) collected</span> and receipt issued same day. Booking file opened.</div>
+          </div>
         </div>
-      </div>
 
-      <div class="cs-step sd-sell">
-        <div class="step-dot">3</div>
-        <div class="step-line"></div>
-        <div class="step-body">
-          <div class="step-meta"><span class="step-tag">Sell</span><span class="step-day">Day 5</span></div>
-          <span class="step-title">Booking confirmed</span>
-          <div class="step-desc"><span class="hl">Deposit INR 1,44,000 (30%) collected.</span> Receipt issued, booking file opened, confirmation sent to client and agent.</div>
+        <div class="step sb">
+          <div class="step-track"><div class="s-dot">3</div><div class="s-line"></div></div>
+          <div class="s-body">
+            <div class="s-meta"><span class="s-tag">Book</span><span class="s-day">Day 6–8</span></div>
+            <div class="s-title">Hotels, tours &amp; transfers booked</div>
+            <div class="s-desc"><span class="hl">Hotels:</span> Duquesne Eiffel, Metropole, Quirinale — all 4* BB, anniversary notes added. <span class="hl">Tours:</span> Versailles, Jungfraujoch, Vatican &amp; Colosseum skip-the-line, English-Hindi guide. Private airport transfers all cities confirmed.</div>
+          </div>
         </div>
-      </div>
 
-      <div class="cs-step sd-book">
-        <div class="step-dot">4</div>
-        <div class="step-line"></div>
-        <div class="step-body">
-          <div class="step-meta"><span class="step-tag">Book</span><span class="step-day">Day 6</span></div>
-          <span class="step-title">Flights booked</span>
-          <div class="step-desc"><span class="hl">AI 131 BOM–CDG 18 Jun · AI 112 FCO–BOM 2 Jul.</span> Names per passport. VGML meals. Aisle seats together. Cost: INR 1,10,000.</div>
+        <div class="step sc2">
+          <div class="step-track"><div class="s-dot">4</div><div class="s-line"></div></div>
+          <div class="s-body">
+            <div class="s-meta"><span class="s-tag">Flights</span><span class="s-day">Day 6</span></div>
+            <div class="s-title">Flight request submitted to flights team</div>
+            <div class="s-desc">Agent submits full flight brief: <span class="hl">AI 131 BOM–CDG 18 Jun · AI 112 FCO–BOM 2 Jul.</span> Names per passport, VGML meals, aisle seats together. Agent chases daily and verifies confirmation before adding e-tickets to the document pack.</div>
+          </div>
         </div>
-      </div>
 
-      <div class="cs-step sd-book">
-        <div class="step-dot">5</div>
-        <div class="step-line"></div>
-        <div class="step-body">
-          <div class="step-meta"><span class="step-tag">Book</span><span class="step-day">Day 7</span></div>
-          <span class="step-title">Hotels &amp; tours booked</span>
-          <div class="step-desc">Duquesne Eiffel 4*, Metropole 4*, Quirinale 4* — all BB. Anniversary note added. <span class="hl">Tours: Versailles, Jungfraujoch, Vatican &amp; Colosseum skip-the-line.</span> Schengen invite issued.</div>
+        <div class="step sv">
+          <div class="step-track"><div class="s-dot">5</div><div class="s-line"></div></div>
+          <div class="s-body">
+            <div class="s-meta"><span class="s-tag">Visa</span><span class="s-day">Day 7 onwards</span></div>
+            <div class="s-title">Schengen visa — initiated &amp; tracked</div>
+            <div class="s-desc">Agent issues visa invitation letter and refers Kapoors to the approved visa partner. Document checklist shared. Agent <span class="hl">follows up with visa company twice per week,</span> logging every update in CRM. Visa confirmed received and verified 3 weeks before departure.</div>
+          </div>
         </div>
-      </div>
 
-      <div class="cs-step sd-book">
-        <div class="step-dot">6</div>
-        <div class="step-line"></div>
-        <div class="step-body">
-          <div class="step-meta"><span class="step-tag">Book</span><span class="step-day">Day 8</span></div>
-          <span class="step-title">Transfers booked</span>
-          <div class="step-desc">Private airport &amp; inter-city transfers confirmed at all 3 cities. Vehicle size verified. Driver contacts collected for document pack.</div>
+        <div class="step sc2">
+          <div class="step-track"><div class="s-dot">6</div><div class="s-line"></div></div>
+          <div class="s-body">
+            <div class="s-meta"><span class="s-tag">Confirm</span><span class="s-day">Day 30–40</span></div>
+            <div class="s-title">Balance, documents &amp; pre-dep call</div>
+            <div class="s-desc"><span class="hl">Balance INR 3,36,000 collected.</span> All supplier confirmations cross-checked. Full document pack dispatched 10 days before departure. Pre-dep call: visa confirmed, e-tickets verified, briefed on EUR cash, adapters and vegetarian restaurant lists. <span class="hl">Agent WhatsApp shared as 24/7 contact.</span></div>
+          </div>
         </div>
-      </div>
 
-      <div class="cs-step sd-conf">
-        <div class="step-dot">7</div>
-        <div class="step-line"></div>
-        <div class="step-body">
-          <div class="step-meta"><span class="step-tag">Confirm</span><span class="step-day">Day 30</span></div>
-          <span class="step-title">Balance &amp; documents</span>
-          <div class="step-desc"><span class="hl">Balance INR 3,36,000 collected.</span> All confirmations cross-checked. Day-by-day PDF compiled. Full pack sent — <span class="hl">10 days before departure.</span></div>
+        <div class="step sp">
+          <div class="step-track"><div class="s-dot">7</div><div class="s-line"></div></div>
+          <div class="s-body">
+            <div class="s-meta"><span class="s-tag">Support</span><span class="s-day">Day 44 · Paris</span></div>
+            <div class="s-title">In-trip issue — hotel has no reservation</div>
+            <div class="s-desc"><span class="hl">"Hotel says they cannot find our reservation."</span> Agent calls Paris hotel directly at 10 PM IST (6:30 PM local). Name spelling discrepancy identified and resolved within 20 minutes. CRM incident log updated.</div>
+          </div>
         </div>
-      </div>
 
-      <div class="cs-step sd-conf">
-        <div class="step-dot">8</div>
-        <div class="step-line"></div>
-        <div class="step-body">
-          <div class="step-meta"><span class="step-tag">Confirm</span><span class="step-day">Day 40</span></div>
-          <span class="step-title">Pre-departure call</span>
-          <div class="step-desc">30-min call with Kapoors. Visa confirmed. Briefed on adaptors, EUR cash, veg restaurants. <span class="hl">Agent WhatsApp shared as 24/7 contact.</span></div>
+        <div class="step sp">
+          <div class="step-track"><div class="s-dot">8</div><div class="s-line"></div></div>
+          <div class="s-body">
+            <div class="s-meta"><span class="s-tag">Support</span><span class="s-day">Day 48</span></div>
+            <div class="s-title">Mid-trip amendment — extra night Rome</div>
+            <div class="s-desc">Horizon requests <span class="hl">one extra night at Hotel Quirinale — INR 9,500 supplement.</span> Agent confirms availability, quotes, gets approval, books and reissues voucher same day. Supplement collected from Horizon within 24 hours.</div>
+          </div>
         </div>
-      </div>
 
-      <div class="cs-step sd-supp">
-        <div class="step-dot">9</div>
-        <div class="step-line"></div>
-        <div class="step-body">
-          <div class="step-meta"><span class="step-tag">Support</span><span class="step-day">Day 44</span></div>
-          <span class="step-title">In-trip issue — Paris</span>
-          <div class="step-desc"><span class="hl">"Hotel says no reservation found."</span> Agent calls Paris hotel directly. Name spelling discrepancy located and resolved in 20 min.</div>
+        <div class="step sp">
+          <div class="step-track"><div class="s-dot">9</div><div class="s-line"></div></div>
+          <div class="s-body">
+            <div class="s-meta"><span class="s-tag">Support</span><span class="s-day">Day 60</span></div>
+            <div class="s-title">Post-trip follow-up &amp; re-sell</div>
+            <div class="s-desc">Welcome-home WhatsApp sent. Google review collected. Feedback noted: Jungfraujoch was the highlight; Rome transfer slightly late — logged for supplier review. <span class="hl">Re-sell initiated: Amalfi or Scandinavia next year?</span></div>
+          </div>
         </div>
-      </div>
 
-      <div class="cs-step sd-supp">
-        <div class="step-dot">10</div>
-        <div class="step-line"></div>
-        <div class="step-body">
-          <div class="step-meta"><span class="step-tag">Support</span><span class="step-day">Day 48</span></div>
-          <span class="step-title">Mid-trip amendment</span>
-          <div class="step-desc">Horizon requests <span class="hl">extra night Rome.</span> Availability confirmed, INR 9,500 supplement quoted, approved, booked &amp; voucher reissued same day.</div>
+        <div class="step sfin">
+          <div class="step-track"><div class="s-dot">10</div><div class="s-line"></div></div>
+          <div class="s-body">
+            <div class="s-meta"><span class="s-tag">Finance</span><span class="s-day">Day 62</span></div>
+            <div class="s-title">Financial close</div>
+            <div class="s-desc">All supplier invoices validated against agreed rates. Extra night supplement reconciled. Horizon Travels commission processed. Booking file reviewed and formally closed. <span class="hl">Zero errors. Zero financial loss.</span></div>
+          </div>
         </div>
-      </div>
 
-      <div class="cs-step sd-supp">
-        <div class="step-dot">11</div>
-        <div class="step-line"></div>
-        <div class="step-body">
-          <div class="step-meta"><span class="step-tag">Support</span><span class="step-day">Day 60</span></div>
-          <span class="step-title">Post-trip follow-up</span>
-          <div class="step-desc">Welcome-home WhatsApp sent. Google review collected. Feedback logged. <span class="hl">Re-sell initiated: Amalfi or Scandinavia next year?</span></div>
-        </div>
-      </div>
-
-      <div class="cs-step sd-fin">
-        <div class="step-dot">12</div>
-        <div class="step-line"></div>
-        <div class="step-body">
-          <div class="step-meta"><span class="step-tag">Finance</span><span class="step-day">Day 62</span></div>
-          <span class="step-title">Financial close</span>
-          <div class="step-desc">All invoices validated. Commission processed. Booking closed — <span class="hl">zero errors, zero financial loss.</span></div>
-        </div>
-      </div>
+      </div><!-- /timeline -->
 
       <div class="fin-summary">
-        <div class="fin-cell">
-          <div class="fl">Total cost</div>
-          <div class="fv">₹3,93,600</div>
-        </div>
-        <div class="fin-cell">
-          <div class="fl">Revenue</div>
-          <div class="fv">₹4,89,500</div>
-        </div>
-        <div class="fin-cell green">
-          <div class="fl">Net margin</div>
-          <div class="fv">₹95,900 · 19.6%</div>
-        </div>
+        <div class="fc"><div class="fl">Total cost</div><div class="fv">₹3,93,600</div></div>
+        <div class="fc"><div class="fl">Total revenue</div><div class="fv">₹4,89,500</div></div>
+        <div class="fc grn"><div class="fl">Net margin</div><div class="fv">₹95,900 · 19.6%</div></div>
       </div>
 
-    </div>
+    </div><!-- /case-card -->
   </div><!-- /right-col -->
+  </div><!-- /two-col -->
+</div><!-- /wrap -->
 
-</div><!-- /main -->
-
-<div class="footer">
-  <span><strong>TripFactory</strong> &nbsp;·&nbsp; Sales Agent Role Framework &nbsp;·&nbsp; India Office</span>
-  <span>Internal document &nbsp;·&nbsp; Travel Answers Group</span>
-</div>
+<footer>
+  <div class="footer-inner">
+    <span><strong>TripFactory</strong> · Sales Agent Role Framework · India Office</span>
+    <span>Internal document · Travel Answers Group</span>
+  </div>
+</footer>
 
 </body>
 </html>
