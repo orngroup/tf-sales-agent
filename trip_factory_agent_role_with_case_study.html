@@ -1,0 +1,478 @@
+
+<h2 class="sr-only">Trip Factory Sales Agent role framework with a live European tour example from the India office</h2>
+<style>
+.tf-wrap { display: grid; grid-template-columns: minmax(0,1.15fr) minmax(0,0.85fr); gap: 0; font-size: 13px; }
+.tf-left { border-right: 0.5px solid var(--color-border-tertiary); }
+.tf-header { padding: 16px 18px 14px; border-bottom: 0.5px solid var(--color-border-tertiary); }
+.tf-header h1 { margin: 0 0 2px; font-size: 16px; font-weight: 500; color: var(--color-text-primary); }
+.tf-header p { margin: 0; font-size: 12px; color: var(--color-text-secondary); }
+.phase { border-bottom: 0.5px solid var(--color-border-tertiary); }
+.phase-head { display: flex; align-items: center; gap: 10px; padding: 12px 18px 10px; }
+.phase-tag { font-size: 10px; font-weight: 500; letter-spacing: .06em; padding: 3px 8px; border-radius: 4px; white-space: nowrap; }
+.phase-title { font-size: 13px; font-weight: 500; color: var(--color-text-primary); }
+.phase-body { padding: 0 18px 14px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.task-card { background: var(--color-background-secondary); border-radius: 6px; padding: 9px 11px; }
+.task-card .tc-title { font-size: 12px; font-weight: 500; color: var(--color-text-primary); margin: 0 0 4px; }
+.task-card ul { margin: 0; padding: 0 0 0 13px; color: var(--color-text-secondary); font-size: 11px; line-height: 1.6; }
+.task-card ul li { margin-bottom: 1px; }
+.phase-tag.amber { background: #FAEEDA; color: #633806; }
+.phase-tag.teal  { background: #E1F5EE; color: #085041; }
+.phase-tag.blue  { background: #E6F1FB; color: #0C447C; }
+.phase-tag.purple{ background: #EEEDFE; color: #3C3489; }
+.phase-tag.coral { background: #FAECE7; color: #712B13; }
+.phase-tag.green { background: #EAF3DE; color: #27500A; }
+.kc-section { padding: 12px 18px 16px; }
+.kc-section .kc-head { font-size: 11px; font-weight: 500; color: var(--color-text-secondary); text-transform: uppercase; letter-spacing: .07em; margin: 0 0 8px; }
+.kc-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px; }
+.kc-item { background: var(--color-background-secondary); border-radius: 6px; padding: 7px 9px; font-size: 11px; color: var(--color-text-secondary); line-height: 1.5; }
+.kc-item strong { display: block; font-weight: 500; color: var(--color-text-primary); font-size: 11px; margin-bottom: 1px; }
+.cs-header { padding: 16px 16px 12px; border-bottom: 0.5px solid var(--color-border-tertiary); }
+.cs-header h2 { margin: 0 0 2px; font-size: 14px; font-weight: 500; color: var(--color-text-primary); }
+.cs-header p { margin: 0; font-size: 11px; color: var(--color-text-secondary); }
+.cs-booking { padding: 10px 16px; background: var(--color-background-secondary); border-bottom: 0.5px solid var(--color-border-tertiary); display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+.cs-booking .bf { font-size: 11px; color: var(--color-text-secondary); }
+.cs-booking .bv { font-size: 11px; font-weight: 500; color: var(--color-text-primary); }
+.cs-step { border-bottom: 0.5px solid var(--color-border-tertiary); padding: 10px 16px; }
+.cs-step-head { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+.cs-num { width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 500; flex-shrink: 0; }
+.cs-step-title { font-size: 12px; font-weight: 500; color: var(--color-text-primary); }
+.cs-step-body { font-size: 11px; color: var(--color-text-secondary); line-height: 1.6; padding-left: 28px; }
+.cs-step-body .highlight { font-weight: 500; color: var(--color-text-primary); }
+.cs-step-body .tag { display: inline-block; padding: 1px 6px; border-radius: 3px; font-size: 10px; font-weight: 500; margin: 2px 2px 2px 0; }
+.tag.a { background:#FAEEDA; color:#633806; }
+.tag.t { background:#E1F5EE; color:#085041; }
+.tag.b { background:#E6F1FB; color:#0C447C; }
+.tag.p { background:#EEEDFE; color:#3C3489; }
+.tag.c { background:#FAECE7; color:#712B13; }
+.tag.g { background:#EAF3DE; color:#27500A; }
+.cs-num.amber { background:#FAEEDA; color:#633806; }
+.cs-num.teal  { background:#E1F5EE; color:#085041; }
+.cs-num.blue  { background:#E6F1FB; color:#0C447C; }
+.cs-num.purple{ background:#EEEDFE; color:#3C3489; }
+.cs-num.coral { background:#FAECE7; color:#712B13; }
+.cs-num.green { background:#EAF3DE; color:#27500A; }
+</style>
+
+<div class="tf-wrap">
+
+  <div class="tf-left">
+    <div class="tf-header">
+      <h1>Trip Factory Sales Agent</h1>
+      <p>Single point of contact · Full-circle ownership · India office</p>
+    </div>
+
+    <div class="phase">
+      <div class="phase-head">
+        <span class="phase-tag amber">Phase 1</span>
+        <span class="phase-title">Sales &amp; Consultation</span>
+      </div>
+      <div class="phase-body">
+        <div class="task-card">
+          <p class="tc-title">Enquiry handling</p>
+          <ul>
+            <li>Respond to B2C and B2B leads within SLA</li>
+            <li>Qualify travel dates, group size, budget</li>
+            <li>Identify special needs — dietary, accessibility, visa</li>
+            <li>Log all enquiries in CRM with full notes</li>
+          </ul>
+        </div>
+        <div class="task-card">
+          <p class="tc-title">Tour recommendation</p>
+          <ul>
+            <li>Match client profile to best-fit itinerary</li>
+            <li>Present guided vs independent options</li>
+            <li>Upsell premium hotels, business class, extras</li>
+            <li>Share itinerary PDF / digital proposal</li>
+          </ul>
+        </div>
+        <div class="task-card">
+          <p class="tc-title">Quoting &amp; negotiation</p>
+          <ul>
+            <li>Build accurate cost sheet with correct margins</li>
+            <li>Apply agent commission structures correctly</li>
+            <li>Provide competitive quote with validity period</li>
+            <li>Counter-negotiate without eroding margin</li>
+          </ul>
+        </div>
+        <div class="task-card">
+          <p class="tc-title">Closing the sale</p>
+          <ul>
+            <li>Confirm verbal agreement via written summary</li>
+            <li>Collect deposit as per payment schedule</li>
+            <li>Send booking confirmation to client and agent</li>
+            <li>Open booking file in system immediately</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="phase">
+      <div class="phase-head">
+        <span class="phase-tag teal">Phase 2</span>
+        <span class="phase-title">Component Booking</span>
+      </div>
+      <div class="phase-body">
+        <div class="task-card">
+          <p class="tc-title">Flights</p>
+          <ul>
+            <li>Source best fares via GDS / NDC / consolidators</li>
+            <li>Book correct name, passport, meal preferences</li>
+            <li>Add frequent flyer numbers, seat selections</li>
+            <li>Monitor for schedule changes and re-routes</li>
+          </ul>
+        </div>
+        <div class="task-card">
+          <p class="tc-title">Hotels &amp; accommodation</p>
+          <ul>
+            <li>Cross-check availability against tour dates</li>
+            <li>Book correct room type, meal plan, occupancy</li>
+            <li>Confirm non-smoking, floor preferences</li>
+            <li>Request early check-in / late checkout if needed</li>
+          </ul>
+        </div>
+        <div class="task-card">
+          <p class="tc-title">Transfers &amp; ground</p>
+          <ul>
+            <li>Book all airport and inter-city transfers</li>
+            <li>Confirm vehicle type for group size</li>
+            <li>Coordinate port pick-ups for cruise legs</li>
+            <li>Share driver contacts with client before travel</li>
+          </ul>
+        </div>
+        <div class="task-card">
+          <p class="tc-title">Tours, guides &amp; extras</p>
+          <ul>
+            <li>Book escorted day tours with licensed guides</li>
+            <li>Arrange entrance tickets — skip-the-line where possible</li>
+            <li>Manage visa invitations, travel insurance</li>
+            <li>Coordinate cruise / rail passes as required</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="phase">
+      <div class="phase-head">
+        <span class="phase-tag blue">Phase 3</span>
+        <span class="phase-title">Confirmation &amp; Documentation</span>
+      </div>
+      <div class="phase-body">
+        <div class="task-card">
+          <p class="tc-title">Supplier confirmations</p>
+          <ul>
+            <li>Chase every supplier for written confirmation</li>
+            <li>Verify names, dates, room types against booking</li>
+            <li>Resolve discrepancies before issuing documents</li>
+            <li>Re-confirm all services 72 hrs before departure</li>
+          </ul>
+        </div>
+        <div class="task-card">
+          <p class="tc-title">Travel document pack</p>
+          <ul>
+            <li>Compile vouchers, e-tickets, hotel confirmations</li>
+            <li>Produce day-by-day itinerary in client language</li>
+            <li>Include emergency contacts, local SIM guidance</li>
+            <li>Send pack at least 10 days before departure</li>
+          </ul>
+        </div>
+        <div class="task-card">
+          <p class="tc-title">Pre-departure briefing</p>
+          <ul>
+            <li>Call client to walk through entire itinerary</li>
+            <li>Confirm passport validity, visa requirements</li>
+            <li>Brief on local customs, weather, dress codes</li>
+            <li>Provide 24/7 emergency contact number</li>
+          </ul>
+        </div>
+        <div class="task-card">
+          <p class="tc-title">Agent / trade handover</p>
+          <ul>
+            <li>Send booking summary to trade agent partner</li>
+            <li>Confirm commission due and payment timeline</li>
+            <li>Provide agent with emergency contact escalation</li>
+            <li>Notify agent of any last-minute changes</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="phase">
+      <div class="phase-head">
+        <span class="phase-tag purple">Phase 4</span>
+        <span class="phase-title">In-trip &amp; On-trip Support</span>
+      </div>
+      <div class="phase-body">
+        <div class="task-card">
+          <p class="tc-title">Issue resolution</p>
+          <ul>
+            <li>Be reachable during client travel window</li>
+            <li>Handle hotel complaints, missed transfers</li>
+            <li>Re-book flights on cancellation immediately</li>
+            <li>Escalate to supplier management if needed</li>
+          </ul>
+        </div>
+        <div class="task-card">
+          <p class="tc-title">Customer queries</p>
+          <ul>
+            <li>Answer client questions on tours, timings, logistics</li>
+            <li>Assist with on-ground restaurant / activity requests</li>
+            <li>Coordinate with local guides for amendments</li>
+            <li>Keep client calm and informed at all times</li>
+          </ul>
+        </div>
+        <div class="task-card">
+          <p class="tc-title">Agent queries</p>
+          <ul>
+            <li>Respond to trade agent queries within 2 hrs</li>
+            <li>Provide status updates on their client's tour</li>
+            <li>Relay any on-trip changes back to agent promptly</li>
+            <li>Manage agent expectations professionally</li>
+          </ul>
+        </div>
+        <div class="task-card">
+          <p class="tc-title">Post-trip follow-up</p>
+          <ul>
+            <li>Welcome client home with thank-you message</li>
+            <li>Collect Google / TripAdvisor review</li>
+            <li>Gather improvement feedback for ops team</li>
+            <li>Initiate re-sell conversation for next trip</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="phase">
+      <div class="phase-head">
+        <span class="phase-tag coral">Phase 5</span>
+        <span class="phase-title">Financial Accountability</span>
+      </div>
+      <div class="phase-body">
+        <div class="task-card">
+          <p class="tc-title">Cost control &amp; margin</p>
+          <ul>
+            <li>Build cost sheets with all components itemised</li>
+            <li>Maintain minimum margin per booking type</li>
+            <li>Validate supplier invoices against agreed rates</li>
+            <li>Flag any rate discrepancies before payment</li>
+          </ul>
+        </div>
+        <div class="task-card">
+          <p class="tc-title">Invoicing &amp; collections</p>
+          <ul>
+            <li>Issue correct invoice to client / trade agent</li>
+            <li>Track deposit and balance payment deadlines</li>
+            <li>Follow up on overdue payments within 24 hrs</li>
+            <li>Issue receipts immediately on payment receipt</li>
+          </ul>
+        </div>
+        <div class="task-card">
+          <p class="tc-title">Supplier payments</p>
+          <ul>
+            <li>Ensure supplier payments are made on time</li>
+            <li>Avoid cancellation due to non-payment</li>
+            <li>Cross-check payment confirmation with booking</li>
+            <li>Escalate urgent payments to accounts team</li>
+          </ul>
+        </div>
+        <div class="task-card">
+          <p class="tc-title">Zero-error policy</p>
+          <ul>
+            <li>Agent bears accountability for any booking error loss</li>
+            <li>Double-check all names, dates, costs before confirm</li>
+            <li>Perform final audit 7 days before departure</li>
+            <li>Document all amendments with reason on file</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="phase">
+      <div class="phase-head">
+        <span class="phase-tag green">Phase 6</span>
+        <span class="phase-title">Reporting &amp; Continuous Improvement</span>
+      </div>
+      <div class="phase-body">
+        <div class="task-card">
+          <p class="tc-title">Performance tracking</p>
+          <ul>
+            <li>Log conversion rate on all enquiries handled</li>
+            <li>Report monthly booking value and margin</li>
+            <li>Track repeat bookings and referrals generated</li>
+            <li>Review error rate — target zero financial losses</li>
+          </ul>
+        </div>
+        <div class="task-card">
+          <p class="tc-title">Knowledge &amp; product</p>
+          <ul>
+            <li>Attend supplier webinars and product training</li>
+            <li>Keep European tour product knowledge current</li>
+            <li>Share market intelligence with team</li>
+            <li>Suggest new tours / routes to product team</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="kc-section">
+      <p class="kc-head">Key competencies</p>
+      <div class="kc-grid">
+        <div class="kc-item"><strong>Destination knowledge</strong>European products, routing, visa rules</div>
+        <div class="kc-item"><strong>GDS proficiency</strong>Amadeus / Galileo, NDC, online tools</div>
+        <div class="kc-item"><strong>Communication</strong>Client, agent &amp; supplier management</div>
+        <div class="kc-item"><strong>Attention to detail</strong>Names, dates, costs — always verified</div>
+        <div class="kc-item"><strong>Financial acumen</strong>Margins, invoicing, reconciliation</div>
+        <div class="kc-item"><strong>Problem-solving</strong>Calm, decisive, solution-focused</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tf-right">
+    <div class="cs-header">
+      <h2>Live example — European escorted tour</h2>
+      <p>Mumbai-based agent books a 14-night Best of Europe tour for 2 pax</p>
+    </div>
+
+    <div class="cs-booking">
+      <div><div class="bf">Client</div><div class="bv">Mr &amp; Mrs Kapoor, Mumbai</div></div>
+      <div><div class="bf">Trade agent</div><div class="bv">Horizon Travels, Andheri</div></div>
+      <div><div class="bf">Tour</div><div class="bv">Best of Europe — 14 nights</div></div>
+      <div><div class="bf">Route</div><div class="bv">Paris · Swiss Alps · Rome</div></div>
+      <div><div class="bf">Depart</div><div class="bv">Mumbai (BOM) — 18 Jun</div></div>
+      <div><div class="bf">Total value</div><div class="bv">INR 4,80,000 (2 pax)</div></div>
+    </div>
+
+    <div class="cs-step">
+      <div class="cs-step-head">
+        <span class="cs-num amber">1</span>
+        <span class="cs-step-title">Enquiry received — day 1</span>
+      </div>
+      <div class="cs-step-body">
+        <span class="tag a">Sell</span>
+        Agent Horizon Travels emails enquiry for a Kapoor couple: <span class="highlight">14 nights Europe, June, budget INR 4.5–5L, vegetarian meals only, anniversary trip.</span><br>
+        Agent opens CRM, logs full requirement. Calls agent back within 1 hour to clarify: no train legs preferred, 4-star hotels minimum, private transfers only.
+      </div>
+    </div>
+
+    <div class="cs-step">
+      <div class="cs-step-head">
+        <span class="cs-num amber">2</span>
+        <span class="cs-step-title">Proposal sent — day 2</span>
+      </div>
+      <div class="cs-step-body">
+        <span class="tag a">Sell</span>
+        Agent prepares a <span class="highlight">branded PDF itinerary</span>: Paris 4N / Swiss Alps 4N (Interlaken) / Rome 4N + 2 travel days. Pricing includes flights (Air India BOM–CDG, FCO–BOM), 4-star hotels, private transfers, escorted day tours with English-Hindi guide. Margin locked at 18%. Quote sent same day with 7-day validity.
+      </div>
+    </div>
+
+    <div class="cs-step">
+      <div class="cs-step-head">
+        <span class="cs-num amber">3</span>
+        <span class="cs-step-title">Booking confirmed — day 5</span>
+      </div>
+      <div class="cs-step-body">
+        <span class="tag a">Sell</span>
+        Horizon Travels confirms, Kapoors pay <span class="highlight">30% deposit (INR 1,44,000)</span>. Agent issues deposit receipt, opens booking file, sends written confirmation email to both client and agent. CRM updated: status → Confirmed.
+      </div>
+    </div>
+
+    <div class="cs-step">
+      <div class="cs-step-head">
+        <span class="cs-num teal">4</span>
+        <span class="cs-step-title">Flights booked — day 6</span>
+      </div>
+      <div class="cs-step-body">
+        <span class="tag t">Book</span>
+        <span class="highlight">Air India AI 131 BOM–CDG 18 Jun, AI 112 FCO–BOM 2 Jul.</span> Names exactly as per passport. Vegetarian meal (VGML) added. Seat selections: 2 aisle seats together. Frequent flyer numbers added. Booking confirmed in Amadeus. Cost: INR 1,10,000 both pax.
+      </div>
+    </div>
+
+    <div class="cs-step">
+      <div class="cs-step-head">
+        <span class="cs-num teal">5</span>
+        <span class="cs-step-title">Hotels booked — day 7</span>
+      </div>
+      <div class="cs-step-body">
+        <span class="tag t">Book</span>
+        <span class="highlight">Paris:</span> Hotel Duquesne Eiffel 4* — Superior Double, BB, 18–22 Jun. <span class="highlight">Interlaken:</span> Hotel Metropole 4* — Deluxe Double, BB, 22–26 Jun. <span class="highlight">Rome:</span> Hotel Quirinale 4* — Classic Double, BB, 26–30 Jun. All confirmations received. Anniversary note added to each reservation.
+      </div>
+    </div>
+
+    <div class="cs-step">
+      <div class="cs-step-head">
+        <span class="cs-num teal">6</span>
+        <span class="cs-step-title">Transfers &amp; tours booked — day 8</span>
+      </div>
+      <div class="cs-step-body">
+        <span class="tag t">Book</span>
+        Private airport transfers booked at all 3 cities. Day tours confirmed: <span class="highlight">Versailles full-day, Jungfraujoch excursion, Rome Vatican &amp; Colosseum skip-the-line.</span> English-Hindi guide confirmed for Versailles and Rome days. Entrance tickets pre-purchased. Schengen visa invitation letter issued to Kapoors.
+      </div>
+    </div>
+
+    <div class="cs-step">
+      <div class="cs-step-head">
+        <span class="cs-num blue">7</span>
+        <span class="cs-step-title">Balance payment &amp; documents — day 30</span>
+      </div>
+      <div class="cs-step-body">
+        <span class="tag b">Confirm</span>
+        <span class="highlight">Balance INR 3,36,000 collected</span> from Horizon Travels. All supplier confirmations received and cross-checked. Day-by-day itinerary PDF compiled in English with hotel addresses in local script. Voucher pack, e-tickets, transfer vouchers assembled. Full pack sent to Kapoors and Horizon on <span class="highlight">8 Jun — 10 days before departure.</span>
+      </div>
+    </div>
+
+    <div class="cs-step">
+      <div class="cs-step-head">
+        <span class="cs-num blue">8</span>
+        <span class="cs-step-title">Pre-departure call — day 40 (14 Jun)</span>
+      </div>
+      <div class="cs-step-body">
+        <span class="tag b">Confirm</span>
+        30-minute call with Mr &amp; Mrs Kapoor. Walks through each day. Confirms Schengen visa received. Reminds: plug adaptors for Europe, currency mix (EUR cash + card), vegetarian restaurant list shared for each city. Agent's <span class="highlight">WhatsApp number provided</span> as 24/7 in-trip contact.
+      </div>
+    </div>
+
+    <div class="cs-step">
+      <div class="cs-step-head">
+        <span class="cs-num purple">9</span>
+        <span class="cs-step-title">In-trip issue — day 44 (18 Jun, Paris)</span>
+      </div>
+      <div class="cs-step-body">
+        <span class="tag p">Support</span>
+        Mrs Kapoor WhatsApps at 10 PM IST: <span class="highlight">"Hotel says no reservation found."</span> Agent checks confirmation — correct hotel, correct date. Calls hotel directly (Paris is 6:30 PM). Hotel locates reservation under slightly different name spelling. Issue resolved in 20 minutes. Agent updates CRM with incident log.
+      </div>
+    </div>
+
+    <div class="cs-step">
+      <div class="cs-step-head">
+        <span class="cs-num purple">10</span>
+        <span class="cs-step-title">Agent query mid-trip — day 48</span>
+      </div>
+      <div class="cs-step-body">
+        <span class="tag p">Support</span>
+        Horizon Travels asks for status update — their client is enjoying the trip but requested an <span class="highlight">extra night in Rome.</span> Agent checks availability at Hotel Quirinale — available at INR 9,500 supplement. Quotes Horizon, gets approval, books immediately and issues updated voucher. Supplements collected within 24 hrs.
+      </div>
+    </div>
+
+    <div class="cs-step">
+      <div class="cs-step-head">
+        <span class="cs-num purple">11</span>
+        <span class="cs-step-title">Post-trip follow-up — day 60</span>
+      </div>
+      <div class="cs-step-body">
+        <span class="tag p">Support</span>
+        Kapoors return. Agent sends personalised WhatsApp: <span class="highlight">"Hope the anniversary was magical!"</span> Requests Google review and collects brief feedback. Kapoors mention Jungfraujoch was the highlight; minor note on Rome transfer being slightly late. Feedback logged for supplier review. Agent re-sell: "Shall we plan Scandinavia or Amalfi for next year?"
+      </div>
+    </div>
+
+    <div class="cs-step">
+      <div class="cs-step-head">
+        <span class="cs-num coral">12</span>
+        <span class="cs-step-title">Financial close — day 62</span>
+      </div>
+      <div class="cs-step-body">
+        <span class="tag c">Finance</span>
+        Agent reconciles full booking file: all supplier invoices validated against agreed rates. <span class="highlight">Total cost: INR 3,93,600. Revenue: INR 4,89,500 (incl. Rome extra night).</span> Net margin: INR 95,900 (19.6%). Horizon Travels commission processed. Final accounts submitted to finance. Booking closed — zero errors, zero financial loss.
+      </div>
+    </div>
+
+  </div>
+</div>
